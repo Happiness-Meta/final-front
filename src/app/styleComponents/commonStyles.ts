@@ -1,14 +1,6 @@
-import css from "styled-jsx/css";
-
-export const bodyStyle = {
-  width: "100%",
-  height: "100vh",
-  padding: "0",
-  margin: "0",
-};
-
 export const commonColor = {
   color: {
+    representative: "#FF8A00",
     pastelBlue: "#7BD3EA",
     patelGreen: "#A1EEBD",
     pastelYellow: "#F6F7C4",

@@ -4,7 +4,11 @@
 import { css, keyframes } from "@emotion/react";
 import Link from "next/link";
 import React from "react";
-import { commonColor, flexCenterX2 } from "./styleComponents/commonStyles";
+import {
+  commonColor,
+  flexCenterX2,
+  widthHeightFull,
+} from "./styleComponents/commonStyles";
 
 //css 스타일 그냥 예시
 
@@ -27,18 +31,15 @@ const emotionAni = keyframes`
   color: black;
 }`;
 
-export default function Home() {
+function HomePage() {
   return (
     <div
       css={[
         { backgroundColor: commonColor.color.pastelPink },
+        flexCenterX2,
+        widthHeightFull,
         `
-        width: 100%;
-        height: 100%;
-        display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
         row-gap: 5px
       `,
       ]}
@@ -57,6 +58,7 @@ export default function Home() {
           css={css`
             color: hotpink;
             animation: ${emotionAni} 0.5s infinite alternate;
+            font-weight: bold;
           `}
         >
           Emotion
@@ -65,3 +67,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default HomePage;
