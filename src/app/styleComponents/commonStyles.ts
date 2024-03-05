@@ -5,6 +5,10 @@ export const commonColor = {
     patelGreen: "#A1EEBD",
     pastelYellow: "#F6F7C4",
     pastelPink: "#F6D6D6",
+    mainYellow: "#FF8A00",
+    mainWhite: "#FFFFFF",
+    mainGray: "#EFEFEF",
+    mainDarkGray: "#353A40",
   },
 };
 
