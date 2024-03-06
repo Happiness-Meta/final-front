@@ -10,6 +10,7 @@ import mainHomeImage from "/public/finalproject-main.svg";
 import searchIcon from "/public/search.svg";
 import products from "/public/products.svg";
 import sclocationicon from "/public/sc-location-icon.svg";
+import LoginPage from "./pages/loginPage/page";
 
 const headerContainerStyle = css`
   margin-top: 20px;
@@ -155,8 +156,12 @@ function HomePage() {
           </nav>
         </div>
         <div css={homeButtonContainer}>
-          <button css={buttonStyle("white", "black")}>로그인</button>
-          <button css={buttonStyle(commonColor.color.mainYellow, "white")}>회원가입</button>
+          <Link href={"pages/loginPage"} css={buttonStyle("white", "black")}>
+            로그인
+          </Link>
+          <Link href={"pages/signUpPage"} css={buttonStyle(commonColor.mainYellow, "white")}>
+            회원가입
+          </Link>
         </div>
       </header>
       <article css={mainArticle}>
