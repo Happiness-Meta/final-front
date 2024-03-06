@@ -1,4 +1,5 @@
 export const commonColor = {
+
   color: {
     representative: "#FF8A00",
     pastelBlue: "#7BD3EA",
@@ -10,6 +11,7 @@ export const commonColor = {
     mainGray: "#EFEFEF",
     mainDarkGray: "#353A40",
   },
+
 };
 
 export const flexCenterX2 = {
