@@ -159,7 +159,7 @@ function HomePage() {
           <Link href={"pages/loginPage"} css={buttonStyle("white", "black")}>
             로그인
           </Link>
-          <Link href={"pages/signUpPage"} css={buttonStyle(commonColor.color.mainYellow, "white")}>
+          <Link href={"pages/signUpPage"} css={buttonStyle(commonColor.mainYellow, "white")}>
             회원가입
           </Link>
         </div>
