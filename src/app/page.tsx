@@ -35,7 +35,7 @@ function HomePage() {
   return (
     <div
       css={[
-        { backgroundColor: commonColor.color.pastelPink },
+        { backgroundColor: commonColor.pastelPink },
         flexCenterX2,
         widthHeightFull,
         `
