@@ -95,7 +95,7 @@ const searchBarAndSearchIcon = css`
     height: 100%;
     border-radius: 10px;
     border: none;
-    padding-left: 20px;
+    padding-left: 18px;
   }
 `;
 
