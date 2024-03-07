@@ -13,10 +13,12 @@ export const signInUpinputStyle = {
   border: "1px solid gray",
   borderRadius: "5px",
   fontSize: "16px",
+  transition: ".2s",
 };
 
 export const signInUpInputStyleHover = `
   &:focus {
+    width: 92%;
     border-color: orange !important;
   }
 `;
@@ -30,8 +32,9 @@ export const signInUpButtonStyle = css`
   color: white;
   font-size: 16px;
   transition: 0.2s;
+  cursor: pointer;
   &:hover {
-    box-shadow: inset 0px 0px 10px black;
+    width: 92%;
     font-weight: bold;
   }
 `;
