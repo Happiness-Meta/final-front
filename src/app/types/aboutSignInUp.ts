@@ -5,3 +5,8 @@ export interface AboutHandlePwVerCheck {
   pwVerRef: RefObject<HTMLInputElement>;
   setPwCheckMessage: (message: string) => void;
 }
+
+export interface AboutVisibilityEyes {
+  isPwVisible: boolean;
+  setIsPwVisible: (T: boolean) => void;
+}

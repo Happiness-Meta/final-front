@@ -1,5 +1,6 @@
 "use client";
 
+import VisibilityEyes from "@/app/commonComponents/VisibilityEyes";
 /** @jsxImportSource @emotion/react */
 import { flexCenterX2 } from "@/app/styleComponents/commonStyles";
 import {
@@ -15,6 +16,7 @@ const LoginSection = () => {
   const pwRef: RefObject<HTMLInputElement> = useRef(null);
 
   const [errorMessage, setErrorMessage] = useState("");
+  const [isPwVisible, setIsPwVisible] = useState(false);
 
   const handleLogin = () => {
     if (emailRef.current!.value === "") {
@@ -30,9 +32,10 @@ const LoginSection = () => {
     <section
       css={[
         flexCenterX2,
-        `flex-direction: column; 
-            width: 100%;
-            `,
+        `
+        flex-direction: column; 
+        width: 100%;
+        `,
       ]}
     >
       <input
@@ -42,18 +45,36 @@ const LoginSection = () => {
         placeholder="email"
         css={[
           signInUpinputStyle,
-          `border-bottom-width: 1px; border-bottom-left-radius: 0; border-bottom-right-radius: 0; ${signInUpInputStyleHover};`,
+          `border-bottom-width: 0; 
+          border-bottom-left-radius: 0; 
+          border-bottom-right-radius: 0;
+          &:focus{
+            border-bottom-width: 1px;
+          }
+          ${signInUpInputStyleHover};`,
         ]}
       />
-      <input
-        ref={pwRef}
-        type="password"
-        placeholder="password"
-        css={[
-          signInUpinputStyle,
-          `border-top-width: 0px; border-top-left-radius: 0; border-top-right-radius: 0; ${signInUpInputStyleHover};`,
-        ]}
-      />
+      <div css={[flexCenterX2, `position: relative; width: 100%`]}>
+        <input
+          ref={pwRef}
+          type={isPwVisible ? "text" : "password"}
+          placeholder="password"
+          css={[
+            signInUpinputStyle,
+            ` border-top-width: 0; 
+            border-top-left-radius: 0; 
+            border-top-right-radius: 0;
+            &:focus{
+              border-top-width: 1px;
+            }
+            ${signInUpInputStyleHover};`,
+          ]}
+        />
+        <VisibilityEyes
+          isPwVisible={isPwVisible}
+          setIsPwVisible={setIsPwVisible}
+        />
+      </div>
       <p css={errorMessageStyle}>{errorMessage}</p>
       <button
         onClick={() => {
