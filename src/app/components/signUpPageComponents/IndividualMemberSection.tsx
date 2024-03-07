@@ -13,8 +13,8 @@ import {
 } from "@/app/styleComponents/commonStyles/inputAndButtonAndText";
 import { handlePwVerCheck } from "@/app/hooks/signUpPageHooks/useHandlePwVerCheck";
 import Image from "next/image";
-import search from "/public/svg/search.svg";
-import React, { RefObject, useEffect, useRef, useState } from "react";
+import search from "@/app/assets/svg/search.svg";
+import React, { RefObject, useRef, useState } from "react";
 import VisibilityEyes from "@/app/components/commonComponents/VisibilityEyes";
 import useSignUpPageStore from "@/app/store/signUpPageStore/useSignUpPageStore";
 

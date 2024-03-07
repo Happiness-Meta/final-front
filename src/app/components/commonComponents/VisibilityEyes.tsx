@@ -2,9 +2,9 @@
 /** @jsxImportSource @emotion/react */
 
 import Image from "next/image";
-import visibility from "/public/svg/visibility.svg";
-import visibility_off from "/public/svg/visibility_off.svg";
-import { AboutVisibilityEyes } from "../../types/aboutSignInUp";
+import visibility from "@/app/assets/svg/visibility.svg";
+import visibility_off from "@/app/assets/svg/visibility_off.svg";
+import { AboutVisibilityEyes } from "@/app/types/aboutSignInUp";
 
 const VisibilityEyes: React.FC<AboutVisibilityEyes> = ({
   isPwVisible,

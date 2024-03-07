@@ -6,10 +6,10 @@ import {
   widthHeightFull,
 } from "@/app/styleComponents/commonStyles/commonStyles";
 import { css } from "@emotion/react";
-import mainHomeImage from "/public/svg/finalproject-main.svg";
-import searchIcon from "/public/svg/search.svg";
-import products from "/public/svg/products.svg";
-import sclocationicon from "/public/svg/sc-location-icon.svg";
+import mainHomeImage from "@/app/assets/svg/finalproject-main.svg";
+import searchIcon from "@/app/assets/svg/search.svg";
+import products from "@/app/assets/svg/products.svg";
+import sclocationicon from "@/app/assets/svg/sc-location-icon.svg";
 import Image from "next/image";
 
 const mainSearchBar = css`

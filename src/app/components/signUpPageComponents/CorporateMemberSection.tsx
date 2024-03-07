@@ -9,10 +9,7 @@ import {
   signInUpinputStyle,
 } from "@/app/styleComponents/commonStyles/inputAndButtonAndText";
 import { handlePwVerCheck } from "@/app/hooks/signUpPageHooks/useHandlePwVerCheck";
-import Image from "next/image";
 import React, { RefObject, useRef, useState } from "react";
-import visibility from "/public/svg/visibility.svg";
-import visibility_off from "/public/svg/visibility_off.svg";
 import VisibilityEyes from "@/app/components/commonComponents/VisibilityEyes";
 
 const CorporateMemberSection = () => {

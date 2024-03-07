@@ -1,7 +1,8 @@
 "use client";
 /** @jsxImportSource @emotion/react */
 import { flexCenterX2 } from "@/app/styleComponents/commonStyles/commonStyles";
-import { css } from "@emotion/react";
+import Kakao from "@/app/assets/svg/kakao.svg";
+import Google from "@/app/assets/svg/google.svg";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -42,7 +43,7 @@ const OAuthSection = () => {
             `${oAuthIconTransition}; background-color: #ffe809`,
           ]}
         >
-          <Image src={"/svg/kakao.svg"} alt="kakao" width={20} height={20} />
+          <Image src={Kakao} alt="kakao" width={20} height={20} />
         </Link>
         <Link
           href={"/"}
@@ -51,7 +52,7 @@ const OAuthSection = () => {
             `${oAuthIconTransition}; background-color: transparent`,
           ]}
         >
-          <Image src={"/svg/google.svg"} alt="kakao" width={20} height={20} />
+          <Image src={Google} alt="google" width={20} height={20} />
         </Link>
       </div>
       <p

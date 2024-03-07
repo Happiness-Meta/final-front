@@ -1,7 +1,7 @@
 import { create } from "zustand";
-import ProfileImage from "/public/svg/profilePicture.svg";
-import BusinessImage from "/public/svg/business001.svg";
-import BusinessImage2 from "/public/svg/business002.svg";
+import ProfileImage from "@/app/assets/svg/profilePicture.svg";
+import BusinessImage from "@/app/assets/svg/business001.svg";
+import BusinessImage2 from "@/app/assets/svg/business002.svg";
 
 export interface HomePagePeopleProfile {
   name: string;

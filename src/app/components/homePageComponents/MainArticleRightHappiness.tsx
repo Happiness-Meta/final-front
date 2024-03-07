@@ -5,7 +5,7 @@ import { css } from "@emotion/react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Image from "next/image";
-import happinessMetaNotion from "/public/svg/happinessMetaNotion.svg";
+import happinessMetaNotion from "@/app/assets/svg/happinessMetaNotion.svg";
 import { flexCenterX2 } from "@/app/styleComponents/commonStyles/commonStyles";
 
 const mainArticleRightSidechildren = css`
