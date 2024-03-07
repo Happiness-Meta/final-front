@@ -1,7 +1,7 @@
 "use client";
 /** @jsxImportSource @emotion/react */
 
-import { flexCenterX2 } from "@/app/styleComponents/commonStyles";
+import { flexCenterX2 } from "@/app/styleComponents/commonStyles/commonStyles";
 import Link from "next/link";
 import React from "react";
 

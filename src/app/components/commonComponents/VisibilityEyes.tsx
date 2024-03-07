@@ -4,7 +4,7 @@
 import Image from "next/image";
 import visibility from "/public/svg/visibility.svg";
 import visibility_off from "/public/svg/visibility_off.svg";
-import { AboutVisibilityEyes } from "../types/aboutSignInUp";
+import { AboutVisibilityEyes } from "../../types/aboutSignInUp";
 
 const VisibilityEyes: React.FC<AboutVisibilityEyes> = ({
   isPwVisible,
