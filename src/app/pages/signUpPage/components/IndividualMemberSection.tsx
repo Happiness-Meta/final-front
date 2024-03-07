@@ -10,7 +10,7 @@ import {
 } from "@/app/styleComponents/inputAndButtonAndText";
 import { handlePwVerCheck } from "@/app/utils/signInUpFuncs";
 import Image from "next/image";
-import search from "/public/search.svg";
+import search from "/public/svg/search.svg";
 import React, { RefObject, useEffect, useRef, useState } from "react";
 import VisibilityEyes from "@/app/commonComponents/VisibilityEyes";
 import useSignUpPageStore from "@/app/store/signUpPageStore/useSignUpPageStore";
@@ -28,23 +28,16 @@ const IndividualMembetSection = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [isTechStacksVisible, setIsTechStacksVisible] = useState(false);
 
-  const { techStackContainer, addTechStack, removeTechStack } =
-    useSignUpPageStore();
+  const { techStackContainer, addTechStack, removeTechStack } = useSignUpPageStore();
 
   const handleIndividualSignUp = () => {
     console.log(positionRef.current?.value);
-    if (emailRef.current?.value === "")
-      return setErrorMessage("이메일을 입력해 주세요.");
-    if (nicknameRef.current?.value === "")
-      return setErrorMessage("닉네임을 입력해 주세요.");
-    if (pwRef.current?.value === "")
-      return setErrorMessage("비밀번호를 입력해주세요");
+    if (emailRef.current?.value === "") return setErrorMessage("이메일을 입력해 주세요.");
+    if (nicknameRef.current?.value === "") return setErrorMessage("닉네임을 입력해 주세요.");
+    if (pwRef.current?.value === "") return setErrorMessage("비밀번호를 입력해주세요");
     if (pwRef.current?.value !== pwVerRef.current?.value)
       return setErrorMessage("위에서 비밀번호를 일치시켜주세요");
-    if (
-      positionRef.current?.value === "" ||
-      positionRef.current?.value === "null"
-    )
+    if (positionRef.current?.value === "" || positionRef.current?.value === "null")
       return setErrorMessage("희망 포지션을 선택해주세요");
   };
 
@@ -72,12 +65,7 @@ const IndividualMembetSection = () => {
   ];
 
   return (
-    <section
-      css={[
-        flexCenterX2,
-        `flex-direction: column; row-gap: 5px; user-select: none;`,
-      ]}
-    >
+    <section css={[flexCenterX2, `flex-direction: column; row-gap: 5px; user-select: none;`]}>
       <input
         autoFocus
         ref={emailRef}
@@ -98,16 +86,11 @@ const IndividualMembetSection = () => {
           placeholder="password"
           css={[signInUpinputStyle, `${signInUpInputStyleHover}`]}
         />
-        <VisibilityEyes
-          isPwVisible={isPwVisible}
-          setIsPwVisible={setIsPwVisible}
-        />
+        <VisibilityEyes isPwVisible={isPwVisible} setIsPwVisible={setIsPwVisible} />
       </div>
       <input
         ref={pwVerRef}
-        onChange={() =>
-          handlePwVerCheck({ pwRef, pwVerRef, setPwCheckMessage })
-        }
+        onChange={() => handlePwVerCheck({ pwRef, pwVerRef, setPwCheckMessage })}
         type={isPwVisible ? "text" : "password"}
         placeholder="verify password"
         css={[signInUpinputStyle, `${signInUpInputStyleHover}`]}
@@ -116,19 +99,13 @@ const IndividualMembetSection = () => {
         css={[
           errorMessageStyle,
           `margin: 0; color: ${
-            pwCheckMessage === "✅ 비밀번호가 일치합니다."
-              ? `#00bf00 !important`
-              : ``
+            pwCheckMessage === "✅ 비밀번호가 일치합니다." ? `#00bf00 !important` : ``
           }`,
         ]}
       >
         {pwCheckMessage}
       </p>
-      <select
-        ref={positionRef}
-        name="희망 포지션"
-        css={[signInUpinputStyle, `height: 40px;`]}
-      >
+      <select ref={positionRef} name="희망 포지션" css={[signInUpinputStyle, `height: 40px;`]}>
         <option value="null">희망 포지션</option>
         <option value="풀스택">풀스택</option>
         <option value="프론트엔드">프론트엔드</option>
@@ -142,18 +119,13 @@ const IndividualMembetSection = () => {
           alt="search"
           width={15}
           height={15}
-          css={[
-            `position: absolute; top:50%; left: 30px; transform: translateY(-50%);`,
-          ]}
+          css={[`position: absolute; top:50%; left: 30px; transform: translateY(-50%);`]}
         />
         <input
           placeholder="기술 스택 : 최대 15개"
           onFocus={() => setIsTechStacksVisible(true)}
           onBlur={() => setTimeout(() => setIsTechStacksVisible(false), 200)}
-          css={[
-            signInUpinputStyle,
-            `${signInUpInputStyleHover}; height: 40px; padding-left: 30px`,
-          ]}
+          css={[signInUpinputStyle, `${signInUpInputStyleHover}; height: 40px; padding-left: 30px`]}
         />
         <div
           css={[
