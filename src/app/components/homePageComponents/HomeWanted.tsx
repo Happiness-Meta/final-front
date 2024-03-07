@@ -5,7 +5,7 @@ import { css } from "@emotion/react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import useHomePageStore from "../store/homePageStore/useHomePageStore";
+import useHomePageStore from "../../store/homePageStore/useHomePageStore";
 import Image from "next/image";
 
 const wantedCssText = css`
@@ -47,7 +47,12 @@ const HomeWanted = () => {
           {Object.entries(pictures).map(([key, pictures], index) => (
             <div key={key}>
               <div css={boxShadowContainer}>
-                <Image src={pictures} alt={`Picture ${index + 1}`} width={345} height={204}></Image>
+                <Image
+                  src={pictures}
+                  alt={`Picture ${index + 1}`}
+                  width={345}
+                  height={204}
+                ></Image>
               </div>
             </div>
           ))}

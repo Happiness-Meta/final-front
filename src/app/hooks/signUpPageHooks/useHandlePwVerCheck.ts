@@ -1,4 +1,4 @@
-import { AboutHandlePwVerCheck } from "../types/aboutSignInUp";
+import { AboutHandlePwVerCheck } from "../../types/aboutSignInUp";
 
 export const handlePwVerCheck: (params: AboutHandlePwVerCheck) => void = ({
   pwRef,

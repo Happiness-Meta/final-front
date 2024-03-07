@@ -1,18 +1,17 @@
 "use client";
 /** @jsxImportSource @emotion/react */
 
-import IndividualMemberSection from "@/app/pages/signUpPage/components/IndividualMemberSection";
+import IndividualMemberSection from "@/app/components/signUpPageComponents/IndividualMemberSection";
 import useSignUpPageStore from "@/app/store/signUpPageStore/useSignUpPageStore";
 import {
   flexCenterX2,
   widthHeightFull,
-} from "@/app/styleComponents/commonStyles";
-import { signInUpMainStyle } from "@/app/styleComponents/inputAndButtonAndText";
+} from "@/app/styleComponents/commonStyles/commonStyles";
 import React from "react";
-import SignUpPathBtnSection from "./components/SignUpPathBtnSection";
-import ProjectTitle from "@/app/commonComponents/ProjectTitle";
-import CorporateMemberSection from "./components/CorporateMemberSection";
-import LinkToLogin from "./components/LinkToLogin";
+import SignUpPathBtnSection from "../../components/signUpPageComponents/SignUpPathBtnSection";
+import ProjectTitle from "@/app/components/commonComponents/ProjectTitle";
+import CorporateMemberSection from "../../components/signUpPageComponents/CorporateMemberSection";
+import LinkToLogin from "../../components/signUpPageComponents/LinkToLogin";
 
 const SignUpPage = () => {
   const { isIndividual } = useSignUpPageStore();

@@ -1,19 +1,19 @@
 "use client";
 /** @jsxImportSource @emotion/react */
 
-import { flexCenterX2 } from "@/app/styleComponents/commonStyles";
+import { flexCenterX2 } from "@/app/styleComponents/commonStyles/commonStyles";
 import {
   errorMessageStyle,
   signInUpButtonStyle,
   signInUpInputStyleHover,
   signInUpinputStyle,
-} from "@/app/styleComponents/inputAndButtonAndText";
-import { handlePwVerCheck } from "@/app/utils/signInUpFuncs";
+} from "@/app/styleComponents/commonStyles/inputAndButtonAndText";
+import { handlePwVerCheck } from "@/app/hooks/signUpPageHooks/useHandlePwVerCheck";
 import Image from "next/image";
 import React, { RefObject, useRef, useState } from "react";
 import visibility from "/public/svg/visibility.svg";
 import visibility_off from "/public/svg/visibility_off.svg";
-import VisibilityEyes from "@/app/commonComponents/VisibilityEyes";
+import VisibilityEyes from "@/app/components/commonComponents/VisibilityEyes";
 
 const CorporateMemberSection = () => {
   const emailRef: RefObject<HTMLInputElement> = useRef(null);

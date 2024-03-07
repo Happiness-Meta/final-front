@@ -4,14 +4,17 @@
 import { css } from "@emotion/react";
 import Link from "next/link";
 import React from "react";
-import { commonColor, flexCenterX2 } from "./styleComponents/commonStyles";
+import {
+  commonColor,
+  flexCenterX2,
+} from "./styleComponents/commonStyles/commonStyles";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import HomeSearchBar from "./homeComponents/HomeSearchBar";
-import HomeWanted from "./homeComponents/HomeWanted";
-import MainArticleRightHappiness from "./homeComponents/MainArticleRightHappiness";
-import TrendingPainter from "./homeComponents/TrendingPainter";
-import NewPainter from "./homeComponents/NewPainter";
+import HomeSearchBar from "./components/homePageComponents/HomeSearchBar";
+import HomeWanted from "./components/homePageComponents/HomeWanted";
+import MainArticleRightHappiness from "./components/homePageComponents/MainArticleRightHappiness";
+import TrendingPainter from "./components/homePageComponents/TrendingPainter";
+import NewPainter from "./components/homePageComponents/NewPainter";
 
 const headerContainerStyle = css`
   margin-top: 20px;
@@ -155,7 +158,10 @@ function HomePage() {
           <Link href={"pages/loginPage"} css={buttonStyle("white", "black")}>
             로그인
           </Link>
-          <Link href={"pages/signUpPage"} css={buttonStyle(commonColor.mainYellow, "white")}>
+          <Link
+            href={"pages/signUpPage"}
+            css={buttonStyle(commonColor.mainYellow, "white")}
+          >
             회원가입
           </Link>
         </div>

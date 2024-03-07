@@ -1,7 +1,7 @@
 "use client";
 /** @jsxImportSource @emotion/react */
 import useSignUpPageStore from "@/app/store/signUpPageStore/useSignUpPageStore";
-import { flexCenterX2 } from "@/app/styleComponents/commonStyles";
+import { flexCenterX2 } from "@/app/styleComponents/commonStyles/commonStyles";
 import { css } from "@emotion/react";
 import React from "react";
 

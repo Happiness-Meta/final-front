@@ -1,7 +1,10 @@
 "use client";
 /** @jsxImportSource @emotion/react */
 
-import { flexCenterX2, widthHeightFull } from "@/app/styleComponents/commonStyles";
+import {
+  flexCenterX2,
+  widthHeightFull,
+} from "@/app/styleComponents/commonStyles/commonStyles";
 import { css } from "@emotion/react";
 import mainHomeImage from "/public/svg/finalproject-main.svg";
 import searchIcon from "/public/svg/search.svg";
@@ -80,11 +83,20 @@ const HomeSearchBar = () => {
           <Image src={products} alt="product-icon" css={searchIconCss}></Image>
 
           <input type="text" placeholder="직군·직무"></input>
-          <Image src={sclocationicon} alt="sclocationicon-icon" css={searchIconCss}></Image>
+          <Image
+            src={sclocationicon}
+            alt="sclocationicon-icon"
+            css={searchIconCss}
+          ></Image>
           <input type="text" placeholder="경력·지역"></input>
         </div>
       </div>
-      <Image src={mainHomeImage} alt="검색창 배경 이미지" width={1200} height={300} />
+      <Image
+        src={mainHomeImage}
+        alt="검색창 배경 이미지"
+        width={1200}
+        height={300}
+      />
     </>
   );
 };

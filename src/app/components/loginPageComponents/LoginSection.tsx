@@ -1,14 +1,14 @@
 "use client";
 
-import VisibilityEyes from "@/app/commonComponents/VisibilityEyes";
+import VisibilityEyes from "@/app/components/commonComponents/VisibilityEyes";
 /** @jsxImportSource @emotion/react */
-import { flexCenterX2 } from "@/app/styleComponents/commonStyles";
+import { flexCenterX2 } from "@/app/styleComponents/commonStyles/commonStyles";
 import {
   errorMessageStyle,
   signInUpButtonStyle,
   signInUpInputStyleHover,
   signInUpinputStyle,
-} from "@/app/styleComponents/inputAndButtonAndText";
+} from "@/app/styleComponents/commonStyles/inputAndButtonAndText";
 import React, { RefObject, useRef, useState } from "react";
 
 const LoginSection = () => {
