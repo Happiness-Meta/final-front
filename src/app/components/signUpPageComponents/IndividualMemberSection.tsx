@@ -5,15 +5,13 @@ import { flexCenterX2 } from "@/app/styleComponents/commonStyles/commonStyles";
 import {
   errorMessageStyle,
   signInUpButtonStyle,
-  signInUpInputStyleHover,
   signInUpinputStyle,
 } from "@/app/styleComponents/commonStyles/inputAndButtonAndText";
-import { handlePwVerCheck } from "@/app/hooks/signUpPageHooks/useHandlePwVerCheck";
 import React, { RefObject, useEffect, useRef, useState } from "react";
-import VisibilityEyes from "@/app/components/commonComponents/VisibilityEyes";
 import { techStackList } from "@/app/constants/techStacks";
-import TechStackSpace from "./TechStackSpace";
-import SignUpInputs from "./SignUpInputs";
+import SignUpInputs from "./imsComponents/SignUpInputs";
+import TechStackSpace from "./imsComponents/TechStackSpace";
+import { preferedPositionList } from "@/app/constants/industryOptions";
 
 const IndividualMembetSection = () => {
   const emailRef: RefObject<HTMLInputElement> = useRef(null);
@@ -41,7 +39,7 @@ const IndividualMembetSection = () => {
       return setErrorMessage("위에서 비밀번호를 일치시켜주세요");
     if (
       positionRef.current?.value === "" ||
-      positionRef.current?.value === "null"
+      positionRef.current?.value === undefined
     )
       return setErrorMessage("희망 포지션을 선택해주세요");
   };
@@ -51,6 +49,10 @@ const IndividualMembetSection = () => {
   }, []);
 
   const nicknamePlaceHolder = "nickname";
+  const positionsArray = preferedPositionList.name.map((position, index) => ({
+    name: position,
+    value: preferedPositionList.value[index],
+  }));
 
   return (
     <section
@@ -75,12 +77,11 @@ const IndividualMembetSection = () => {
         name="희망 포지션"
         css={[signInUpinputStyle, `height: 40px;`]}
       >
-        <option value="null">희망 포지션</option>
-        <option value="풀스택">풀스택</option>
-        <option value="프론트엔드">프론트엔드</option>
-        <option value="백엔드">백엔드</option>
-        <option value="클라우드 아키텍트">클라우드 아키텍트</option>
-        <option value="소프트웨어 엔지니어">소프트웨어 엔지니어</option>
+        {positionsArray.map((position, index) => (
+          <option key={index} value={position.value}>
+            {position.name}
+          </option>
+        ))}
       </select>
       <TechStackSpace
         searchTechStackRef={searchTechStackRef}
@@ -90,7 +91,6 @@ const IndividualMembetSection = () => {
         setIsTechStacksVisible={setIsTechStacksVisible}
         searchedList={searchedList}
       />
-
       <p css={errorMessageStyle}>{errorMessage}</p>
       <button onClick={handleIndividualSignUp} css={signInUpButtonStyle}>
         회원가입

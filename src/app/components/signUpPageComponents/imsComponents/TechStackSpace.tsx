@@ -2,10 +2,7 @@
 /** @jsxImportSource @emotion/react */
 
 import { handleSearchTechStacks } from "@/app/hooks/signUpPageHooks/useHandleSearchTechStacks";
-import {
-  commonColor,
-  flexCenterX2,
-} from "@/app/styleComponents/commonStyles/commonStyles";
+import { flexCenterX2 } from "@/app/styleComponents/commonStyles/commonStyles";
 import Image from "next/image";
 import search from "@/app/assets/svg/search.svg";
 import {

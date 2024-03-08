@@ -7,7 +7,7 @@ import {
   signInUpInputStyleHover,
   signInUpinputStyle,
 } from "@/app/styleComponents/commonStyles/inputAndButtonAndText";
-import VisibilityEyes from "../commonComponents/VisibilityEyes";
+import VisibilityEyes from "../../commonComponents/VisibilityEyes";
 import { handlePwVerCheck } from "@/app/hooks/signUpPageHooks/useHandlePwVerCheck";
 import { AboutSignUpInputs } from "@/app/types/aboutSignInUp";
 
