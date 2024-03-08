@@ -35,8 +35,12 @@ const SignUpPathBtnSection = () => {
             isIndividual
               ? `border: 2px solid;
                   border-bottom: none;
-                  border-radius:  10px 10px 0 0; color: orange; font-weight: bold;`
-              : `border-bottom: 2px solid orange; color: gray; &:hover{ color: black; font-size: 16px}`
+                  border-radius:  10px 10px 0 0; 
+                  color: orange; 
+                  font-weight: bold;`
+              : `border-bottom: 2px solid orange; 
+              color: gray; 
+              &:hover{ color: black; font-size: 16px}`
           }`,
         ]}
       >

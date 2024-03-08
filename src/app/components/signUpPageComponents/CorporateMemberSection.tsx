@@ -11,6 +11,7 @@ import {
 import { handlePwVerCheck } from "@/app/hooks/signUpPageHooks/useHandlePwVerCheck";
 import React, { RefObject, useRef, useState } from "react";
 import VisibilityEyes from "@/app/components/commonComponents/VisibilityEyes";
+import SignUpInputs from "./SignUpInputs";
 
 const CorporateMemberSection = () => {
   const emailRef: RefObject<HTMLInputElement> = useRef(null);
@@ -33,54 +34,21 @@ const CorporateMemberSection = () => {
       return setErrorMessage("위에서 비밀번호를 일치시켜주세요");
   };
 
+  const companyPlaceHolder = "company name";
+
   return (
     <section css={[flexCenterX2, `flex-direction: column; row-gap: 5px `]}>
-      <input
-        autoFocus
-        ref={emailRef}
-        type="text"
-        placeholder="email"
-        css={[signInUpinputStyle, `${signInUpInputStyleHover}`]}
+      <SignUpInputs
+        emailRef={emailRef}
+        nicknameCompanyRef={companyNameRef}
+        nicknameCompanyPlaceHolder={companyPlaceHolder}
+        pwRef={pwRef}
+        pwVerRef={pwVerRef}
+        isPwVisible={isPwVisible}
+        setIsPwVisible={setIsPwVisible}
+        pwCheckMessage={pwCheckMessage}
+        setPwCheckMessage={setPwCheckMessage}
       />
-      <input
-        ref={companyNameRef}
-        type="text"
-        placeholder="company name"
-        css={[signInUpinputStyle, `${signInUpInputStyleHover}`]}
-      />
-      <div css={[flexCenterX2, `position: relative; width: 100%`]}>
-        <input
-          ref={pwRef}
-          type={isPwVisible ? "text" : "password"}
-          placeholder="password"
-          css={[signInUpinputStyle, `${signInUpInputStyleHover}`]}
-        />
-        <VisibilityEyes
-          isPwVisible={isPwVisible}
-          setIsPwVisible={setIsPwVisible}
-        />
-      </div>
-      <input
-        ref={pwVerRef}
-        onChange={() =>
-          handlePwVerCheck({ pwRef, pwVerRef, setPwCheckMessage })
-        }
-        type={isPwVisible ? "text" : "password"}
-        placeholder="verify password"
-        css={[signInUpinputStyle, `${signInUpInputStyleHover}`]}
-      />
-      <p
-        css={[
-          errorMessageStyle,
-          `margin: 0; color: ${
-            pwCheckMessage === "✅ 비밀번호가 일치합니다."
-              ? `#00bf00 !important`
-              : ``
-          }`,
-        ]}
-      >
-        {pwCheckMessage}
-      </p>
       <p css={errorMessageStyle}>{errorMessage}</p>
       <button css={signInUpButtonStyle} onClick={handleCorporateSignUp}>
         회원가입

@@ -1,10 +1,7 @@
 "use client";
 /** @jsxImportSource @emotion/react */
 
-import {
-  commonColor,
-  flexCenterX2,
-} from "@/app/styleComponents/commonStyles/commonStyles";
+import { flexCenterX2 } from "@/app/styleComponents/commonStyles/commonStyles";
 import {
   errorMessageStyle,
   signInUpButtonStyle,
@@ -12,11 +9,11 @@ import {
   signInUpinputStyle,
 } from "@/app/styleComponents/commonStyles/inputAndButtonAndText";
 import { handlePwVerCheck } from "@/app/hooks/signUpPageHooks/useHandlePwVerCheck";
-import Image from "next/image";
-import search from "@/app/assets/svg/search.svg";
-import React, { RefObject, useRef, useState } from "react";
+import React, { RefObject, useEffect, useRef, useState } from "react";
 import VisibilityEyes from "@/app/components/commonComponents/VisibilityEyes";
-import useSignUpPageStore from "@/app/store/signUpPageStore/useSignUpPageStore";
+import { techStackList } from "@/app/constants/techStacks";
+import TechStackSpace from "./TechStackSpace";
+import SignUpInputs from "./SignUpInputs";
 
 const IndividualMembetSection = () => {
   const emailRef: RefObject<HTMLInputElement> = useRef(null);
@@ -24,15 +21,13 @@ const IndividualMembetSection = () => {
   const pwRef: RefObject<HTMLInputElement> = useRef(null);
   const pwVerRef: RefObject<HTMLInputElement> = useRef(null);
   const positionRef: RefObject<HTMLSelectElement> = useRef(null);
-  const techStackRef: RefObject<HTMLInputElement> = useRef(null);
+  const searchTechStackRef: RefObject<HTMLInputElement> = useRef(null);
 
   const [pwCheckMessage, setPwCheckMessage] = useState("");
-  const [isPwVisible, setIsPwVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [isPwVisible, setIsPwVisible] = useState(false);
   const [isTechStacksVisible, setIsTechStacksVisible] = useState(false);
-
-  const { techStackContainer, addTechStack, removeTechStack } =
-    useSignUpPageStore();
+  const [searchedList, setSearchedList] = useState<string[]>([]);
 
   const handleIndividualSignUp = () => {
     console.log(positionRef.current?.value);
@@ -51,28 +46,11 @@ const IndividualMembetSection = () => {
       return setErrorMessage("희망 포지션을 선택해주세요");
   };
 
-  const techStacks = [
-    "HTML/CSS",
-    "JavaScript",
-    "TypeScript",
-    "React",
-    "Nextjs",
-    "Redux",
-    "Zustand",
-    "SCSS",
-    "Emotion",
-    "StyledComponent",
-    "C",
-    "C+",
-    "C++",
-    "C#",
-    "Java",
-    "Python",
-    "Swift",
-    "PHP",
-    "Ruby",
-    "Go",
-  ];
+  useEffect(() => {
+    setSearchedList(techStackList);
+  }, []);
+
+  const nicknamePlaceHolder = "nickname";
 
   return (
     <section
@@ -81,52 +59,17 @@ const IndividualMembetSection = () => {
         `flex-direction: column; row-gap: 5px; user-select: none;`,
       ]}
     >
-      <input
-        autoFocus
-        ref={emailRef}
-        type="text"
-        placeholder="email"
-        css={[signInUpinputStyle, `${signInUpInputStyleHover}`]}
+      <SignUpInputs
+        emailRef={emailRef}
+        nicknameCompanyRef={nicknameRef}
+        nicknameCompanyPlaceHolder={nicknamePlaceHolder}
+        pwRef={pwRef}
+        pwVerRef={pwVerRef}
+        isPwVisible={isPwVisible}
+        setIsPwVisible={setIsPwVisible}
+        pwCheckMessage={pwCheckMessage}
+        setPwCheckMessage={setPwCheckMessage}
       />
-      <input
-        ref={nicknameRef}
-        type="text"
-        placeholder="nickname"
-        css={[signInUpinputStyle, `${signInUpInputStyleHover}`]}
-      />
-      <div css={[flexCenterX2, `position: relative; width: 100%`]}>
-        <input
-          ref={pwRef}
-          type={isPwVisible ? "text" : "password"}
-          placeholder="password"
-          css={[signInUpinputStyle, `${signInUpInputStyleHover}`]}
-        />
-        <VisibilityEyes
-          isPwVisible={isPwVisible}
-          setIsPwVisible={setIsPwVisible}
-        />
-      </div>
-      <input
-        ref={pwVerRef}
-        onChange={() =>
-          handlePwVerCheck({ pwRef, pwVerRef, setPwCheckMessage })
-        }
-        type={isPwVisible ? "text" : "password"}
-        placeholder="verify password"
-        css={[signInUpinputStyle, `${signInUpInputStyleHover}`]}
-      />
-      <p
-        css={[
-          errorMessageStyle,
-          `margin: 0; color: ${
-            pwCheckMessage === "✅ 비밀번호가 일치합니다."
-              ? `#00bf00 !important`
-              : ``
-          }`,
-        ]}
-      >
-        {pwCheckMessage}
-      </p>
       <select
         ref={positionRef}
         name="희망 포지션"
@@ -139,104 +82,14 @@ const IndividualMembetSection = () => {
         <option value="클라우드 아키텍트">클라우드 아키텍트</option>
         <option value="소프트웨어 엔지니어">소프트웨어 엔지니어</option>
       </select>
-      <div css={[flexCenterX2, `position: relative; width:100%;`]}>
-        <Image
-          src={search}
-          alt="search"
-          width={15}
-          height={15}
-          css={[
-            `position: absolute; top:50%; left: 30px; transform: translateY(-50%);`,
-          ]}
-        />
-        <input
-          placeholder="기술 스택 : 최대 15개"
-          onFocus={() => setIsTechStacksVisible(true)}
-          onBlur={() => setTimeout(() => setIsTechStacksVisible(false), 200)}
-          css={[
-            signInUpinputStyle,
-            `${signInUpInputStyleHover}; height: 40px; padding-left: 30px`,
-          ]}
-        />
-        <div
-          css={[
-            `position: absolute; top: 102%;
-            display: ${isTechStacksVisible ? `flex` : `none`};
-            flex-direction: column;
-            width: 90%; 
-            min-height:30px; height: fit-content; max-height: 200px; 
-            border: 1px solid gray; border-radius: 7px; 
-            background-color: white;
-            overflow-y: scroll;
-            z-index:1;`,
-          ]}
-        >
-          {techStacks.map((tech, index) => {
-            return (
-              <div
-                key={index}
-                onClick={() => addTechStack(tech)}
-                css={[
-                  `display: flex;
-                  align-items: center;
-                  width: 100%; 
-                  height: 30px; 
-                  padding: 10px;
-                  padding-left: 25px;
-                  border-radius: 5px;
-                  &:hover{background-color: #ff8a001a;};`,
-                ]}
-              >
-                {tech}
-              </div>
-            );
-          })}
-        </div>
-      </div>
-      <div
-        css={[
-          signInUpinputStyle,
-          `${signInUpInputStyleHover}; 
-          display:flex; align-items: center; gap: 3px;
-          height: 35px; padding-left: 3px; overflow-x: scroll;`,
-        ]}
-      >
-        {techStackContainer.map((tech, index) => {
-          return (
-            <div
-              key={index}
-              onClick={() => removeTechStack(tech)}
-              css={[
-                `
-                position: relative;
-                width: fit-content; 
-                padding: 1px 8px; 
-                border: 1px solid ${commonColor.representative};
-                border-radius: 5px;
-                background-color: #ff8a003b;
-                font-size: 14px;
-                font-weight: 500;
-                white-space: nowrap;
-                transition: .3s;
-                &:hover {
-                  background-color: black;
-                }
-                &:hover::before {
-                  content: "삭제";
-                  position: absolute;
-                  top: 50%;
-                  left: 50%;
-                  transform: translate(-50%, -50%);
-                  color: orange;
-                }
-                `,
-              ]}
-            >
-              {tech}
-            </div>
-          );
-        })}
-      </div>
+      <TechStackSpace
+        searchTechStackRef={searchTechStackRef}
+        techStackList={techStackList}
+        setSearchedList={setSearchedList}
+        isTechStacksVisible={isTechStacksVisible}
+        setIsTechStacksVisible={setIsTechStacksVisible}
+        searchedList={searchedList}
+      />
 
       <p css={errorMessageStyle}>{errorMessage}</p>
       <button onClick={handleIndividualSignUp} css={signInUpButtonStyle}>
