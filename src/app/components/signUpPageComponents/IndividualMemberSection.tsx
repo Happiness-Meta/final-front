@@ -3,7 +3,6 @@
 
 import { flexCenterX2 } from "@/app/styleComponents/commonStyles/commonStyles";
 import {
-  errorMessageStyle,
   signInUpButtonStyle,
   signInUpinputStyle,
 } from "@/app/styleComponents/commonStyles/inputAndButtonAndText";
@@ -12,6 +11,8 @@ import { techStackList } from "@/app/constants/techStacks";
 import SignUpInputs from "./imsComponents/SignUpInputs";
 import TechStackSpace from "./imsComponents/TechStackSpace";
 import { preferedPositionList } from "@/app/constants/industryOptions";
+import useSignUpPageStore from "@/app/store/signUpPageStore/useSignUpPageStore";
+import SignUpErrorMessage from "../commonComponents/SignUpErrorMessage";
 
 const IndividualMembetSection = () => {
   const emailRef: RefObject<HTMLInputElement> = useRef(null);
@@ -27,8 +28,11 @@ const IndividualMembetSection = () => {
   const [isTechStacksVisible, setIsTechStacksVisible] = useState(false);
   const [searchedList, setSearchedList] = useState<string[]>([]);
 
+  const { activateErrorMessageAni } = useSignUpPageStore();
+
   const handleIndividualSignUp = () => {
     console.log(positionRef.current?.value);
+    activateErrorMessageAni();
     if (emailRef.current?.value === "")
       return setErrorMessage("이메일을 입력해 주세요.");
     if (nicknameRef.current?.value === "")
@@ -37,10 +41,7 @@ const IndividualMembetSection = () => {
       return setErrorMessage("비밀번호를 입력해주세요");
     if (pwRef.current?.value !== pwVerRef.current?.value)
       return setErrorMessage("위에서 비밀번호를 일치시켜주세요");
-    if (
-      positionRef.current?.value === "" ||
-      positionRef.current?.value === undefined
-    )
+    if (positionRef.current?.value === "희망 포지션")
       return setErrorMessage("희망 포지션을 선택해주세요");
   };
 
@@ -49,10 +50,6 @@ const IndividualMembetSection = () => {
   }, []);
 
   const nicknamePlaceHolder = "nickname";
-  const positionsArray = preferedPositionList.name.map((position, index) => ({
-    name: position,
-    value: preferedPositionList.value[index],
-  }));
 
   return (
     <section
@@ -77,9 +74,9 @@ const IndividualMembetSection = () => {
         name="희망 포지션"
         css={[signInUpinputStyle, `height: 40px;`]}
       >
-        {positionsArray.map((position, index) => (
-          <option key={index} value={position.value}>
-            {position.name}
+        {preferedPositionList.map((position, index) => (
+          <option key={index} value={position}>
+            {position}
           </option>
         ))}
       </select>
@@ -91,7 +88,7 @@ const IndividualMembetSection = () => {
         setIsTechStacksVisible={setIsTechStacksVisible}
         searchedList={searchedList}
       />
-      <p css={errorMessageStyle}>{errorMessage}</p>
+      <SignUpErrorMessage errorMessage={errorMessage} />
       <button onClick={handleIndividualSignUp} css={signInUpButtonStyle}>
         회원가입
       </button>

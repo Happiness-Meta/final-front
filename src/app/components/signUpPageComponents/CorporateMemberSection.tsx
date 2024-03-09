@@ -10,6 +10,8 @@ import {
 import React, { RefObject, useRef, useState } from "react";
 import SignUpInputs from "./imsComponents/SignUpInputs";
 import { industryList } from "@/app/constants/industryOptions";
+import SignUpErrorMessage from "../commonComponents/SignUpErrorMessage";
+import useSignUpPageStore from "@/app/store/signUpPageStore/useSignUpPageStore";
 
 const CorporateMemberSection = () => {
   const emailRef: RefObject<HTMLInputElement> = useRef(null);
@@ -22,8 +24,10 @@ const CorporateMemberSection = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [isPwVisible, setIsPwVisible] = useState(false);
 
+  const { activateErrorMessageAni } = useSignUpPageStore();
+
   const handleCorporateSignUp = () => {
-    console.log(industryRef.current?.value);
+    activateErrorMessageAni();
     if (emailRef.current?.value === "")
       return setErrorMessage("아이디를 입력해 주세요.");
     if (companyNameRef.current?.value === "")
@@ -32,18 +36,11 @@ const CorporateMemberSection = () => {
       return setErrorMessage("비밀번호를 입력해주세요");
     if (pwRef.current?.value !== pwVerRef.current?.value)
       return setErrorMessage("위에서 비밀번호를 일치시켜주세요");
-    if (
-      industryRef.current?.value === "" ||
-      industryRef.current?.value === undefined
-    )
+    if (industryRef.current?.value === "산업 분야")
       return setErrorMessage("산업분야을 선택해주세요");
   };
 
   const companyPlaceHolder = "company name";
-  const industryArray = industryList.name.map((industry, index) => ({
-    name: industry,
-    value: industryList.value[index],
-  }));
 
   return (
     <section css={[flexCenterX2, `flex-direction: column; row-gap: 5px `]}>
@@ -63,13 +60,13 @@ const CorporateMemberSection = () => {
         name="산업 분야"
         css={[signInUpinputStyle, `height: 40px;`]}
       >
-        {industryArray.map((industry, index) => (
-          <option key={index} value={industry.value}>
-            {industry.name}
+        {industryList.map((industry, index) => (
+          <option key={index} value={industry}>
+            {industry}
           </option>
         ))}
       </select>
-      <p css={errorMessageStyle}>{errorMessage}</p>
+      <SignUpErrorMessage errorMessage={errorMessage} />
       <button css={signInUpButtonStyle} onClick={handleCorporateSignUp}>
         회원가입
       </button>
