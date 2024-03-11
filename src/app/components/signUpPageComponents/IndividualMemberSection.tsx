@@ -2,17 +2,15 @@
 /** @jsxImportSource @emotion/react */
 
 import { flexCenterX2 } from "@/app/styleComponents/commonStyles/commonStyles";
-import {
-  signInUpButtonStyle,
-  signInUpinputStyle,
-} from "@/app/styleComponents/commonStyles/inputAndButtonAndText";
+import { signInUpButtonStyle } from "@/app/styleComponents/commonStyles/inputAndButtonAndText";
 import React, { RefObject, useEffect, useRef, useState } from "react";
 import { techStackList } from "@/app/constants/techStacks";
 import SignUpInputs from "./imsComponents/SignUpInputs";
-import TechStackSpace from "./imsComponents/TechStackSpace";
+import TechStackSpace from "../commonComponents/TechStackSpace";
 import { preferedPositionList } from "@/app/constants/industryOptions";
 import useSignUpPageStore from "@/app/store/signUpPageStore/useSignUpPageStore";
 import SignUpErrorMessage from "../commonComponents/SignUpErrorMessage";
+import PositionSpace from "../commonComponents/PositionSpace";
 
 const IndividualMembetSection = () => {
   const emailRef: RefObject<HTMLInputElement> = useRef(null);
@@ -69,17 +67,10 @@ const IndividualMembetSection = () => {
         pwCheckMessage={pwCheckMessage}
         setPwCheckMessage={setPwCheckMessage}
       />
-      <select
-        ref={positionRef}
-        name="희망 포지션"
-        css={[signInUpinputStyle, `height: 40px;`]}
-      >
-        {preferedPositionList.map((position, index) => (
-          <option key={index} value={position}>
-            {position}
-          </option>
-        ))}
-      </select>
+      <PositionSpace
+        positionRef={positionRef}
+        positionList={preferedPositionList}
+      />
       <TechStackSpace
         searchTechStackRef={searchTechStackRef}
         techStackList={techStackList}

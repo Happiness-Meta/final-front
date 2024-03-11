@@ -72,7 +72,10 @@ const TechStackSpace: React.FC<AboutTechStackSpace> = ({
             return (
               <div
                 key={index}
-                onClick={() => addTechStack(tech)}
+                onClick={() => {
+                  addTechStack(tech);
+                  searchTechStackRef.current!.value = "";
+                }}
                 css={searchedListStyle}
               >
                 {tech}

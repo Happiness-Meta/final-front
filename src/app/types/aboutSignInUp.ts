@@ -31,3 +31,8 @@ export interface AboutTechStackSpace {
   setIsTechStacksVisible: (T: boolean) => void;
   searchedList: string[];
 }
+
+export interface AboutPositionSpace {
+  positionRef: RefObject<HTMLSelectElement>;
+  positionList: string[];
+}
