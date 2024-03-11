@@ -5,6 +5,7 @@ import Image from "next/image";
 import visibility from "@/app/assets/svg/visibility.svg";
 import visibility_off from "@/app/assets/svg/visibility_off.svg";
 import { AboutVisibilityEyes } from "@/app/types/aboutSignInUp";
+import { commonColor } from "@/app/styleComponents/commonStyles/commonStyles";
 
 const VisibilityEyes: React.FC<AboutVisibilityEyes> = ({
   isPwVisible,
@@ -23,7 +24,7 @@ const VisibilityEyes: React.FC<AboutVisibilityEyes> = ({
         border-radius:50%;
         cursor: pointer;
         &:hover {
-          border: 1px solid orange;
+          border: 1px solid ${commonColor.representative};
         }
         `,
       ]}

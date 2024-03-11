@@ -5,24 +5,29 @@ import { flexCenterX2 } from "@/app/styleComponents/commonStyles/commonStyles";
 import {
   errorMessageStyle,
   signInUpButtonStyle,
-  signInUpInputStyleHover,
   signInUpinputStyle,
 } from "@/app/styleComponents/commonStyles/inputAndButtonAndText";
-import { handlePwVerCheck } from "@/app/hooks/signUpPageHooks/useHandlePwVerCheck";
 import React, { RefObject, useRef, useState } from "react";
-import VisibilityEyes from "@/app/components/commonComponents/VisibilityEyes";
+import SignUpInputs from "./imsComponents/SignUpInputs";
+import { industryList } from "@/app/constants/industryOptions";
+import SignUpErrorMessage from "../commonComponents/SignUpErrorMessage";
+import useSignUpPageStore from "@/app/store/signUpPageStore/useSignUpPageStore";
 
 const CorporateMemberSection = () => {
   const emailRef: RefObject<HTMLInputElement> = useRef(null);
   const companyNameRef: RefObject<HTMLInputElement> = useRef(null);
   const pwRef: RefObject<HTMLInputElement> = useRef(null);
   const pwVerRef: RefObject<HTMLInputElement> = useRef(null);
+  const industryRef: RefObject<HTMLSelectElement> = useRef(null);
 
   const [pwCheckMessage, setPwCheckMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isPwVisible, setIsPwVisible] = useState(false);
 
+  const { activateErrorMessageAni } = useSignUpPageStore();
+
   const handleCorporateSignUp = () => {
+    activateErrorMessageAni();
     if (emailRef.current?.value === "")
       return setErrorMessage("아이디를 입력해 주세요.");
     if (companyNameRef.current?.value === "")
@@ -31,57 +36,37 @@ const CorporateMemberSection = () => {
       return setErrorMessage("비밀번호를 입력해주세요");
     if (pwRef.current?.value !== pwVerRef.current?.value)
       return setErrorMessage("위에서 비밀번호를 일치시켜주세요");
+    if (industryRef.current?.value === "산업 분야")
+      return setErrorMessage("산업분야을 선택해주세요");
   };
+
+  const companyPlaceHolder = "company name";
 
   return (
     <section css={[flexCenterX2, `flex-direction: column; row-gap: 5px `]}>
-      <input
-        autoFocus
-        ref={emailRef}
-        type="text"
-        placeholder="email"
-        css={[signInUpinputStyle, `${signInUpInputStyleHover}`]}
+      <SignUpInputs
+        emailRef={emailRef}
+        nicknameCompanyRef={companyNameRef}
+        nicknameCompanyPlaceHolder={companyPlaceHolder}
+        pwRef={pwRef}
+        pwVerRef={pwVerRef}
+        isPwVisible={isPwVisible}
+        setIsPwVisible={setIsPwVisible}
+        pwCheckMessage={pwCheckMessage}
+        setPwCheckMessage={setPwCheckMessage}
       />
-      <input
-        ref={companyNameRef}
-        type="text"
-        placeholder="company name"
-        css={[signInUpinputStyle, `${signInUpInputStyleHover}`]}
-      />
-      <div css={[flexCenterX2, `position: relative; width: 100%`]}>
-        <input
-          ref={pwRef}
-          type={isPwVisible ? "text" : "password"}
-          placeholder="password"
-          css={[signInUpinputStyle, `${signInUpInputStyleHover}`]}
-        />
-        <VisibilityEyes
-          isPwVisible={isPwVisible}
-          setIsPwVisible={setIsPwVisible}
-        />
-      </div>
-      <input
-        ref={pwVerRef}
-        onChange={() =>
-          handlePwVerCheck({ pwRef, pwVerRef, setPwCheckMessage })
-        }
-        type={isPwVisible ? "text" : "password"}
-        placeholder="verify password"
-        css={[signInUpinputStyle, `${signInUpInputStyleHover}`]}
-      />
-      <p
-        css={[
-          errorMessageStyle,
-          `margin: 0; color: ${
-            pwCheckMessage === "✅ 비밀번호가 일치합니다."
-              ? `#00bf00 !important`
-              : ``
-          }`,
-        ]}
+      <select
+        ref={industryRef}
+        name="산업 분야"
+        css={[signInUpinputStyle, `height: 40px;`]}
       >
-        {pwCheckMessage}
-      </p>
-      <p css={errorMessageStyle}>{errorMessage}</p>
+        {industryList.map((industry, index) => (
+          <option key={index} value={industry}>
+            {industry}
+          </option>
+        ))}
+      </select>
+      <SignUpErrorMessage errorMessage={errorMessage} />
       <button css={signInUpButtonStyle} onClick={handleCorporateSignUp}>
         회원가입
       </button>

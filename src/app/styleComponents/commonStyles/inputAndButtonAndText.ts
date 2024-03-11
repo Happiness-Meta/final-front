@@ -19,7 +19,7 @@ export const signInUpinputStyle = {
 export const signInUpInputStyleHover = `
   &:focus {
     width: 92%;
-    border-color: orange !important;
+    border-color: ${commonColor.representative} !important;
   }
 `;
 

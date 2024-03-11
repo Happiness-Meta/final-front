@@ -1,6 +1,7 @@
 "use client";
 
 import VisibilityEyes from "@/app/components/commonComponents/VisibilityEyes";
+import useSignUpPageStore from "@/app/store/signUpPageStore/useSignUpPageStore";
 /** @jsxImportSource @emotion/react */
 import { flexCenterX2 } from "@/app/styleComponents/commonStyles/commonStyles";
 import {
@@ -10,6 +11,7 @@ import {
   signInUpinputStyle,
 } from "@/app/styleComponents/commonStyles/inputAndButtonAndText";
 import React, { RefObject, useRef, useState } from "react";
+import SignUpErrorMessage from "../commonComponents/SignUpErrorMessage";
 
 const LoginSection = () => {
   const emailRef: RefObject<HTMLInputElement> = useRef(null);
@@ -18,7 +20,10 @@ const LoginSection = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [isPwVisible, setIsPwVisible] = useState(false);
 
+  const { activateErrorMessageAni } = useSignUpPageStore();
+
   const handleLogin = () => {
+    activateErrorMessageAni();
     if (emailRef.current!.value === "") {
       setErrorMessage("이메일를 입력해주세요.");
       return;
@@ -75,7 +80,7 @@ const LoginSection = () => {
           setIsPwVisible={setIsPwVisible}
         />
       </div>
-      <p css={errorMessageStyle}>{errorMessage}</p>
+      <SignUpErrorMessage errorMessage={errorMessage} />
       <button
         onClick={() => {
           handleLogin();
