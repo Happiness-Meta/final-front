@@ -10,3 +10,14 @@ export interface AboutVisibilityEyes {
   isPwVisible: boolean;
   setIsPwVisible: (T: boolean) => void;
 }
+
+export interface HomePagePeopleProfile {
+  name: string;
+  description: string;
+  image: string;
+}
+
+export interface AboutHomePage {
+  profiles: { [key: string]: HomePagePeopleProfile };
+  pictures: { [key: string]: string };
+}
