@@ -13,6 +13,7 @@ import {
   searchButton,
   searchBarAndSearchIcon2,
   jobListUl,
+  homeImageCss,
 } from "@/app/styleComponents/homePageStyles/HomeSearchBar";
 import { commonColor } from "@/app/styleComponents/commonStyles/commonStyles";
 import {
@@ -181,7 +182,7 @@ const HomeSearchBar = () => {
           </div>
         </div>
       </div>
-      <Image src={mainHomeImage} alt="검색창 배경 이미지" width={1200} height={300} />
+      <Image src={mainHomeImage} alt="검색창 배경 이미지" css={homeImageCss} />
     </>
   );
 };

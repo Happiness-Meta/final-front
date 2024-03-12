@@ -39,7 +39,6 @@ function HomePage() {
             <span>MY커리어</span>
             <span>허브</span>
             <span>채용</span>
-            <span>커뮤니티</span>
           </nav>
         </div>
         <div css={homeButtonContainer}>

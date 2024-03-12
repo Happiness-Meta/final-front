@@ -4,7 +4,8 @@ import { flexCenterX2, widthHeightFull } from "../commonStyles/commonStyles";
 export const mainSearchBar = css`
   ${flexCenterX2}
   ${widthHeightFull}
-  width: 1025px;
+  max-width: 1025px;
+  width: 100%;
   height: 100px;
   background-color: #ffffff;
   position: absolute;
@@ -13,8 +14,6 @@ export const mainSearchBar = css`
 
   input:focus {
     outline: none;
-  }
-  input::placeholder {
   }
 `;
 
@@ -81,4 +80,10 @@ export const jobListUl = () => css`
     margin-top: 15px;
     margin-bottom: 15px;
   }
+`;
+
+export const homeImageCss = css`
+  max-width: 1200px;
+  width: 100%;
+  height: auto;
 `;

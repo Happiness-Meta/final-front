@@ -13,17 +13,21 @@ const wantedCssText = css`
 `;
 
 const sliderContainer = css`
-  height: 400px;
-  width: 1135px;
+  max-height: 400px;
+  max-width: 1135px;
+  width: 100%;
+  margin: auto;
 `;
 
 const boxShadowContainer = css`
   overflow: hidden;
   border-radius: 17px;
   display: inline-block;
-  width: 345px;
-  height: 204px;
+  width: 30vw;
+  height: auto;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  max-width: 345px;
+  max-height: 204px;
 `;
 
 const HomeWanted = () => {
@@ -37,6 +41,30 @@ const HomeWanted = () => {
     autoplay: true,
     autoplaySpeed: 2000,
     pauseOnHover: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          initialSlide: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
   return (
@@ -47,12 +75,7 @@ const HomeWanted = () => {
           {Object.entries(pictures).map(([key, pictures], index) => (
             <div key={key}>
               <div css={boxShadowContainer}>
-                <Image
-                  src={pictures}
-                  alt={`Picture ${index + 1}`}
-                  width={345}
-                  height={204}
-                ></Image>
+                <Image src={pictures} alt={`Picture ${index + 1}`} width={345} height={204}></Image>
               </div>
             </div>
           ))}

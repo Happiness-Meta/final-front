@@ -50,6 +50,22 @@ export const homeMenuStyle = () => css`
       margin-right: 0;
     }
   }
+
+  @media (max-width: 1023px) {
+    font-size: 20px;
+    margin-left: 40px;
+    span {
+      margin-right: 15px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    font-size: 16px;
+    margin-left: 20px;
+    span {
+      margin-right: 10px;
+    }
+  }
 `;
 
 export const homeButtonContainer = () => css`
@@ -95,22 +111,37 @@ export const mainArticleRightSide = css`
     font-size: 16px;
     line-height: 19px;
   }
+  @media (max-width: 1300px) {
+    display: none;
+  }
 `;
 
 export const mainBodyFlex = css`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  @media (max-width: 1023px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 export const mainArticleLeftSide = css`
   background: white;
   width: 263px;
+
+  @media (max-width: 1023px) {
+    display: none;
+  }
 `;
 
 export const mainArticleMiddle = css`
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 1023px) {
+    align-items: center;
+  }
 `;
 
 export const wantedCss = css`
