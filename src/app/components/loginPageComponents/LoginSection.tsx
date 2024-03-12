@@ -1,11 +1,10 @@
 "use client";
+/** @jsxImportSource @emotion/react */
 
 import VisibilityEyes from "@/app/components/commonComponents/VisibilityEyes";
 import useSignUpPageStore from "@/app/store/signUpPageStore/useSignUpPageStore";
-/** @jsxImportSource @emotion/react */
 import { flexCenterX2 } from "@/app/styleComponents/commonStyles/commonStyles";
 import {
-  errorMessageStyle,
   signInUpButtonStyle,
   signInUpInputStyleHover,
   signInUpinputStyle,

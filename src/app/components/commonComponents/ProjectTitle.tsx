@@ -3,7 +3,6 @@
 
 import { flexCenterX2 } from "@/app/styleComponents/commonStyles/commonStyles";
 import Link from "next/link";
-import React from "react";
 
 const LinkStyle = {
   ...flexCenterX2,

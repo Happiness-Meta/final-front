@@ -3,7 +3,6 @@
 import useSignUpPageStore from "@/app/store/signUpPageStore/useSignUpPageStore";
 import { flexCenterX2 } from "@/app/styleComponents/commonStyles/commonStyles";
 import { css } from "@emotion/react";
-import React from "react";
 
 const SignUpPathBtnSection = () => {
   const { isIndividual, setIsIndividual } = useSignUpPageStore();

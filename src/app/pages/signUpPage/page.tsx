@@ -7,7 +7,6 @@ import {
   flexCenterX2,
   widthHeightFull,
 } from "@/app/styleComponents/commonStyles/commonStyles";
-import React from "react";
 import SignUpPathBtnSection from "../../components/signUpPageComponents/SignUpPathBtnSection";
 import ProjectTitle from "@/app/components/commonComponents/ProjectTitle";
 import CorporateMemberSection from "../../components/signUpPageComponents/CorporateMemberSection";

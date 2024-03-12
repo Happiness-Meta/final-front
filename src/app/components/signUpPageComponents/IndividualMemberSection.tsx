@@ -3,7 +3,7 @@
 
 import { flexCenterX2 } from "@/app/styleComponents/commonStyles/commonStyles";
 import { signInUpButtonStyle } from "@/app/styleComponents/commonStyles/inputAndButtonAndText";
-import React, { RefObject, useEffect, useRef, useState } from "react";
+import { RefObject, useEffect, useRef, useState } from "react";
 import { techStackList } from "@/app/constants/techStacks";
 import SignUpInputs from "./imsComponents/SignUpInputs";
 import TechStackSpace from "../commonComponents/TechStackSpace";

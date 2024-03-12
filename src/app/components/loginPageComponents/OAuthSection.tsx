@@ -5,7 +5,6 @@ import Kakao from "@/app/assets/svg/kakao.svg";
 import Google from "@/app/assets/svg/google.svg";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
 const oAuthIconStyle = {
   ...flexCenterX2,
