@@ -10,7 +10,6 @@ export const handleSearchTechStacks: (
   params: AboutHandleSearchTechStacks
 ) => void = ({ searchTechStackRef, techStackList, setSearchedList }) => {
   const searchTerm = searchTechStackRef.current?.value.toLowerCase();
-
   if (searchTerm?.length! > 0) {
     const filteredTechStack = techStackList.filter((tech) =>
       tech.toLowerCase().includes(searchTerm!)
