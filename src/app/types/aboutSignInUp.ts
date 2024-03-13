@@ -21,3 +21,8 @@ export interface AboutHomePage {
   profiles: { [key: string]: HomePagePeopleProfile };
   pictures: { [key: string]: string };
 }
+
+export interface AboutPositionSpace {
+  positionRef: RefObject<HTMLSelectElement>;
+  positionList: string[];
+}

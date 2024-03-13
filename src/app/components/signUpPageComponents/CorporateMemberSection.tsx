@@ -2,16 +2,13 @@
 /** @jsxImportSource @emotion/react */
 
 import { flexCenterX2 } from "@/app/styleComponents/commonStyles/commonStyles";
-import {
-  errorMessageStyle,
-  signInUpButtonStyle,
-  signInUpinputStyle,
-} from "@/app/styleComponents/commonStyles/inputAndButtonAndText";
-import React, { RefObject, useRef, useState } from "react";
+import { signInUpButtonStyle } from "@/app/styleComponents/commonStyles/inputAndButtonAndText";
+import { RefObject, useRef, useState } from "react";
 import SignUpInputs from "./imsComponents/SignUpInputs";
 import { industryList } from "@/app/constants/industryOptions";
 import SignUpErrorMessage from "../commonComponents/SignUpErrorMessage";
 import useSignUpPageStore from "@/app/store/signUpPageStore/useSignUpPageStore";
+import PositionSpace from "../commonComponents/PositionSpace";
 
 const CorporateMemberSection = () => {
   const emailRef: RefObject<HTMLInputElement> = useRef(null);
@@ -55,17 +52,7 @@ const CorporateMemberSection = () => {
         pwCheckMessage={pwCheckMessage}
         setPwCheckMessage={setPwCheckMessage}
       />
-      <select
-        ref={industryRef}
-        name="산업 분야"
-        css={[signInUpinputStyle, `height: 40px;`]}
-      >
-        {industryList.map((industry, index) => (
-          <option key={index} value={industry}>
-            {industry}
-          </option>
-        ))}
-      </select>
+      <PositionSpace positionRef={industryRef} positionList={industryList} />
       <SignUpErrorMessage errorMessage={errorMessage} />
       <button css={signInUpButtonStyle} onClick={handleCorporateSignUp}>
         회원가입

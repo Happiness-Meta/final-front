@@ -6,7 +6,6 @@ import {
   oscillatingAni2,
 } from "@/app/styleComponents/commonStyles/keyframes";
 import { css } from "@emotion/react";
-import React from "react";
 
 interface AboutSignUpErrorMessage {
   errorMessage: string;
