@@ -2,17 +2,7 @@ import { create } from "zustand";
 import ProfileImage from "@/app/assets/svg/profilePicture.svg";
 import BusinessImage from "@/app/assets/svg/business001.svg";
 import BusinessImage2 from "@/app/assets/svg/business002.svg";
-
-export interface HomePagePeopleProfile {
-  name: string;
-  description: string;
-  image: string;
-}
-
-interface AboutHomePage {
-  profiles: { [key: string]: HomePagePeopleProfile };
-  pictures: { [key: string]: string };
-}
+import { AboutHomePage } from "@/app/types/aboutSignInUp";
 
 const useHomePageStore = create<AboutHomePage>((set) => ({
   profiles: {

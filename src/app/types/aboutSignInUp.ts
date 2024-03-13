@@ -11,23 +11,13 @@ export interface AboutVisibilityEyes {
   setIsPwVisible: (T: boolean) => void;
 }
 
-export interface AboutSignUpInputs {
-  emailRef: RefObject<HTMLInputElement>;
-  nicknameCompanyRef: RefObject<HTMLInputElement>;
-  nicknameCompanyPlaceHolder: string;
-  pwRef: RefObject<HTMLInputElement>;
-  pwVerRef: RefObject<HTMLInputElement>;
-  isPwVisible: boolean;
-  setIsPwVisible: (T: boolean) => void;
-  pwCheckMessage: string;
-  setPwCheckMessage: (T: string) => void;
+export interface HomePagePeopleProfile {
+  name: string;
+  description: string;
+  image: string;
 }
 
-export interface AboutTechStackSpace {
-  searchTechStackRef: RefObject<HTMLInputElement>;
-  techStackList: string[];
-  setSearchedList: (T: string[]) => void;
-  isTechStacksVisible: boolean;
-  setIsTechStacksVisible: (T: boolean) => void;
-  searchedList: string[];
+export interface AboutHomePage {
+  profiles: { [key: string]: HomePagePeopleProfile };
+  pictures: { [key: string]: string };
 }
