@@ -13,10 +13,6 @@ import TrendingPainter from "./components/homePageComponents/TrendingPainter";
 import NewPainter from "./components/homePageComponents/NewPainter";
 import {
   headerContainerStyle,
-  titleAndMenuStyle,
-  titleAndMenuStylePalette,
-  homeTitleStyle,
-  homeMenuStyle,
   homeButtonContainer,
   buttonStyle,
   mainBodyFlex,
@@ -26,21 +22,13 @@ import {
   wantedCss,
   mainArticleRightSide,
 } from "./styleComponents/homePageStyles/HomePageStyles";
+import ProjectMenu from "./components/commonComponents/Projectmenu";
 
 function HomePage() {
   return (
     <>
       <header css={headerContainerStyle}>
-        <div css={titleAndMenuStyle}>
-          <div css={titleAndMenuStylePalette}>
-            <p css={homeTitleStyle}>Palette*</p>
-          </div>
-          <nav css={homeMenuStyle}>
-            <span>MY커리어</span>
-            <span>허브</span>
-            <span>채용</span>
-          </nav>
-        </div>
+        <ProjectMenu />
         <div css={homeButtonContainer}>
           <Link href={"pages/loginPage"} css={buttonStyle("white", "black")}>
             로그인

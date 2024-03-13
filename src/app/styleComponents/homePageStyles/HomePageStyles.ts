@@ -26,6 +26,7 @@ export const buttonStyle = (backgroundColor: string, color: string) => css`
   font-size: 16px;
   line-height: 19px;
   margin-right: 10px;
+  cursor: pointer;
 `;
 
 export const homeTitleStyle = () => css`
