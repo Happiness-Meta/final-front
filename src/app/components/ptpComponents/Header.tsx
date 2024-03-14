@@ -9,10 +9,14 @@ const Header = () => {
   return (
     <header
       css={[
-        `position: absolute; top:0; left: 0; 
+        `position: sticky; top:0; left: 0; 
           display: flex; justify-content: space-between; align-items: center; 
-          width: 100%; height: 80px; 
-          padding: 10px 30px;`,
+          width: 100%; height: 60px; 
+          padding: 10px 20px;
+          background-color: #FFFFFF;
+          box-shadow: 0 5px 10px gray;
+          z-index: 10;
+          `,
       ]}
     >
       <Link

@@ -14,10 +14,11 @@
 
 body {
   width: 100%;
-  height: 100vh;
+  height: 100%;
 }
 
-input {
+input,
+textarea {
   outline: none !important;
 }
 

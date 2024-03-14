@@ -3,12 +3,13 @@
 
 import { projectNnDInputStyle } from "@/app/styleComponents/projectCreatingStyles/inputStyles";
 import { questionStyle } from "@/app/styleComponents/projectCreatingStyles/textAndEtcStyles";
-import NextButton from "../NextButton";
+import NextButton from "../buttons/NextButton";
 import { RefObject, useRef } from "react";
 import useProjectStore from "@/app/store/commonStore/useProjectStore";
 
 const FirstQuestion = () => {
   const inputRef: RefObject<HTMLInputElement> = useRef(null);
+
   const { dynamicQuestionsContainer, addDynamicQuestions } = useProjectStore();
   return (
     <>

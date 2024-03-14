@@ -4,9 +4,9 @@ import useProjectStore from "@/app/store/commonStore/useProjectStore";
 import { previousButtonStyle } from "@/app/styleComponents/projectCreatingStyles/buttonStyles";
 
 const PreviousButton = () => {
-  const { subtractOrder } = useProjectStore();
+  const { setOrder } = useProjectStore();
   return (
-    <button onClick={() => subtractOrder()} css={[previousButtonStyle]}>
+    <button onClick={() => setOrder(-1)} css={[previousButtonStyle]}>
       ◀ 이전 질문
     </button>
   );
