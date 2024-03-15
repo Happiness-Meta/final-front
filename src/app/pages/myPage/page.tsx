@@ -7,7 +7,7 @@ import Image from "next/image";
 import React, { RefObject, useEffect, useRef, useState } from "react";
 
 //components
-import ProjectTitle from "@/app/styleComponents/myPageStyles/myPageProjectTitle";
+import ProjectTitle from "@/app/components/myPageComponents/myPageProjectTitle";
 
 //img
 import Email from "@/app/assets/svg/Message_light.svg";
@@ -22,7 +22,6 @@ import {
 } from "@/app/styleComponents/commonStyles/inputAndButtonAndText";
 
 //constans
-import { techStacks } from "@/app/constants/myPage/TechStack";
 import { techStackList } from "@/app/constants/techStacks";
 
 //custom hooks
