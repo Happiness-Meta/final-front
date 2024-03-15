@@ -17,12 +17,9 @@ const PaintBackground = () => {
         right: 0;
         background: linear-gradient(
           45deg,
-          ${dynamicQuestionsContainer[1] !== `#FFFFFF`
-            ? `${dynamicQuestionsContainer[1]}`
-            : `#808080`},
+          ${dynamicQuestionsContainer[1]},
           ${commonColor.representative}
         );
-        transition: 1s;
         animation: ${paintAni} 2s forwards;
       `}
     ></div>

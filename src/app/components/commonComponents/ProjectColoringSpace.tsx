@@ -4,11 +4,8 @@
 import { paintColors } from "@/app/constants/paintColors";
 import useProjectStore from "@/app/store/commonStore/useProjectStore";
 import { paintStyle } from "@/app/styleComponents/projectCreatingStyles/textAndEtcStyles";
-import React, { RefObject } from "react";
-
-interface AboutProjectColoringSpace {
-  paintColorRef: RefObject<HTMLButtonElement>;
-}
+import { AboutProjectColoringSpace } from "@/app/types/aboutCommonComponents";
+import { css } from "@emotion/react";
 
 const ProjectColoringSpace: React.FC<AboutProjectColoringSpace> = ({
   paintColorRef,
@@ -36,8 +33,10 @@ const ProjectColoringSpace: React.FC<AboutProjectColoringSpace> = ({
             }}
             css={[
               paintStyle,
-              `background-color: ${color}; 
-                border: ${clickedColor === color && `3px solid #FF8A00`}`,
+              css`
+                background-color: ${color};
+                ${clickedColor === color && `border: 3px solid #FF8A00`}
+              `,
             ]}
           ></button>
         );

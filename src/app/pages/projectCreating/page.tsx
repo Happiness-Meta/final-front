@@ -1,5 +1,6 @@
 "use client";
 /** @jsxImportSource @emotion/react */
+
 import FirstQuestion from "@/app/components/projectCreatingComponents/questions/FirstQuestion";
 import Footer from "@/app/components/projectCreatingComponents/Footer";
 import useProjectStore from "@/app/store/commonStore/useProjectStore";
@@ -30,7 +31,7 @@ const ProjectCreating = () => {
         }`,
       ]}
     >
-      {order !== 4 || 5 ? undefined : <WelcomeMessage />}
+      {order !== 4 && 5 ? <WelcomeMessage /> : undefined}
       <main
         css={[
           flexCenterX2,

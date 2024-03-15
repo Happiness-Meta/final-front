@@ -119,6 +119,8 @@ export const inputStyles = {
   style6: css`
     width: 20%;
     ${commonInputStyle}
+    text-align: center;
+    font-weight: bold;
     &:focus {
       border-color: ${commonColor.representative};
       border-radius: 20px;
@@ -158,17 +160,29 @@ export const addButtonStyle = css`
   background-color: #0000000d;
   font-size: 1.3em;
   transition: 0.2s;
-  &:hover {
-    border-radius: 20px;
-    background-color: ${commonColor.representative};
-    color: white;
-    font-size: 1.7em;
-  }
+  &:hover,
   &:focus {
     outline: 3px solid white;
     border-radius: 20px;
     background-color: ${commonColor.representative};
     color: white;
     font-size: 1.7em;
+  }
+`;
+
+export const createButtonStyle = css`
+  width: 100%;
+  height: 40px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  background-color: #00b000c2;
+  color: white;
+  font-size: 1em;
+  transition: 0.3s;
+  cursor: pointer;
+  &:hover,
+  &:focus {
+    height: 50px;
+    background-color: #00b000;
   }
 `;

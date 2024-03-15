@@ -9,7 +9,7 @@ export const nextButtonStyle = `
   color: white;
   transition: 0.2s;
   cursor: pointer;
-  &:hover {
+  &:hover, &:focus {
     width: 170px;
     border-radius: 25px;
     font-size: 15px;
@@ -25,7 +25,7 @@ export const previousButtonStyle = `
   color: ${commonColor.representative};
   transition: 0.2s;
   cursor: pointer;
-  &:hover {
+  &:hover, &:focus {
     border-radius: 25px;
     font-size: 15px;
   }

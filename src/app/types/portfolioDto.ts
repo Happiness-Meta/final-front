@@ -15,7 +15,7 @@ interface AboutLink {
 }
 
 export interface CreatePortfolioDTO {
-  visibility: string; // 공개 여부 -> private
+  visibility: boolean; // 공개 여부 -> private
   color: string; // 메인 컬러 -> #FFFFFF
   projectName: string; // 프로젝트 명 -> not null
   description: string; // 프로젝트 설명 -> not null

@@ -5,7 +5,7 @@ import IndividualMemberSection from "@/app/components/signUpPageComponents/Indiv
 import useSignUpPageStore from "@/app/store/signUpPageStore/useSignUpPageStore";
 import {
   flexCenterX2,
-  widthHeightFull,
+  widthHeighVhFull,
 } from "@/app/styleComponents/commonStyles/commonStyles";
 import SignUpPathBtnSection from "../../components/signUpPageComponents/SignUpPathBtnSection";
 import ProjectTitle from "@/app/components/commonComponents/ProjectTitle";
@@ -15,7 +15,7 @@ import LinkToLogin from "../../components/signUpPageComponents/LinkToLogin";
 const SignUpPage = () => {
   const { isIndividual } = useSignUpPageStore();
   return (
-    <div css={[flexCenterX2, widthHeightFull]}>
+    <div css={[flexCenterX2, widthHeighVhFull]}>
       <main
         css={[
           `

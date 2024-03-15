@@ -20,3 +20,8 @@ export const widthHeightFull = {
   width: "100%",
   height: "100%",
 };
+
+export const widthHeighVhFull = {
+  width: "100%",
+  height: "100vh",
+};
