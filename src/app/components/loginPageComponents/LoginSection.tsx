@@ -11,6 +11,9 @@ import {
 } from "@/app/styleComponents/commonStyles/inputAndButtonAndText";
 import React, { RefObject, useRef, useState } from "react";
 import SignUpErrorMessage from "../commonComponents/SignUpErrorMessage";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
+import { isErrored } from "stream";
 
 const LoginSection = () => {
   const emailRef: RefObject<HTMLInputElement> = useRef(null);
@@ -21,27 +24,30 @@ const LoginSection = () => {
 
   const { activateErrorMessageAni } = useSignUpPageStore();
 
-  const handleLogin = async () => {
-    activateErrorMessageAni();
-    if (emailRef.current!.value === "") {
-      setErrorMessage("이메일를 입력해주세요.");
-      return;
-    } else if (pwRef.current!.value === "") {
-      setErrorMessage("비밀번호를 입력해주세요.");
-      return;
-    }
+  const handleLogin = useMutation({
+    mutationFn: async () => {
+      if (emailRef.current!.value === "") {
+        setErrorMessage("이메일를 입력해주세요.");
+        activateErrorMessageAni();
+        return;
+      } else if (pwRef.current!.value === "") {
+        setErrorMessage("비밀번호를 입력해주세요.");
+        activateErrorMessageAni();
+        return;
+      }
 
-    const res = await fetch("http://processlogic.link/api/v1/auth/login", {
-      method: "POST",
-      body: JSON.stringify({
+      const body = {
         email: emailRef.current!.value,
         password: pwRef.current!.value,
-      }),
-    });
-    if (!res.ok) {
-      throw new Error("failed");
-    }
-  };
+      };
+
+      const res = await axios.post(
+        "http://processlogic.link/api/v1/auth/login",
+        body
+      );
+    },
+    onError: () => console.log("failed"),
+  });
 
   return (
     <section
@@ -93,7 +99,7 @@ const LoginSection = () => {
       <SignUpErrorMessage errorMessage={errorMessage} />
       <button
         onClick={() => {
-          handleLogin();
+          handleLogin.mutate();
         }}
         css={signInUpButtonStyle}
       >
