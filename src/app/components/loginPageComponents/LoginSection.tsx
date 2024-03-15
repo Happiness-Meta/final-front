@@ -21,7 +21,7 @@ const LoginSection = () => {
 
   const { activateErrorMessageAni } = useSignUpPageStore();
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     activateErrorMessageAni();
     if (emailRef.current!.value === "") {
       setErrorMessage("이메일를 입력해주세요.");
@@ -29,6 +29,17 @@ const LoginSection = () => {
     } else if (pwRef.current!.value === "") {
       setErrorMessage("비밀번호를 입력해주세요.");
       return;
+    }
+
+    const res = await fetch("http://processlogic.link/api/v1/auth/login", {
+      method: "POST",
+      body: JSON.stringify({
+        email: emailRef.current!.value,
+        password: pwRef.current!.value,
+      }),
+    });
+    if (!res.ok) {
+      throw new Error("failed");
     }
   };
 

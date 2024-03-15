@@ -1,6 +1,7 @@
+import { css } from "@emotion/react";
 import { commonColor } from "../commonStyles/commonStyles";
 
-export const projectNnDInputStyle = `
+export const projectNnDInputStyle = css`
   width: 40%;
   min-width: 400px;
   height: 50px;
@@ -17,12 +18,12 @@ export const projectNnDInputStyle = `
   }
 `;
 
-export const periodInputStyle = `
+export const periodInputStyle = css`
   width: 230px;
-  height:40px; 
+  height: 40px;
   padding: 10px;
-  border: 1px solid gray; 
-  border-radius:10px; 
+  border: 1px solid gray;
+  border-radius: 10px;
   text-align: center;
   font-size: 1.1em;
   transition: 0.2s;
@@ -33,12 +34,16 @@ export const periodInputStyle = `
   }
 `;
 
-export const personnelInputStyle = `
-  width:40px; 
-  height: 50px; 
-  border: 1px solid gray; 
-  border-radius: 10px; 
-  text-align: center; 
-  font-size: 2em; 
-  &:focus{border-color: orange}
+export const personnelInputStyle = css`
+  width: 45px;
+  height: 50px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 2em;
+  transition: 0.2s;
+  &:focus {
+    width: 50px;
+    border-color: ${commonColor.representative};
+  }
 `;

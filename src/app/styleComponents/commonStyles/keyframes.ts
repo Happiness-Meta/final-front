@@ -59,6 +59,17 @@ export const showUp = keyframes`
 }
 `;
 
+export const showUp2 = keyframes`
+0% {
+  opacity: 0;
+  transform: translateY(15px);
+}
+100% {
+  opacity: 1;
+  transform: translateY(0px);
+}
+`;
+
 export const paintAni = keyframes`
 0% {
   width: 0;

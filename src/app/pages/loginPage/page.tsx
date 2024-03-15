@@ -2,7 +2,7 @@
 /** @jsxImportSource @emotion/react */
 import {
   flexCenterX2,
-  widthHeightFull,
+  widthHeighVhFull,
 } from "@/app/styleComponents/commonStyles/commonStyles";
 import LoginSection from "@/app/components/loginPageComponents/LoginSection";
 import OAuthSection from "@/app/components/loginPageComponents/OAuthSection";
@@ -12,7 +12,7 @@ import { signInUpMainStyle } from "@/app/styleComponents/commonStyles/inputAndBu
 
 const LoginPage = () => {
   return (
-    <div css={[widthHeightFull, flexCenterX2]}>
+    <div css={[widthHeighVhFull, flexCenterX2]}>
       <main
         css={[
           signInUpMainStyle,
