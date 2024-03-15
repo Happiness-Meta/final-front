@@ -2,13 +2,12 @@
 /** @jsxImportSource @emotion/react */
 
 import useProjectStore from "@/app/store/commonStore/useProjectStore";
-
 import { nextButtonStyle } from "@/app/styleComponents/projectCreatingStyles/buttonStyles";
 
 const NextButton = () => {
-  const { addOrder } = useProjectStore();
+  const { setOrder } = useProjectStore();
   return (
-    <button onClick={() => addOrder()} css={[nextButtonStyle]}>
+    <button onClick={() => setOrder(1)} css={[nextButtonStyle]}>
       다음 질문 ▶
     </button>
   );

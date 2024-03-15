@@ -2,8 +2,8 @@ import { create } from "zustand";
 
 interface AboutProjectStore {
   order: number;
-  addOrder: () => void;
-  subtractOrder: () => void;
+  setOrder: (num: number) => void;
+  orderToSix: () => void;
   dynamicQuestionsContainer: string[];
   addDynamicQuestions: (content: string, orders: number) => void;
   clickedColor: string;
@@ -12,8 +12,8 @@ interface AboutProjectStore {
 
 const useProjectStore = create<AboutProjectStore>((set) => ({
   order: 0,
-  addOrder: () => set((state) => ({ order: state.order + 1 })),
-  subtractOrder: () => set((state) => ({ order: state.order - 1 })),
+  setOrder: (num) => set((state) => ({ order: state.order + num })),
+  orderToSix: () => set({ order: 6 }),
   dynamicQuestionsContainer: ["", "#FFFFFF", "", "", "1", ""],
   addDynamicQuestions: (content, orders) =>
     set((state) => {

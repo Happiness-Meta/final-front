@@ -3,8 +3,8 @@
 
 import { periodInputStyle } from "@/app/styleComponents/projectCreatingStyles/inputStyles";
 import { questionStyle } from "@/app/styleComponents/projectCreatingStyles/textAndEtcStyles";
-import PreviousButton from "../PreviousButton";
-import NextButton from "../NextButton";
+import PreviousButton from "../buttons/PreviousButton";
+import NextButton from "../buttons/NextButton";
 import { RefObject, useRef } from "react";
 import useProjectStore from "@/app/store/commonStore/useProjectStore";
 

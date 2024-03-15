@@ -2,8 +2,8 @@
 /** @jsxImportSource @emotion/react */
 
 import { questionStyle } from "@/app/styleComponents/projectCreatingStyles/textAndEtcStyles";
-import PreviousButton from "../PreviousButton";
-import NextButton from "../NextButton";
+import PreviousButton from "../buttons/PreviousButton";
+import NextButton from "../buttons/NextButton";
 import useProjectStore from "@/app/store/commonStore/useProjectStore";
 import { RefObject, useRef } from "react";
 import { personnelInputStyle } from "@/app/styleComponents/projectCreatingStyles/inputStyles";

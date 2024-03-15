@@ -58,3 +58,26 @@ export const showUp = keyframes`
   transform: translateY(0px);
 }
 `;
+
+export const paintAni = keyframes`
+0% {
+  width: 0;
+  height: 0;
+  border-bottom-left-radius: 50vw;
+}
+100% {
+  width: 100%;
+  height: 100%;
+}
+`;
+
+export const templateAni = keyframes`
+0% {
+  opacity: 0;
+  width: 0;
+  padding: 80px 0;
+}
+100% {
+  opacity: 1;
+}
+`;
