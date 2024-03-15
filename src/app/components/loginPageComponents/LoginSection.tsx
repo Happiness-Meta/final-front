@@ -13,9 +13,15 @@ import React, { RefObject, useRef, useState } from "react";
 import SignUpErrorMessage from "../commonComponents/SignUpErrorMessage";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import { isErrored } from "stream";
+import { useCookies } from "react-cookie";
+import useLoginPageStore from "@/app/store/loginPageStore/useLoginPageStore";
+import { useRouter } from "next/navigation";
 
 const LoginSection = () => {
+  const router = useRouter();
+
+  const [, setCookie] = useCookies(["email", "nickname", "token"]);
+
   const emailRef: RefObject<HTMLInputElement> = useRef(null);
   const pwRef: RefObject<HTMLInputElement> = useRef(null);
 
@@ -23,6 +29,7 @@ const LoginSection = () => {
   const [isPwVisible, setIsPwVisible] = useState(false);
 
   const { activateErrorMessageAni } = useSignUpPageStore();
+  const { setIsLogined } = useLoginPageStore();
 
   const handleLogin = useMutation({
     mutationFn: async () => {
@@ -41,10 +48,18 @@ const LoginSection = () => {
         password: pwRef.current!.value,
       };
 
-      const res = await axios.post(
+      const response = await axios.post(
         "http://processlogic.link/api/v1/auth/login",
         body
       );
+      console.log(response.data.data);
+      setCookie("email", response.data.data.email);
+      setCookie("nickname", response.data.data.name);
+      setCookie("token", response.data.data.token);
+      setIsLogined(true);
+      setTimeout(() => {
+        router.push("/");
+      }, 2000);
     },
     onError: () => console.log("failed"),
   });

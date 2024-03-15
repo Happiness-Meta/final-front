@@ -1,5 +1,17 @@
 import { RefObject } from "react";
 
+export interface AboutSignUpInputs {
+  emailRef: RefObject<HTMLInputElement>;
+  nicknameCompanyRef: RefObject<HTMLInputElement>;
+  nicknameCompanyPlaceHolder: string;
+  pwRef: RefObject<HTMLInputElement>;
+  pwVerRef: RefObject<HTMLInputElement>;
+  isPwVisible: boolean;
+  setIsPwVisible: (T: boolean) => void;
+  pwCheckMessage: string;
+  setPwCheckMessage: (T: string) => void;
+}
+
 export interface AboutHandlePwVerCheck {
   pwRef: RefObject<HTMLInputElement>;
   pwVerRef: RefObject<HTMLInputElement>;

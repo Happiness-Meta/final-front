@@ -11,22 +11,16 @@ import SignUpPathBtnSection from "../../components/signUpPageComponents/SignUpPa
 import ProjectTitle from "@/app/components/commonComponents/ProjectTitle";
 import CorporateMemberSection from "../../components/signUpPageComponents/CorporateMemberSection";
 import LinkToLogin from "../../components/signUpPageComponents/LinkToLogin";
+import WelcomeMessage from "@/app/components/signUpPageComponents/WelcomeMessage";
+import { mainStyle } from "@/app/styleComponents/signUpPageStyles/signUpPageStyles";
 
 const SignUpPage = () => {
-  const { isIndividual } = useSignUpPageStore();
+  const { isIndividual, isSignedUp } = useSignUpPageStore();
+
   return (
     <div css={[flexCenterX2, widthHeighVhFull]}>
-      <main
-        css={[
-          `
-            display: flex;
-            flex-direction: column;
-            justify-content: start;
-            width: 400px;
-            height: 650px;
-          `,
-        ]}
-      >
+      <main css={mainStyle}>
+        {isSignedUp ? <WelcomeMessage /> : undefined}
         <ProjectTitle />
         <SignUpPathBtnSection />
         {isIndividual ? (

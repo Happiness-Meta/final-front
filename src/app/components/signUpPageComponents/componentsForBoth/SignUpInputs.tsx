@@ -40,6 +40,9 @@ const SignUpInputs: React.FC<AboutSignUpInputs> = ({
       <div css={[flexCenterX2, `position: relative; width: 100%`]}>
         <input
           ref={pwRef}
+          onChange={() =>
+            handlePwVerCheck({ pwRef, pwVerRef, setPwCheckMessage })
+          }
           type={isPwVisible ? "text" : "password"}
           placeholder="password"
           css={[signInUpinputStyle, `${signInUpInputStyleHover}`]}
