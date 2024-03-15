@@ -41,7 +41,8 @@ const ProjectTitle = () => {
               padding: 0.7rem;
               border-radius: 0.5rem;
               margin-right: 1rem;
-              box-shadow: 0 4px 4px 2px gray;
+              // hover 추가
+              box-shadow: 0 1px 4px 2px gray;
             `}
           >
             이력서 추가
@@ -57,7 +58,7 @@ const ProjectTitle = () => {
               border: 2px solid #ff8a00;
               padding: 0.7rem;
               border-radius: 0.5rem;
-              box-shadow: 0 4px 4px 2px gray;
+              box-shadow: 0 1px 4px 2px gray;
             `}
           >
             프로젝트 추가
