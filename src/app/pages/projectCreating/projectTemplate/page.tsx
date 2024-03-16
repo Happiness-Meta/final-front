@@ -19,12 +19,15 @@ import {
 import PaintBackground from "@/app/components/ptpComponents/PaintBackground";
 import Header from "@/app/components/ptpComponents/Header";
 import ProjectColoringSpace from "@/app/components/commonComponents/ProjectColoringSpace";
-import { RefObject, useRef } from "react";
+import { RefObject, useRef, useState } from "react";
 import ProjectName from "@/app/components/ptpComponents/sections/ProjectName";
 import ProjectPeriod from "@/app/components/ptpComponents/sections/ProjectPeriod";
 import ProjectPersonnel from "@/app/components/ptpComponents/sections/ProjectPersonnel";
 import ProjectDescription from "@/app/components/ptpComponents/sections/ProjectDescription";
 import { useProjectTemplateStore } from "@/app/store/projectTemplateStore/useProjectTemplateStore";
+import { useTemplateInputStore } from "@/app/store/projectTemplateStore/useTemplateInputStore";
+import ProjectMainFunction from "@/app/components/ptpComponents/sections/ProjectMainFunction";
+import ProjectMyFunction from "@/app/components/ptpComponents/sections/ProjectMyFunction";
 
 const ProjectTemplate = () => {
   const paintColorRef: RefObject<HTMLButtonElement> = useRef(null);
@@ -33,8 +36,9 @@ const ProjectTemplate = () => {
   const endDateRef: RefObject<HTMLInputElement> = useRef(null);
   const personnelRef: RefObject<HTMLInputElement> = useRef(null);
   const descriptionRef: RefObject<HTMLTextAreaElement> = useRef(null);
-  const mainFunctionsRef: RefObject<HTMLInputElement> = useRef(null);
-  const myFunctionsRef: RefObject<HTMLInputElement> = useRef(null);
+  const mainFunctionRef: RefObject<HTMLInputElement> = useRef(null);
+  const myFunctionRef: RefObject<HTMLInputElement> = useRef(null);
+  const myFunctionContRef: RefObject<HTMLInputElement> = useRef(null);
   const pDefinitionRef: RefObject<HTMLInputElement> = useRef(null);
   const pSolutionRef: RefObject<HTMLTextAreaElement> = useRef(null);
   const pResolutionRef: RefObject<HTMLInputElement> = useRef(null);
@@ -43,6 +47,7 @@ const ProjectTemplate = () => {
 
   const { dynamicQuestionsContainer } = useProjectStore();
   const { setGuideMessage } = useProjectTemplateStore();
+  // const {}= useTemplateInputStore();
 
   return (
     <div
@@ -63,47 +68,11 @@ const ProjectTemplate = () => {
         <ProjectPeriod startDateRef={startDateRef} endDateRef={endDateRef} />
         <ProjectPersonnel personnelRef={personnelRef} />
         <ProjectDescription descriptionRef={descriptionRef} />
-
-        <label htmlFor="mainFunctions" css={labelStyles.style1}>
-          주요 기능
-        </label>
-        <hr />
-        <input
-          autoFocus
-          ref={mainFunctionsRef}
-          onFocus={() =>
-            setGuideMessage("이 프로젝트의 주요 기능은 무엇인가요?")
-          }
-          id="mainFunctions"
-          type="text"
-          css={inputStyles.style1}
+        <ProjectMainFunction mainFunctionRef={mainFunctionRef} />
+        <ProjectMyFunction
+          myFunctionRef={myFunctionRef}
+          myFunctionContRef={myFunctionContRef}
         />
-        <button css={[addButtonStyle]}>+</button>
-
-        <label htmlFor="myFunctions" css={labelStyles.style1}>
-          내가 구현한 기능
-        </label>
-        <hr />
-        <div css={inputContainerStyles.style2}>
-          <input
-            ref={myFunctionsRef}
-            onFocus={() => setGuideMessage("구현한 기능을 적어주세요.")}
-            id="myFunctions"
-            type="text"
-            css={inputStyles.style4}
-          />
-          <input
-            onFocus={() => setGuideMessage("이 기능의 기여도는 얼마나 되나요?")}
-            type="number"
-            step={10}
-            min={10}
-            max={100}
-            defaultValue={100}
-            css={inputStyles.style5}
-          />
-        </div>
-        <button css={[addButtonStyle]}>+</button>
-
         <label htmlFor="problem" css={labelStyles.style1}>
           문제 해결
           <span

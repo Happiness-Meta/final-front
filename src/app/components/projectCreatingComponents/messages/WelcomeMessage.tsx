@@ -13,6 +13,11 @@ const WelcomeMessage = () => {
     100% { opacity:0; display:none;}
   `;
 
+  const goneDown = keyframes`
+  0%, 50%{ opacity:1; transform: translateY(0px);};
+  100% { opacity:0; transform: translateY(20px);}
+  `;
+
   return (
     <div
       css={[
@@ -24,11 +29,19 @@ const WelcomeMessage = () => {
           left: 0;
           background-color: white;
           z-index: 10;
-          animation: ${fadeOut} 2s forwards;
+          animation: ${fadeOut} 3s forwards;
         `,
       ]}
     >
-      <h1>같이 프로젝트를 기록해 보아요!</h1>
+      <h1
+        css={[
+          css`
+            animation: ${goneDown} 2s forwards;
+          `,
+        ]}
+      >
+        같이 프로젝트를 기록해 보아요!
+      </h1>
     </div>
   );
 };
