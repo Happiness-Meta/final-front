@@ -6,7 +6,7 @@ import { signInUpButtonStyle } from "@/app/styleComponents/commonStyles/inputAnd
 import { RefObject, useRef, useState } from "react";
 import SignUpInputs from "./componentsForBoth/SignUpInputs";
 import { industryList } from "@/app/constants/industryOptions";
-import SignUpErrorMessage from "../commonComponents/SignUpErrorMessage";
+import SignUpErrorMessage from "../commonComponents/SignInUpErrorMessage";
 import useSignUpPageStore from "@/app/store/signUpPageStore/useSignUpPageStore";
 import PositionSpace from "../commonComponents/PositionSpace";
 import axios from "axios";

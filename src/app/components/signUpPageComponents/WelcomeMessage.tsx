@@ -6,7 +6,10 @@ import {
   flexCenterX2,
   widthHeighVhFull,
 } from "@/app/styleComponents/commonStyles/commonStyles";
-import { showUp } from "@/app/styleComponents/commonStyles/keyframes";
+import {
+  msgContainerStyle,
+  msgTextStyle,
+} from "@/app/styleComponents/commonStyles/signInUpMsgStyles";
 import { css } from "@emotion/react";
 import { useCookies } from "react-cookie";
 
@@ -14,38 +17,12 @@ const WelcomeMessage = () => {
   const [cookies] = useCookies(["nickname"]);
 
   return (
-    <div
-      css={[
-        widthHeighVhFull,
-        flexCenterX2,
-        css`
-          position: absolute;
-          top: 0;
-          left: 0;
-          background-color: white;
-          z-index: 10;
-        `,
-      ]}
-    >
-      <p
-        css={[
-          css`
-            font-size: 3em;
-            font-weight: bold;
-            animation: ${showUp} 1s;
-          `,
-        ]}
-      >
-        <span
-          css={[
-            css`
-              color: ${commonColor.representative};
-            `,
-          ]}
-        >
-          Palette*
+    <div css={[widthHeighVhFull, flexCenterX2, msgContainerStyle]}>
+      <p css={[msgTextStyle]}>
+        <span css={[`color: ${commonColor.representative}; font-size: 2em;`]}>
+          Palette
         </span>{" "}
-        에 오신 것을 환영합니다, {cookies.nickname} 님!
+        에 오신 것을 환영합니다!
       </p>
     </div>
   );

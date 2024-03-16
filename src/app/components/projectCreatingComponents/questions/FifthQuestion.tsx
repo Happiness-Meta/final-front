@@ -33,12 +33,16 @@ const FifthQuestion = () => {
       <input
         autoFocus
         ref={inputRef}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            handleBtnOnClick();
+          }
+        }}
         type="text"
         defaultValue={dynamicQuestionsContainer[5]}
         onChange={() => addDynamicQuestions(inputRef.current!.value, 5)}
         css={[projectNnDInputStyle]}
       />
-
       <section css={[`display: flex; gap: 20px;`]}>
         <PreviousButton />
         <button onClick={handleBtnOnClick} css={[nextButtonStyle]}>

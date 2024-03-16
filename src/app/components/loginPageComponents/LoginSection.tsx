@@ -10,7 +10,7 @@ import {
   signInUpinputStyle,
 } from "@/app/styleComponents/commonStyles/inputAndButtonAndText";
 import React, { RefObject, useRef, useState } from "react";
-import SignUpErrorMessage from "../commonComponents/SignUpErrorMessage";
+import SignUpErrorMessage from "../commonComponents/SignInUpErrorMessage";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useCookies } from "react-cookie";
@@ -52,16 +52,15 @@ const LoginSection = () => {
         "http://processlogic.link/api/v1/auth/login",
         body
       );
-      console.log(response.data.data);
       setCookie("email", response.data.data.email);
       setCookie("nickname", response.data.data.name);
       setCookie("token", response.data.data.token);
       setIsLogined(true);
       setTimeout(() => {
         router.push("/");
-      }, 2000);
+      }, 2500);
     },
-    onError: () => console.log("failed"),
+    onError: () => console.log("you have failed to login"),
   });
 
   return (
@@ -93,6 +92,11 @@ const LoginSection = () => {
       <div css={[flexCenterX2, `position: relative; width: 100%`]}>
         <input
           ref={pwRef}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleLogin.mutate();
+            }
+          }}
           type={isPwVisible ? "text" : "password"}
           placeholder="password"
           css={[

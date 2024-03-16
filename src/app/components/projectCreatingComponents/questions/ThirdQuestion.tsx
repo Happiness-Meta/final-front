@@ -12,7 +12,8 @@ const ThirdQuestion = () => {
   const startDateRef: RefObject<HTMLInputElement> = useRef(null);
   const endDateRef: RefObject<HTMLInputElement> = useRef(null);
 
-  const { dynamicQuestionsContainer, addDynamicQuestions } = useProjectStore();
+  const { dynamicQuestionsContainer, addDynamicQuestions, setOrder } =
+    useProjectStore();
 
   return (
     <>
@@ -34,6 +35,11 @@ const ThirdQuestion = () => {
         <div css={[`display: flex; gap: 10px;`]}>
           <input
             ref={endDateRef}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                setOrder(1);
+              }
+            }}
             type="date"
             css={[periodInputStyle]}
             defaultValue={dynamicQuestionsContainer[3]}

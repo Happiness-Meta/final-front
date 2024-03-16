@@ -9,7 +9,7 @@ import SignUpInputs from "./componentsForBoth/SignUpInputs";
 import TechStackSpace from "../commonComponents/TechStackSpace";
 import { preferedPositionList } from "@/app/constants/industryOptions";
 import useSignUpPageStore from "@/app/store/signUpPageStore/useSignUpPageStore";
-import SignUpErrorMessage from "../commonComponents/SignUpErrorMessage";
+import SignUpErrorMessage from "../commonComponents/SignInUpErrorMessage";
 import PositionSpace from "../commonComponents/PositionSpace";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
@@ -88,7 +88,7 @@ const IndividualMembetSection = () => {
       setIsSignedUp(true);
       setTimeout(() => {
         router.push("/");
-      }, 2000);
+      }, 2500);
     },
     onError: () => {
       console.log("onError");
