@@ -32,14 +32,7 @@ const HomeSearchBar = () => {
   useDetectClose(dropdownRef, () => setIsOpen(false));
   const [isTechStacksVisible, setIsTechStacksVisible] = useState(false);
   const { techStackContainer, addTechStack, removeTechStack } = useSignUpPageStore();
-  const JobList = [
-    "풀스택",
-    "프론트엔드",
-    "백엔드",
-    "게임개발",
-    "클라우드 아키텍트",
-    "소프트웨어 엔지니어",
-  ];
+  const JobList = ["이력서", "포트폴리오"];
 
   const techStacks = [
     "HTML/CSS",
@@ -111,7 +104,7 @@ const HomeSearchBar = () => {
             min-height:30px; height: fit-content; max-height: 200px; 
             border: 1px solid gray; border-radius: 7px; 
             background-color: white;
-            overflow-y: scroll;
+            overflow: scroll;
             z-index:1;`,
             ]}
           >
@@ -141,7 +134,7 @@ const HomeSearchBar = () => {
               signInUpinputStyle,
               `${signInUpInputStyleHover}; 
           display:flex; align-items: center; gap: 3px;
-          height: 35px; padding-left: 3px; overflow-x: scroll;`,
+          height: 35px; padding-left: 3px; overflow: hidden;`,
             ]}
           >
             {techStackContainer.map((tech, index) => {

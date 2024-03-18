@@ -1,4 +1,5 @@
 "use client";
+/** @jsxImportSource @emotion/react */
 
 import ProjectMenu from "@/app/components/commonComponents/Projectmenu";
 import { commonColor } from "@/app/styleComponents/commonStyles/commonStyles";
@@ -10,44 +11,78 @@ import {
 import Link from "next/link";
 import buyTicket from "@/app/assets/svg/buyticket.svg";
 import Image from "next/image";
-import { css } from "@emotion/react";
 import ReactModal from "react-modal";
 import useModalstore from "@/app/store/modalStore/ticketPageStore/useModalStore";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { RequestPayParams } from "../../../../portone";
-/** @jsxImportSource @emotion/react */
+import axios from "axios";
+import qrCode from "@/app/assets/svg/qrcode.svg";
+import paletteTicketPicture from "@/app/assets/svg/paletteTicketPicture.svg";
+import {
+  buyTicketCenter,
+  reactModalTicket,
+  ticketStyles,
+  leftStyle,
+  imageStyle,
+  ticketNumberStyle,
+  ticketInfoStyle,
+  showNameStyle,
+  rightStyle,
+  rightInfoContainerStyle,
+  barcodeStyle,
+  paymentStyle,
+} from "@/app/styleComponents/ticketPagestyles/ticketPageStyles";
 
-const buyTicketCenter = css`
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const reactModalTicket = css`
-  background-color: gray;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 300px;
-  height: 300px;
-`;
+interface SetOrder {
+  orderUid: string;
+  amount: number;
+  itemName: string;
+  buyerName: string;
+  buyerAddress: string;
+}
 
 const TicketPage = () => {
   const { isModalOpen, togglePayModal } = useModalstore();
 
-  const handlebuyTicket = () => {
-    togglePayModal();
+  const [isSetOrder, setIsSetOrder] = useState<SetOrder>({
+    orderUid: "",
+    amount: 0,
+    itemName: "",
+    buyerName: "",
+    buyerAddress: "",
+  });
+
+  const handleBuyTicket = async () => {
+    try {
+      // axios.get의 인자는 요청을 보낼 URL입니다.
+      const response = await axios.post("http://localhost:8080/order");
+
+      setIsSetOrder(response.data);
+
+      // 요청이 성공적으로 처리되면 실행될 코드
+      // 예를 들어, 응답을 콘솔에 출력
+      console.log(response.data);
+    } catch (error) {
+      // 에러 처리 코드
+      console.error("handleBuyTicket error:", error);
+    } finally {
+      // 성공하든 에러가 발생하든 항상 실행(모달창 띄우기)
+      togglePayModal();
+    }
   };
 
   useEffect(() => {
-    // 아임포트 스크립트 동적 로드 및 초기화
+    console.log("isSetOrder", isSetOrder);
+    console.log("isSetOrder", typeof isSetOrder.orderUid);
+  }, [isSetOrder]);
+
+  useEffect(() => {
+    // 포트원 스크립트 동적 로드 및 초기화
     const script = document.createElement("script");
     script.src = "https://cdn.iamport.kr/js/iamport.payment-1.2.0.js";
     script.onload = () => {
       if (window.IMP) {
-        window.IMP.init(process.env.APP_SHOP_CODE!);
+        window.IMP.init(process.env.NEXT_PUBLIC_SHOP_ID!);
       }
     };
     document.body.appendChild(script);
@@ -58,23 +93,42 @@ const TicketPage = () => {
   }, []);
 
   //결제 로직
-  const handlePayment = () => {
+  const handlePayment = async () => {
     if (window.IMP) {
       const data: RequestPayParams = {
         pg: "html5_inicis",
         pay_method: "card",
-        merchant_uid: `mid_${new Date().getTime()}`,
-        amount: 100,
-        name: "팔레트 티켓",
-        buyer_name: "구매자 이름",
+        merchant_uid: isSetOrder.orderUid,
+        amount: isSetOrder.amount,
+        name: isSetOrder.itemName,
+        buyer_name: isSetOrder.buyerName,
         buyer_tel: "010-1234-5678",
         buyer_email: "example@example.com",
-        buyer_addr: "서울특별시 강남구 신사동",
+        buyer_addr: isSetOrder.buyerAddress,
         buyer_postcode: "01181",
       };
 
-      window.IMP.request_pay(data, (response) => {
+      //front -> kg : request
+      //kg -> front : response
+
+      window.IMP.request_pay(data, async (response) => {
         if (response.success) {
+          console.log("window.imp.request_pay: ", data);
+          console.log("call back!!: " + JSON.stringify(data));
+
+          if (response.imp_uid) {
+            try {
+              const rsp = await axios.post("http://localhost:8080/payment", {
+                order_uid: response.merchant_uid,
+                payment_uid: response.imp_uid,
+              });
+              console.log(rsp.data);
+            } catch (error) {
+              console.error("axios 요청 중 에러 발생:", error);
+            }
+          } else {
+            console.log("imp_uid가 null입니다. 요청을 보내지 않습니다.");
+          }
           alert("결제 성공");
         } else {
           alert(`결제 실패: ${response.error_msg}`);
@@ -150,7 +204,7 @@ const TicketPage = () => {
         >
           월 ₩ 5,900
         </div>
-        <div css={buyTicketCenter} onClick={handlebuyTicket}>
+        <div css={buyTicketCenter} onClick={handleBuyTicket}>
           <div
             css={[
               buttonStyle(commonColor.mainYellow, "white"),
@@ -175,9 +229,32 @@ const TicketPage = () => {
         css={reactModalTicket}
         ariaHideApp={false}
       >
-        <div>결제 정보</div>
-        <div css={buttonStyle(commonColor.mainYellow, "white")} onClick={handlePayment}>
-          결제하기
+        <div css={ticketStyles}>
+          <div css={leftStyle}>
+            <div css={imageStyle}>
+              <Image src={paletteTicketPicture} alt="ticket-image"></Image>
+            </div>
+            <div css={ticketInfoStyle}>
+              <div css={showNameStyle}>
+                <h1>Buy Ticket</h1>
+                <h2>of Palette</h2>
+              </div>
+            </div>
+          </div>
+          <div css={rightStyle}>
+            <div css={rightInfoContainerStyle}>
+              <div css={barcodeStyle}>
+                <Image src={qrCode} alt="QR code" />
+              </div>
+              <p css={ticketNumberStyle}>#20240313</p>
+            </div>
+            <div
+              css={[buttonStyle(commonColor.mainYellow, "white"), paymentStyle]}
+              onClick={handlePayment}
+            >
+              결제하기
+            </div>
+          </div>
         </div>
       </ReactModal>
     </>

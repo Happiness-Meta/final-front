@@ -67,8 +67,8 @@ export const jobListUl = () => css`
   top: 90px;
   left: 1vw;
   border-radius: 10px;
-  width: 486.5px;
-  height: 300px;
+  width: 336.5px;
+  height: 102px;
   background-color: white;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
