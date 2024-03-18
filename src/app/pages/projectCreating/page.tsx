@@ -26,7 +26,7 @@ const ProjectCreating = () => {
         `transition: box-shadow .3s; 
         ${
           order !== 5
-            ? `box-shadow: inset 0px 0px 20px 20px ${dynamicQuestionsContainer[1]}`
+            ? `box-shadow: inset 0px 0px 20px 50px ${dynamicQuestionsContainer[1]}`
             : undefined
         }`,
       ]}

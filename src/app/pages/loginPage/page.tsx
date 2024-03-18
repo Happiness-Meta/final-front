@@ -9,8 +9,14 @@ import OAuthSection from "@/app/components/loginPageComponents/OAuthSection";
 import ProjectTitle from "@/app/components/commonComponents/ProjectTitle";
 import SignUpBtnSection from "@/app/components/loginPageComponents/SignUpBtnSection";
 import { signInUpMainStyle } from "@/app/styleComponents/commonStyles/inputAndButtonAndText";
+import HelloMessage from "@/app/components/loginPageComponents/HelloMessage";
+import useLoginPageStore from "@/app/store/loginPageStore/useLoginPageStore";
+// import { useCookies } from "react-cookie";
 
 const LoginPage = () => {
+  const { isLogined } = useLoginPageStore();
+  // const [cookies] = useCookies(["token"]);
+  // console.log(cookies);
   return (
     <div css={[widthHeighVhFull, flexCenterX2]}>
       <main
@@ -20,6 +26,7 @@ const LoginPage = () => {
           `flex-direction: column; user-select: none;`,
         ]}
       >
+        {isLogined ? <HelloMessage /> : undefined}
         <ProjectTitle />
         <LoginSection />
         <OAuthSection />

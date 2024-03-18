@@ -8,6 +8,8 @@ interface AboutSignUpPageStore {
   removeTechStack: (T: string) => void;
   errorMessageAniStatus: boolean;
   activateErrorMessageAni: () => void;
+  isSignedUp: boolean;
+  setIsSignedUp: (value: boolean) => void;
 }
 
 const useSignUpPageStore = create<AboutSignUpPageStore>((set) => ({
@@ -35,6 +37,8 @@ const useSignUpPageStore = create<AboutSignUpPageStore>((set) => ({
   errorMessageAniStatus: false,
   activateErrorMessageAni: () =>
     set((state) => ({ errorMessageAniStatus: !state.errorMessageAniStatus })),
+  isSignedUp: false,
+  setIsSignedUp: (T) => set({ isSignedUp: T }),
 }));
 
 export default useSignUpPageStore;

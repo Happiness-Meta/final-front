@@ -10,12 +10,18 @@ import {
   signInUpinputStyle,
 } from "@/app/styleComponents/commonStyles/inputAndButtonAndText";
 import React, { RefObject, useRef, useState } from "react";
-import SignUpErrorMessage from "../commonComponents/SignUpErrorMessage";
+import SignUpErrorMessage from "../commonComponents/SignInUpErrorMessage";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import { isErrored } from "stream";
+import { useCookies } from "react-cookie";
+import useLoginPageStore from "@/app/store/loginPageStore/useLoginPageStore";
+import { useRouter } from "next/navigation";
 
 const LoginSection = () => {
+  const router = useRouter();
+
+  const [, setCookie] = useCookies(["email", "nickname", "token"]);
+
   const emailRef: RefObject<HTMLInputElement> = useRef(null);
   const pwRef: RefObject<HTMLInputElement> = useRef(null);
 
@@ -23,6 +29,7 @@ const LoginSection = () => {
   const [isPwVisible, setIsPwVisible] = useState(false);
 
   const { activateErrorMessageAni } = useSignUpPageStore();
+  const { setIsLogined } = useLoginPageStore();
 
   const handleLogin = useMutation({
     mutationFn: async () => {
@@ -41,12 +48,19 @@ const LoginSection = () => {
         password: pwRef.current!.value,
       };
 
-      const res = await axios.post(
+      const response = await axios.post(
         "http://processlogic.link/api/v1/auth/login",
         body
       );
+      setCookie("email", response.data.data.email);
+      setCookie("nickname", response.data.data.name);
+      setCookie("token", response.data.data.token);
+      setIsLogined(true);
+      setTimeout(() => {
+        router.push("/");
+      }, 2500);
     },
-    onError: () => console.log("failed"),
+    onError: () => console.log("you have failed to login"),
   });
 
   return (
@@ -78,6 +92,11 @@ const LoginSection = () => {
       <div css={[flexCenterX2, `position: relative; width: 100%`]}>
         <input
           ref={pwRef}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleLogin.mutate();
+            }
+          }}
           type={isPwVisible ? "text" : "password"}
           placeholder="password"
           css={[

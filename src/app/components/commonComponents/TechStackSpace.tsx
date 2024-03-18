@@ -10,11 +10,11 @@ import {
   signInUpinputStyle,
 } from "@/app/styleComponents/commonStyles/inputAndButtonAndText";
 import useSignUpPageStore from "@/app/store/signUpPageStore/useSignUpPageStore";
-import { AboutTechStackSpace } from "@/app/types/aboutSignInUp";
 import {
   searchedListStyle,
   stackInContainerStyle,
 } from "@/app/styleComponents/signUpPageStyles/techStackStyles";
+import { AboutTechStackSpace } from "@/app/types/aboutCommonComponents";
 
 const TechStackSpace: React.FC<AboutTechStackSpace> = ({
   searchTechStackRef,

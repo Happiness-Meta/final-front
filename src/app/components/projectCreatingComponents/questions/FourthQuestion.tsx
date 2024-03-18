@@ -11,7 +11,8 @@ import { personnelInputStyle } from "@/app/styleComponents/projectCreatingStyles
 const FourthQuestion = () => {
   const inputRef: RefObject<HTMLInputElement> = useRef(null);
 
-  const { dynamicQuestionsContainer, addDynamicQuestions } = useProjectStore();
+  const { dynamicQuestionsContainer, addDynamicQuestions, setOrder } =
+    useProjectStore();
 
   return (
     <>
@@ -21,6 +22,11 @@ const FourthQuestion = () => {
       <input
         autoFocus
         ref={inputRef}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            setOrder(1);
+          }
+        }}
         type="number"
         min={1}
         max={99}
