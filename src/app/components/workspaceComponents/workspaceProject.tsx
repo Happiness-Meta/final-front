@@ -20,6 +20,8 @@ import {
 } from "@/app/styleComponents/workspaceStyles/projectStyles";
 import arrowRight from "@/app/assets/svg/arrow-right-small.svg";
 
+// libraries
+
 // img
 import AddIcon from "@/app/assets/svg/addIcon.svg";
 
