@@ -34,6 +34,7 @@ export const ContentContainer = {
 
 export const AddProjectButtonContainer = {
   width: "130px",
+  height: "100px",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",

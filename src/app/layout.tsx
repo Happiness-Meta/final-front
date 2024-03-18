@@ -20,6 +20,7 @@ export default function RootLayout({
     <ReactQueryClientProvider>
       <html lang="en">
         <body className={inter.className}>
+          {/* <MockProvider /> */}
           {children}
           <Script src="https://cdn.iamport.kr/v1/iamport.js" />
         </body>

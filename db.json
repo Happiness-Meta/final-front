@@ -1,0 +1,76 @@
+{
+  "userData": [
+    {
+      "userName": "서근재",
+      "projectName": "WEB-IDE",
+      "techStack": ["TypeScript", "React", "Spring"],
+      "projectStartDate": "2024-01-23",
+      "projectEndDate": "2024-02-25",
+      "chatImg": "./app/assets/svg/chat.svg"
+    },
+    {
+      "userName": "최윤석",
+      "projectName": "환경 살리기",
+      "techStack": ["TypeScript", "Next.js", "Spring", "Java"],
+      "projectStartDate": "2023-11-25",
+      "projectEndDate": "2024-03-11)",
+      "chatImg": "./app/assets/svg/chat.svg"
+    },
+    {
+      "userName": "김수연",
+      "projectName": "블로그 웹사이트 만들기",
+      "techStack": ["TypeScript", "React", "React Query", "Node.js", "zustand"],
+      "projectStartDate": "2023-01-23",
+      "projectEndDate": " 2023-04-06)",
+      "chatImg": "./app/assets/svg/chat.svg"
+    },
+    {
+      "userName": "양재선",
+      "projectName": "Happ-Meta",
+      "techStack": [
+        "TypeScript",
+        "Next.js",
+        "Spring",
+        "Java",
+        "zustand",
+        "Emotion",
+        "MySQL"
+      ],
+      "projectStartDate": "2023-0-19",
+      "projectEndDate": "2024-01-01",
+      "chatImg": "./app/assets/svg/chat.svg"
+    },
+    {
+      "userName": "서재근",
+      "projectName": "관광데이터활용",
+      "techStack": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "React",
+        "Spring",
+        "Java",
+        "MySQL"
+      ],
+      "projectStartDate": "2022-11-31)",
+      "projectEndDate": "2023-11-01",
+      "chatImg": "./app/assets/svg/chat.svg"
+    },
+    {
+      "userName": "재근",
+      "projectName": "다이어리 만들기",
+      "techStack": [
+        "Recoil",
+        "React",
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "MySQL",
+        "Django"
+      ],
+      "projectStartDate": "2024-5-19",
+      "projectEndDate": "2025-01-01",
+      "chatImg": "./app/assets/svg/chat.svg"
+    }
+  ]
+}

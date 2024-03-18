@@ -20,6 +20,8 @@ import {
 } from "@/app/styleComponents/workspaceStyles/projectStyles";
 import arrowRight from "@/app/assets/svg/arrow-right-small.svg";
 
+// libraries
+
 // img
 import AddIcon from "@/app/assets/svg/addIcon.svg";
 
@@ -35,7 +37,7 @@ const WorkspaceProject = () => {
       ]}
     >
       <div css={[projectHeader, `margin-top: 7rem;`]}>
-        <div css={project}>이력서</div>
+        <div css={project}>프로젝트</div>
         <Image css={arrowImg} src={arrowRight} alt="화살표" />
       </div>
       <div css={divider}></div>
@@ -43,9 +45,7 @@ const WorkspaceProject = () => {
         css={[
           ContentContainer,
           `
-        
         flex-direction: column;
-        
     
       `,
         ]}
