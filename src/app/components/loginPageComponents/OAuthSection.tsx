@@ -1,8 +1,8 @@
 "use client";
 /** @jsxImportSource @emotion/react */
 import { flexCenterX2 } from "@/app/styleComponents/commonStyles/commonStyles";
-import Kakao from "@/app/assets/svg/kakao.svg";
-import Google from "@/app/assets/svg/google.svg";
+import Kakao from "@/app/assets/oAuth/kakao.svg";
+import Google from "@/app/assets/oAuth/google.svg";
 import Image from "next/image";
 import Link from "next/link";
 

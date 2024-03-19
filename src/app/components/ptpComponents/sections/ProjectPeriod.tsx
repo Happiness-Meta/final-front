@@ -14,7 +14,7 @@ const ProjectPeriod: React.FC<AboutProjectPeriod> = ({
   startDateRef,
   endDateRef,
 }) => {
-  const { dynamicQuestionsContainer } = useProjectStore();
+  const { dynamicQuestionsContainer, addDynamicQuestions } = useProjectStore();
   const { setGuideMessage } = useProjectTemplateStore();
 
   return (
@@ -27,6 +27,7 @@ const ProjectPeriod: React.FC<AboutProjectPeriod> = ({
         <input
           ref={startDateRef}
           onFocus={() => setGuideMessage("프로젝트의 시작일은 언제인가요?")}
+          onChange={(e) => addDynamicQuestions(e.target.value, 2)}
           id="period"
           type="date"
           defaultValue={dynamicQuestionsContainer[2]}
@@ -36,6 +37,7 @@ const ProjectPeriod: React.FC<AboutProjectPeriod> = ({
         <input
           ref={endDateRef}
           onFocus={() => setGuideMessage("프로젝트의 종료일은 언제인가요?")}
+          onChange={(e) => addDynamicQuestions(e.target.value, 3)}
           type="date"
           defaultValue={dynamicQuestionsContainer[3]}
           css={inputStyles.style2}

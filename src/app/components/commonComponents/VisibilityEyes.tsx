@@ -6,6 +6,7 @@ import visibility from "@/app/assets/svg/visibility.svg";
 import visibility_off from "@/app/assets/svg/visibility_off.svg";
 import { AboutVisibilityEyes } from "@/app/types/aboutSignInUp";
 import { commonColor } from "@/app/styleComponents/commonStyles/commonStyles";
+import { css } from "@emotion/react";
 
 const VisibilityEyes: React.FC<AboutVisibilityEyes> = ({
   isPwVisible,
@@ -17,15 +18,20 @@ const VisibilityEyes: React.FC<AboutVisibilityEyes> = ({
       alt="visibility"
       onClick={() => setIsPwVisible(!isPwVisible)}
       css={[
-        `position: absolute; 
-        top: 50%; right: 30px; 
-        transform: translateY(-50%); 
-        padding: 5px;
-        border-radius:50%;
-        cursor: pointer;
-        &:hover {
-          border: 1px solid ${commonColor.representative};
-        }
+        css`
+          position: absolute;
+          top: 50%;
+          right: 30px;
+          transform: translateY(-50%);
+          padding: 5px;
+          border-radius: 50%;
+          transition: width 0.2s, height 0.2s;
+          cursor: pointer;
+          &:hover {
+            border: 1px solid ${commonColor.representative};
+            width: 29px;
+            height: 29px;
+          }
         `,
       ]}
       width={30}

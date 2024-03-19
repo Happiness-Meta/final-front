@@ -15,12 +15,14 @@ const PaintBackground = () => {
         position: fixed;
         top: 0;
         right: 0;
+        width: 100%;
+        height: 100%;
         background: linear-gradient(
           45deg,
           ${dynamicQuestionsContainer[1]},
           ${commonColor.representative}
         );
-        animation: ${paintAni} 2s forwards;
+        animation: ${paintAni} 1s forwards;
       `}
     ></div>
   );

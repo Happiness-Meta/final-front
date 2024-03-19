@@ -8,6 +8,7 @@ export const headerStyle = css`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 5px;
   width: 100%;
   height: 60px;
   padding: 10px 20px;

@@ -14,7 +14,8 @@ const WelcomeMessage = () => {
   `;
 
   const goneDown = keyframes`
-  0%, 50%{ opacity:1; transform: translateY(0px);};
+  0%{ opacity:0; transform: translateY(-20px);}
+  20%, 70%{ opacity:1; transform: translateY(0px);}
   100% { opacity:0; transform: translateY(20px);}
   `;
 
