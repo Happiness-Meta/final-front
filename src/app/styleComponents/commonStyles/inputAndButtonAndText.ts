@@ -7,7 +7,7 @@ export const signInUpMainStyle = {
 };
 
 export const signInUpinputStyle = {
-  width: "90%",
+  width: "100%",
   height: "50px",
   padding: "10px",
   border: "1px solid gray",
@@ -18,7 +18,7 @@ export const signInUpinputStyle = {
 
 export const signInUpInputStyleHover = `
   &:focus {
-    width: 92%;
+    width: 102%;
     border-color: ${commonColor.representative} !important;
   }
 `;

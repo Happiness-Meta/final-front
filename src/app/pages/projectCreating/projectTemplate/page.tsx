@@ -7,6 +7,7 @@ import {
 } from "@/app/styleComponents/commonStyles/commonStyles";
 import {
   createButtonStyle,
+  labelStyles,
   pageStyle,
   sectionStyle,
   templateBottomStyle,
@@ -23,12 +24,16 @@ import ProjectFunction from "@/app/components/ptpComponents/sections/ProjectFunc
 import ProjectProblem from "@/app/components/ptpComponents/sections/ProjectProblem";
 import ProjectLink from "@/app/components/ptpComponents/sections/ProjectLink";
 import ProjectTakeaway from "@/app/components/ptpComponents/sections/ProjectTakeaway";
+import TechStackSpace from "@/app/components/commonComponents/TechStackSpace";
+import { css } from "@emotion/react";
+import ProjectTechStack from "@/app/components/ptpComponents/sections/ProjectTechStack";
 
 const ProjectTemplate = () => {
   const nameRef: RefObject<HTMLInputElement> = useRef(null);
   const startDateRef: RefObject<HTMLInputElement> = useRef(null);
   const endDateRef: RefObject<HTMLInputElement> = useRef(null);
   const personnelRef: RefObject<HTMLInputElement> = useRef(null);
+  const searchTechStackRef: RefObject<HTMLInputElement> = useRef(null);
   const descriptionRef: RefObject<HTMLTextAreaElement> = useRef(null);
   const projectFuntionRef: RefObject<HTMLInputElement> = useRef(null);
   const projFuncContRef: RefObject<HTMLInputElement> = useRef(null);
@@ -68,6 +73,7 @@ const ProjectTemplate = () => {
         <ProjectName nameRef={nameRef} />
         <ProjectPeriod startDateRef={startDateRef} endDateRef={endDateRef} />
         <ProjectPersonnel personnelRef={personnelRef} />
+        <ProjectTechStack searchTechStackRef={searchTechStackRef} />
         <ProjectDescription descriptionRef={descriptionRef} />
         <ProjectFunction
           projectFuntionRef={projectFuntionRef}

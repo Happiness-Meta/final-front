@@ -10,6 +10,7 @@ import {
 import VisibilityEyes from "../../commonComponents/VisibilityEyes";
 import { handlePwVerCheck } from "@/app/hooks/signUpPageHooks/useHandlePwVerCheck";
 import { AboutSignUpInputs } from "@/app/types/aboutSignInUp";
+import { useState } from "react";
 
 const SignUpInputs: React.FC<AboutSignUpInputs> = ({
   emailRef,
@@ -17,11 +18,9 @@ const SignUpInputs: React.FC<AboutSignUpInputs> = ({
   nicknameCompanyPlaceHolder,
   pwRef,
   pwVerRef,
-  isPwVisible,
-  setIsPwVisible,
-  pwCheckMessage,
-  setPwCheckMessage,
 }) => {
+  const [pwCheckMessage, setPwCheckMessage] = useState("");
+  const [isPwVisible, setIsPwVisible] = useState(false);
   return (
     <>
       <input

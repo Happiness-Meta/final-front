@@ -19,9 +19,7 @@ const CorporateMemberSection = () => {
   const pwVerRef: RefObject<HTMLInputElement> = useRef(null);
   const industryRef: RefObject<HTMLSelectElement> = useRef(null);
 
-  const [pwCheckMessage, setPwCheckMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [isPwVisible, setIsPwVisible] = useState(false);
 
   const { activateErrorMessageAni } = useSignUpPageStore();
 
@@ -74,10 +72,6 @@ const CorporateMemberSection = () => {
         nicknameCompanyPlaceHolder={companyPlaceHolder}
         pwRef={pwRef}
         pwVerRef={pwVerRef}
-        isPwVisible={isPwVisible}
-        setIsPwVisible={setIsPwVisible}
-        pwCheckMessage={pwCheckMessage}
-        setPwCheckMessage={setPwCheckMessage}
       />
       <PositionSpace positionRef={industryRef} positionList={industryList} />
       <SignUpErrorMessage errorMessage={errorMessage} />

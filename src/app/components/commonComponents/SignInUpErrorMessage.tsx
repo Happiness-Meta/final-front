@@ -1,5 +1,6 @@
 "use client";
 /** @jsxImportSource @emotion/react */
+
 import useSignUpPageStore from "@/app/store/signUpPageStore/useSignUpPageStore";
 import {
   oscillatingAni1,

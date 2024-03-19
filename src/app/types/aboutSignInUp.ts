@@ -6,10 +6,6 @@ export interface AboutSignUpInputs {
   nicknameCompanyPlaceHolder: string;
   pwRef: RefObject<HTMLInputElement>;
   pwVerRef: RefObject<HTMLInputElement>;
-  isPwVisible: boolean;
-  setIsPwVisible: (T: boolean) => void;
-  pwCheckMessage: string;
-  setPwCheckMessage: (T: string) => void;
 }
 
 export interface AboutHandlePwVerCheck {
