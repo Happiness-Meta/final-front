@@ -23,19 +23,27 @@ import {
   techStackExampleStyle,
 } from "@/app/styleComponents/commonStyles/techStackSpaceStyles";
 import { css } from "@emotion/react";
+import { useProjectTemplateStore } from "@/app/store/projectTemplateStore/useProjectTemplateStore";
+import { toHeight0 } from "@/app/styleComponents/commonStyles/keyframes";
 
 const TechStackSpace: React.FC<AboutTechStackSpace> = ({
   searchTechStackRef,
 }) => {
-  const { techStackContainer, addTechStack, removeTechStack } =
-    useSignUpPageStore();
+  const { setGuideMessage } = useProjectTemplateStore();
 
+  const [techStackContainer, setTechStackContainer] = useState<string[]>([]);
   const [isTechStacksVisible, setIsTechStacksVisible] = useState(false);
   const [searchedList, setSearchedList] = useState<string[]>([]);
 
   useEffect(() => {
     setSearchedList(techStackList);
   }, []);
+
+  const handleRemoveTechStack = (tech: string) => {
+    setTechStackContainer((techStack) =>
+      techStack.filter((techStack) => techStack !== tech)
+    );
+  };
 
   return (
     <>
@@ -57,8 +65,11 @@ const TechStackSpace: React.FC<AboutTechStackSpace> = ({
               setSearchedList,
             })
           }
-          onFocus={() => setIsTechStacksVisible(true)}
-          onBlur={() => setTimeout(() => setIsTechStacksVisible(false), 200)}
+          onFocus={() => {
+            setIsTechStacksVisible(true);
+            setGuideMessage("프로젝트에 사용한 기술스택을 선택해주세요.");
+          }}
+          onBlur={() => setTimeout(() => setIsTechStacksVisible(false), 100)}
           css={[
             signInUpinputStyle,
             `${signInUpInputStyleHover}; height: 40px; padding-left: 30px`,
@@ -68,7 +79,7 @@ const TechStackSpace: React.FC<AboutTechStackSpace> = ({
           css={[
             techStackExampleStyle,
             css`
-              display: ${isTechStacksVisible ? `flex` : `none`};
+              animation: ${isTechStacksVisible ? null : toHeight0} 0.3s forwards;
             `,
           ]}
         >
@@ -76,8 +87,8 @@ const TechStackSpace: React.FC<AboutTechStackSpace> = ({
             return (
               <div
                 key={index}
-                onClick={() => {
-                  addTechStack(tech);
+                onMouseDown={() => {
+                  setTechStackContainer((techStack) => [...techStack, tech]);
                   searchTechStackRef.current!.value = "";
                 }}
                 css={searchedListStyle}
@@ -93,7 +104,7 @@ const TechStackSpace: React.FC<AboutTechStackSpace> = ({
           return (
             <div
               key={index}
-              onClick={() => removeTechStack(tech)}
+              onClick={() => handleRemoveTechStack(tech)}
               css={stackInContainerStyle}
             >
               {tech}

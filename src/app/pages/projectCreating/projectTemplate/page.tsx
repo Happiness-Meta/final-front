@@ -7,7 +7,6 @@ import {
 } from "@/app/styleComponents/commonStyles/commonStyles";
 import {
   createButtonStyle,
-  labelStyles,
   pageStyle,
   sectionStyle,
   templateBottomStyle,
@@ -24,9 +23,8 @@ import ProjectFunction from "@/app/components/ptpComponents/sections/ProjectFunc
 import ProjectProblem from "@/app/components/ptpComponents/sections/ProjectProblem";
 import ProjectLink from "@/app/components/ptpComponents/sections/ProjectLink";
 import ProjectTakeaway from "@/app/components/ptpComponents/sections/ProjectTakeaway";
-import TechStackSpace from "@/app/components/commonComponents/TechStackSpace";
-import { css } from "@emotion/react";
 import ProjectTechStack from "@/app/components/ptpComponents/sections/ProjectTechStack";
+import useSignUpPageStore from "@/app/store/signUpPageStore/useSignUpPageStore";
 
 const ProjectTemplate = () => {
   const nameRef: RefObject<HTMLInputElement> = useRef(null);
@@ -43,6 +41,9 @@ const ProjectTemplate = () => {
   const linkNameRef: RefObject<HTMLInputElement> = useRef(null);
   const linkRef: RefObject<HTMLInputElement> = useRef(null);
 
+  const { techStackContainer } = useSignUpPageStore();
+  console.log(techStackContainer.length);
+
   useEffect(() => {
     if (nameRef.current?.value === "") {
       return nameRef.current.focus();
@@ -55,6 +56,9 @@ const ProjectTemplate = () => {
     }
     if (personnelRef.current?.value === "") {
       return personnelRef.current.focus();
+    }
+    if (techStackContainer.length === 0) {
+      return searchTechStackRef.current?.focus();
     }
     if (descriptionRef.current?.value === "") {
       return descriptionRef.current.focus();

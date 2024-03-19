@@ -2,26 +2,24 @@
 /** @jsxImportSource @emotion/react */
 
 import { useProjectTemplateStore } from "@/app/store/projectTemplateStore/useProjectTemplateStore";
-import { useTemplateInputStore } from "@/app/store/projectTemplateStore/useTemplateInputStore";
 import {
   addButtonStyle,
-  deleteButtonStyle,
+  deleteButtonStyles,
   inputContainerStyles,
   inputStyles,
   labelStyles,
 } from "@/app/styleComponents/projectTemplateStyles/templateStyle";
-import { RefObject } from "react";
 import Delete from "@/app/assets/svg/delete.svg";
 import Image from "next/image";
 import { AboutProjectFunction } from "@/app/types/aboutProjectTemplate";
+import { useProjectFunctionStore } from "@/app/store/projectTemplateStore/useProjectFunctionStore";
 
 const ProjectFunction: React.FC<AboutProjectFunction> = ({
   projectFuntionRef,
   projFuncContRef,
 }) => {
   const { setGuideMessage } = useProjectTemplateStore();
-  const { projFuncs, addFunc, deleteFunc, putTextInFunc, putContInFunc } =
-    useTemplateInputStore();
+  const { projFuncs, addFunc, deleteFunc, setFunc } = useProjectFunctionStore();
 
   return (
     <>
@@ -33,17 +31,17 @@ const ProjectFunction: React.FC<AboutProjectFunction> = ({
         return (
           <div key={index} css={inputContainerStyles.style2}>
             <input
+              autoComplete="off"
               ref={projectFuntionRef}
               autoFocus={projFuncs.length > 1 ? true : false}
-              autoComplete="off"
               onFocus={() => setGuideMessage("구현 기능을 적어주세요.")}
               onChange={(e) => {
-                putTextInFunc(e.target.value, index);
-                console.log(projFuncs);
+                setFunc("function", e.target.value, index);
               }}
               id="myFunctions"
               type="text"
               css={inputStyles.style4}
+              value={_.function}
             />
             <input
               ref={projFuncContRef}
@@ -51,19 +49,18 @@ const ProjectFunction: React.FC<AboutProjectFunction> = ({
                 setGuideMessage("이 기능의 기여도는 얼마나 되나요?")
               }
               onChange={(e) => {
-                putContInFunc(parseInt(e.target.value), index);
-                console.log(projFuncs);
+                setFunc("contribution", parseInt(e.target.value), index);
               }}
               type="number"
               step={10}
               min={0}
               max={100}
-              defaultValue={100}
               css={inputStyles.style5}
+              value={_.contribution}
             />
             {projFuncs.length > 1 ? (
               <button
-                css={[deleteButtonStyle]}
+                css={[deleteButtonStyles.deleteButtonStyle1]}
                 onClick={() => {
                   deleteFunc(index);
                 }}

@@ -32,7 +32,6 @@ export const signInUpButtonStyle = css`
   color: white;
   font-size: 16px;
   transition: 0.2s;
-  cursor: pointer;
   &:hover {
     width: 92%;
     font-weight: bold;

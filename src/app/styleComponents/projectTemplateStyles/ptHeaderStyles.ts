@@ -30,7 +30,6 @@ export const workspaceBtnStyle = css`
   background-color: transparent;
   color: ${commonColor.representative};
   transition: 0.2s;
-  cursor: pointer;
   &:hover {
     width: 110px;
     background-color: ${commonColor.representative};

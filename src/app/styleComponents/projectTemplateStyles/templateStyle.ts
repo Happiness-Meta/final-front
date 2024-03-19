@@ -186,7 +186,6 @@ export const createButtonStyle = css`
   color: white;
   font-size: 1em;
   transition: 0.3s;
-  cursor: pointer;
   &:hover,
   &:focus {
     height: 50px;
@@ -194,19 +193,34 @@ export const createButtonStyle = css`
   }
 `;
 
-export const deleteButtonStyle = css`
-  width: 30px;
-  border: 1px solid gray;
-  border-radius: 5px;
-  background-color: transparent;
-  overflow: hidden;
-  animation: ${fromOpacityWidth0} 0.5s;
-  transition: 0.3s;
-  cursor: pointer;
-  &:hover {
-    background-color: ${commonColor.representative};
-  }
-`;
+export const deleteButtonStyles = {
+  deleteButtonStyle1: css`
+    width: 30px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    background-color: transparent;
+    overflow: hidden;
+    animation: ${fromOpacityWidth0} 0.5s;
+    transition: 0.3s;
+    &:hover {
+      border-color: red;
+      background-color: ${commonColor.representative};
+    }
+  `,
+  deleteButtonStyle2: css`
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 1px;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    background-color: transparent;
+    &:hover {
+      border-color: red;
+      background-color: orange;
+    }
+  `,
+};
 
 export const templateBottomStyle = css`
   width: 100%;

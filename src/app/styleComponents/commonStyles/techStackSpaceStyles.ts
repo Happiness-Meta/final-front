@@ -14,7 +14,7 @@ export const techStackExampleStyle = css`
   flex-direction: column;
   width: 100%;
   min-height: 30px;
-  height: fit-content;
+  height: auto;
   max-height: 200px;
   border: 1px solid gray;
   border-radius: 7px;
