@@ -44,7 +44,7 @@ const SignUpInputs: React.FC<AboutSignUpInputs> = ({
             handlePwVerCheck({ pwRef, pwVerRef, setPwCheckMessage })
           }
           type={isPwVisible ? "text" : "password"}
-          placeholder="password"
+          placeholder="password : 9자 이상"
           css={[signInUpinputStyle, `${signInUpInputStyleHover}`]}
         />
         <VisibilityEyes

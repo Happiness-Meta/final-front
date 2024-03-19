@@ -7,16 +7,14 @@ import { paintStyle } from "@/app/styleComponents/projectCreatingStyles/textAndE
 import { AboutProjectColoringSpace } from "@/app/types/aboutCommonComponents";
 import { css } from "@emotion/react";
 
-const ProjectColoringSpace: React.FC<AboutProjectColoringSpace> = ({
-  paintColorRef,
-}) => {
+const ProjectColoringSpace = () => {
   const { addDynamicQuestions, clickedColor, setClickedColor } =
     useProjectStore();
 
   return (
     <div
       css={[
-        `display: flex; justify-content: center; align-items: center; gap: 50px;
+        `display: flex; justify-content: center; align-items: center; gap: 4vw;
           width: 100%; 
           height: 50px; 
           `,
@@ -25,7 +23,6 @@ const ProjectColoringSpace: React.FC<AboutProjectColoringSpace> = ({
       {paintColors.map((color, index) => {
         return (
           <button
-            ref={paintColorRef}
             key={index}
             onClick={() => {
               addDynamicQuestions(color, 1);

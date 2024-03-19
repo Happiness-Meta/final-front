@@ -10,7 +10,7 @@ import {
 import { AboutProjectName } from "@/app/types/aboutProjectTemplate";
 
 const ProjectName: React.FC<AboutProjectName> = ({ nameRef }) => {
-  const { dynamicQuestionsContainer } = useProjectStore();
+  const { dynamicQuestionsContainer, addDynamicQuestions } = useProjectStore();
   const { setGuideMessage } = useProjectTemplateStore();
 
   return (
@@ -23,17 +23,11 @@ const ProjectName: React.FC<AboutProjectName> = ({ nameRef }) => {
         autoComplete="off"
         ref={nameRef}
         onFocus={() => setGuideMessage("프로젝트 이름은 무엇인가요?")}
+        onChange={(e) => addDynamicQuestions(e.target.value, 0)}
         id="name"
         type="text"
         defaultValue={dynamicQuestionsContainer[0]}
-        css={[
-          inputStyles.style1,
-          `${
-            nameRef.current?.value !== "" && undefined
-              ? `border-color:green;`
-              : ``
-          }`,
-        ]}
+        css={[inputStyles.style1]}
       />
     </>
   );

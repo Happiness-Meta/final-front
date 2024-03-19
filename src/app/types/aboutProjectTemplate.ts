@@ -16,3 +16,19 @@ export interface AboutProjectPersonnel {
 export interface AboutProjectDescription {
   descriptionRef: RefObject<HTMLTextAreaElement>;
 }
+
+export interface AboutProjectFunction {
+  projectFuntionRef: RefObject<HTMLInputElement>;
+  projFuncContRef: RefObject<HTMLInputElement>;
+}
+
+export interface AboutProjectProblem {
+  pDefinitionRef: RefObject<HTMLInputElement>;
+  pReasonRef: RefObject<HTMLTextAreaElement>;
+  pSolutionRef: RefObject<HTMLTextAreaElement>;
+}
+
+export interface AboutProjectLink {
+  linkNameRef: RefObject<HTMLInputElement>;
+  linkRef: RefObject<HTMLInputElement>;
+}

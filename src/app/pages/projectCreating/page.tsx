@@ -16,6 +16,7 @@ import FifthQuestion from "@/app/components/projectCreatingComponents/questions/
 import WelcomeMessage from "@/app/components/projectCreatingComponents/messages/WelcomeMessage";
 import ContinueMessage from "@/app/components/projectCreatingComponents/messages/ContinueMessage";
 import Link from "next/link";
+import StepViewer from "@/app/components/projectCreatingComponents/StepViewer";
 
 const ProjectCreating = () => {
   const { order, dynamicQuestionsContainer } = useProjectStore();
@@ -31,13 +32,14 @@ const ProjectCreating = () => {
         }`,
       ]}
     >
-      {order !== 4 && 5 ? <WelcomeMessage /> : undefined}
+      {dynamicQuestionsContainer[0] === "" ? <WelcomeMessage /> : undefined}
       <main
         css={[
           flexCenterX2,
           `flex-direction: column; width: 100%; height: 100vh; row-gap: 20px;`,
         ]}
       >
+        {order !== 5 ? <StepViewer /> : undefined}
         {order === 0 ? (
           <FirstQuestion />
         ) : order === 1 ? (

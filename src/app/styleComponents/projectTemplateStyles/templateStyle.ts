@@ -1,6 +1,12 @@
 import { css } from "@emotion/react";
-import { templateAni } from "../commonStyles/keyframes";
+import { fromOpacityWidth0, templateAni } from "../commonStyles/keyframes";
 import { commonColor } from "../commonStyles/commonStyles";
+
+export const pageStyle = css`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 export const sectionStyle = css`
   display: flex;
@@ -18,7 +24,7 @@ export const sectionStyle = css`
   box-shadow: 0 0 10px gray;
   z-index: 1;
   opacity: 0;
-  animation: ${templateAni} 1s 2s forwards;
+  animation: ${templateAni} 1s 1s forwards;
 `;
 
 export const labelStyles = {
@@ -44,6 +50,7 @@ export const inputContainerStyles = {
   style2: css`
     display: flex;
     justify-content: space-between;
+    gap: 5px;
     padding: 5px;
     border: 1px solid gray;
     border-radius: 5px;
@@ -161,7 +168,7 @@ export const addButtonStyle = css`
   font-size: 1.3em;
   transition: 0.2s;
   &:hover,
-  &:focus {
+  &:active {
     outline: 3px solid white;
     border-radius: 20px;
     background-color: ${commonColor.representative};
@@ -185,4 +192,24 @@ export const createButtonStyle = css`
     height: 50px;
     background-color: #00b000;
   }
+`;
+
+export const deleteButtonStyle = css`
+  width: 30px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  background-color: transparent;
+  overflow: hidden;
+  animation: ${fromOpacityWidth0} 0.5s;
+  transition: 0.3s;
+  cursor: pointer;
+  &:hover {
+    background-color: ${commonColor.representative};
+  }
+`;
+
+export const templateBottomStyle = css`
+  width: 100%;
+  height: 50px;
+  margin-top: 30px;
 `;

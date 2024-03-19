@@ -92,3 +92,16 @@ export const templateAni = keyframes`
   opacity: 1;
 }
 `;
+
+export const fromOpacityWidth0 = keyframes`
+0% {
+  opacity: 0;
+  width: 0;
+}
+`;
+
+export const aniForImportant = keyframes`
+100%{
+    width: 200px;
+}
+`;

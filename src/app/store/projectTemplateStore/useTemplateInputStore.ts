@@ -1,36 +1,40 @@
 import { create } from "zustand";
 
+interface AboutFunction {
+  function: string;
+  contribution: number;
+}
+
 interface AboutTemplateInputStore {
-  mainFuncs: string[][];
-  addMainFunc: () => void;
-  putTextInMainFunc: (text: string, order: number) => void;
-  myFuncs: string[][];
-  addMyFunc: () => void;
-  putTextInMyFunc: (text: string, order: number) => void;
-  putContInMyFunc: (cont: string, order: number) => void;
+  projFuncs: AboutFunction[];
+  addFunc: () => void;
+  putTextInFunc: (text: string, order: number) => void;
+  putContInFunc: (cont: number, order: number) => void;
+  deleteFunc: (index: number) => void;
 }
 
 export const useTemplateInputStore = create<AboutTemplateInputStore>((set) => ({
-  mainFuncs: [[]],
-  addMainFunc: () => set((state) => ({ mainFuncs: [...state.mainFuncs, []] })),
-  putTextInMainFunc: (text, order) =>
+  projFuncs: [{ function: "", contribution: 100 }],
+  addFunc: () =>
+    set((state) => ({
+      projFuncs: [...state.projFuncs, { function: "", contribution: 0 }],
+    })),
+  putTextInFunc: (text, order) =>
     set((state) => {
-      const updatedStatus = [...state.mainFuncs];
-      updatedStatus[order] = [text];
-      return { mainFuncs: updatedStatus };
+      const updatedStatus = [...state.projFuncs];
+      updatedStatus[order].function = text;
+      return { projFuncs: updatedStatus };
     }),
-  myFuncs: [[]],
-  addMyFunc: () => set((state) => ({ myFuncs: [...state.myFuncs, []] })),
-  putTextInMyFunc: (text, order) =>
+  putContInFunc: (cont, order) =>
     set((state) => {
-      const updatedStatus = [...state.myFuncs];
-      updatedStatus[order][0] = text;
-      return { myFuncs: updatedStatus };
+      const updatedStatus = [...state.projFuncs];
+      updatedStatus[order].contribution = cont;
+      return { projFuncs: updatedStatus };
     }),
-  putContInMyFunc: (cont, order) =>
+  deleteFunc: (index) =>
     set((state) => {
-      const updatedStatus = [...state.myFuncs];
-      updatedStatus[order][1] = cont;
-      return { myFuncs: updatedStatus };
+      const updatedStatus = state.projFuncs.filter((_, i) => i !== index);
+      console.log(updatedStatus);
+      return { projFuncs: updatedStatus };
     }),
 }));

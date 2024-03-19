@@ -37,6 +37,8 @@ const Header = () => {
           css={[
             css`
               color: black;
+              white-space: nowrap;
+              text-overflow: ellipsis;
               font-size: 1.3em;
               font-weight: bold;
               transition: 0.5s;

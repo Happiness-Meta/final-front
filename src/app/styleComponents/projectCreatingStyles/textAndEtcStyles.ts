@@ -20,8 +20,12 @@ export const templateLinkStyle = css`
 `;
 
 export const paintStyle = css`
-  width: 40px;
-  height: 40px;
+  width: 4vw;
+  height: 4vw;
+  min-width: 30px;
+  min-height: 30px;
+  max-width: 40px;
+  max-height: 40px;
   border: 1px solid gray;
   border-radius: 20px;
   transition: transform 0.4s, box-shadow 0.4s;

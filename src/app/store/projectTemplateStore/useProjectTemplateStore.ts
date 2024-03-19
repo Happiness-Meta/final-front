@@ -11,7 +11,7 @@ interface AboutProjectTemplateStore {
 
 export const useProjectTemplateStore = create<AboutProjectTemplateStore>(
   (set) => ({
-    guideMessage: "PROJECT TEMPLATE",
+    guideMessage: "",
     setGuideMessage: (message: string) => set({ guideMessage: message }),
     guideMessageAni: false,
     setGuideMessageAni: () =>
