@@ -42,7 +42,6 @@ const ProjectTemplate = () => {
   const linkRef: RefObject<HTMLInputElement> = useRef(null);
 
   const { techStackContainer } = useSignUpPageStore();
-  console.log(techStackContainer.length);
 
   useEffect(() => {
     if (nameRef.current?.value === "") {

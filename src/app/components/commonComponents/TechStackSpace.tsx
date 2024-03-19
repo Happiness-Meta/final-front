@@ -29,21 +29,16 @@ import { toHeight0 } from "@/app/styleComponents/commonStyles/keyframes";
 const TechStackSpace: React.FC<AboutTechStackSpace> = ({
   searchTechStackRef,
 }) => {
+  const { techStackContainer, addTechStack, removeTechStack } =
+    useSignUpPageStore();
   const { setGuideMessage } = useProjectTemplateStore();
 
-  const [techStackContainer, setTechStackContainer] = useState<string[]>([]);
   const [isTechStacksVisible, setIsTechStacksVisible] = useState(false);
   const [searchedList, setSearchedList] = useState<string[]>([]);
 
   useEffect(() => {
     setSearchedList(techStackList);
   }, []);
-
-  const handleRemoveTechStack = (tech: string) => {
-    setTechStackContainer((techStack) =>
-      techStack.filter((techStack) => techStack !== tech)
-    );
-  };
 
   return (
     <>
@@ -88,7 +83,7 @@ const TechStackSpace: React.FC<AboutTechStackSpace> = ({
               <div
                 key={index}
                 onMouseDown={() => {
-                  setTechStackContainer((techStack) => [...techStack, tech]);
+                  addTechStack(tech);
                   searchTechStackRef.current!.value = "";
                 }}
                 css={searchedListStyle}
@@ -104,7 +99,7 @@ const TechStackSpace: React.FC<AboutTechStackSpace> = ({
           return (
             <div
               key={index}
-              onClick={() => handleRemoveTechStack(tech)}
+              onClick={() => removeTechStack(tech)}
               css={stackInContainerStyle}
             >
               {tech}

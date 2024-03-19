@@ -182,14 +182,14 @@ export const createButtonStyle = css`
   height: 40px;
   border: 1px solid gray;
   border-radius: 5px;
-  background-color: #00b000c2;
+  background-color: #00d800e3;
   color: white;
   font-size: 1em;
   transition: 0.3s;
   &:hover,
   &:focus {
     height: 50px;
-    background-color: #00b000;
+    background-color: #00d800;
   }
 `;
 
