@@ -14,7 +14,6 @@ const LinkStyle = {
   fontSize: "40px",
   fontWeight: "bold",
   marginLeft: "4rem",
-  marginTop: "1rem",
 };
 
 const workspaceButton = {

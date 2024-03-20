@@ -40,28 +40,11 @@ const ProjectTitle = () => {
               background-color: #ff8a00;
               padding: 0.7rem;
               border-radius: 0.5rem;
-              margin-right: 1rem;
               // hover 추가
-              box-shadow: 0 1px 4px 2px gray;
+              box-shadow: 0 1px 3px 1px gray;
             `}
           >
-            이력서 추가
-          </div>
-        </button>
-        <button css={AddProjectButton}>
-          <div
-            css={css`
-              width: 8vw;
-              text-align: center;
-              color: #ff8a00;
-              background-color: white;
-              border: 2px solid #ff8a00;
-              padding: 0.7rem;
-              border-radius: 0.5rem;
-              box-shadow: 0 1px 4px 2px gray;
-            `}
-          >
-            프로젝트 추가
+            이력서 편집
           </div>
         </button>
         <Link href={"/pages/myPage"} css={AddProjectButton}>
@@ -69,12 +52,13 @@ const ProjectTitle = () => {
             css={css`
               width: 8vw;
               text-align: center;
-              color: black;
+              color: #ff8a00;
               background-color: white;
               padding: 0.7rem;
+              border: 2px solid #ff8a00;
               border-radius: 0.5rem;
               margin-left: 1rem;
-              box-shadow: 0 1px 4px 1px;
+              box-shadow: 0 1px 2px 1px gray;
             `}
           >
             마이 페이지

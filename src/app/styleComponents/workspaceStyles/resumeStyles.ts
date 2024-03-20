@@ -6,6 +6,7 @@ export const resumeHeader = {
 
 export const resumeHeaderColumn = {
   diplay: "flex",
+  height: "200px",
 };
 
 export const arrowImg = {

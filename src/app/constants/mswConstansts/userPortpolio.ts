@@ -1,5 +1,5 @@
 // types
-import { portPoliosThumbnailData } from "@/app/types/portPoliosThumbnailData";
+import { portPoliosThumbnailData } from "@/app/types/aboutPortPoliosThumbnailData";
 
 // img
 import Chat from "@/app/assets/svg/chat.svg";
