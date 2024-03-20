@@ -11,7 +11,6 @@ export const LinkStyle = {
   fontSize: "40px",
   fontWeight: "bold",
   marginLeft: "4rem",
-  marginTop: "1rem",
 };
 
 export const workspaceButton = {

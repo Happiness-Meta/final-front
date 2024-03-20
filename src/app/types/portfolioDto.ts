@@ -59,3 +59,13 @@ export interface UpdatePortfolioDTO {
 export interface DeletePortfolioDTO {
   id: number;
 }
+
+export interface portPoliosThumbnailData {
+  userName: string;
+  projectName: string;
+  techStack: string[];
+  projectStartDate: Date;
+  projectEndDate: Date;
+  projectPersonnel: number;
+  projectOutline: string;
+}

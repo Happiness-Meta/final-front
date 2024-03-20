@@ -5,7 +5,7 @@ export const ProfileContainer = {
   display: "flex",
   FlexDirection: "row",
   marginLeft: "4rem",
-  marginTop: "3rem",
+  marginTop: "2rem",
 };
 
 export const UserProfileImg = {
