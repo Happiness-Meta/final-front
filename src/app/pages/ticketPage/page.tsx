@@ -32,6 +32,7 @@ import {
   barcodeStyle,
   paymentStyle,
 } from "@/app/styleComponents/ticketPagestyles/ticketPageStyles";
+import { orderProducts } from "@/app/constants/orderProducts";
 
 interface SetOrder {
   orderUid: string;
@@ -55,7 +56,11 @@ const TicketPage = () => {
   const handleBuyTicket = async () => {
     try {
       // axios.get의 인자는 요청을 보낼 URL입니다.
-      const response = await axios.post("http://localhost:8080/order");
+      const body = {
+        itemPrice: orderProducts.BASIC_TICKET.itemPrice,
+        itemName: orderProducts.BASIC_TICKET.itemName,
+      };
+      const response = await axios.post("/api/v1/order", body);
 
       setIsSetOrder(response.data);
 
@@ -102,7 +107,7 @@ const TicketPage = () => {
         amount: isSetOrder.amount,
         name: isSetOrder.itemName,
         buyer_name: isSetOrder.buyerName,
-        buyer_tel: "010-1234-5678",
+        buyer_tel: "010-1234-5678", //user에 들어갈 정보 인터페이스
         buyer_email: "example@example.com",
         buyer_addr: isSetOrder.buyerAddress,
         buyer_postcode: "01181",
@@ -119,8 +124,9 @@ const TicketPage = () => {
           if (response.imp_uid) {
             try {
               const rsp = await axios.post("http://localhost:8080/payment", {
-                order_uid: response.merchant_uid,
-                payment_uid: response.imp_uid,
+                paymentUid: response.imp_uid,
+                orderUid: response.merchant_uid,
+                cardNumber: response.card_number,
               });
               console.log(rsp.data);
             } catch (error) {

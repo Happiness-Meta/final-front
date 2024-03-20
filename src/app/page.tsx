@@ -23,19 +23,42 @@ import {
   mainArticleRightSide,
 } from "./styleComponents/homePageStyles/HomePageStyles";
 import ProjectMenu from "./components/commonComponents/Projectmenu";
+import { useCookies } from "react-cookie";
 
 function HomePage() {
+  const [cookies, , removeCookie] = useCookies(["email", "nickname", "token"]);
+  const removeCookies = () => {
+    removeCookie("email");
+    removeCookie("nickname");
+    removeCookie("token");
+    window.location.reload();
+  };
   return (
     <>
       <header css={headerContainerStyle}>
         <ProjectMenu />
         <div css={homeButtonContainer}>
-          <Link href={"pages/loginPage"} css={buttonStyle("white", "black")}>
-            로그인
-          </Link>
-          <Link href={"pages/signUpPage"} css={buttonStyle(commonColor.mainYellow, "white")}>
-            회원가입
-          </Link>
+          {cookies.token ? (
+            <>
+              <div
+                css={buttonStyle("white", "black")}
+                onClick={() => {
+                  removeCookies();
+                }}
+              >
+                로그아웃
+              </div>
+            </>
+          ) : (
+            <>
+              <Link href={"pages/loginPage"} css={buttonStyle("white", "black")}>
+                로그인
+              </Link>
+              <Link href={"pages/signUpPage"} css={buttonStyle(commonColor.mainYellow, "white")}>
+                회원가입
+              </Link>
+            </>
+          )}
         </div>
       </header>
 

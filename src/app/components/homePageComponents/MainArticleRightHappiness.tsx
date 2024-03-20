@@ -12,6 +12,7 @@ const mainArticleRightSidechildren = css`
   display: flex;
   flex-direction: column;
   background-color: #ffffff;
+  margin-top: 8px;
 `;
 
 const mainArticleRightSideText = css`
@@ -39,7 +40,6 @@ const MainArticleRightHappiness = () => {
   return (
     <>
       <div css={mainArticleRightSidechildren}>
-        <p css={mainArticleRightSideText}>🍀행복메타</p>
         <div css={happinessMetaNotionClick}>노션 바로가기</div>
         <Image src={happinessMetaNotion} alt="happinessMetaNotion"></Image>
       </div>

@@ -23,7 +23,9 @@ import {
 import { useRef, useEffect, useState } from "react";
 import useDetectClose from "@/app/hooks/homePageHooks/useDetectClose";
 import { JobDropDown } from "./JobDropDown";
-import useSignUpPageStore from "@/app/store/signUpPageStore/useSignUpPageStore";
+import { preferedPositionList } from "@/app/constants/industryOptions";
+import { techStackList } from "@/app/constants/techStacks";
+import useHomePageTechStore from "@/app/store/homePageStore/useHomePageTechStore";
 
 const HomeSearchBar = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -31,31 +33,7 @@ const HomeSearchBar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   useDetectClose(dropdownRef, () => setIsOpen(false));
   const [isTechStacksVisible, setIsTechStacksVisible] = useState(false);
-  const { techStackContainer, addTechStack, removeTechStack } = useSignUpPageStore();
-  const JobList = ["이력서", "포트폴리오"];
-
-  const techStacks = [
-    "HTML/CSS",
-    "JavaScript",
-    "TypeScript",
-    "React",
-    "Nextjs",
-    "Redux",
-    "Zustand",
-    "SCSS",
-    "Emotion",
-    "StyledComponent",
-    "C",
-    "C+",
-    "C++",
-    "C#",
-    "Java",
-    "Python",
-    "Swift",
-    "PHP",
-    "Ruby",
-    "Go",
-  ];
+  const { techStackContainer, addTechStack, removeTechStack } = useHomePageTechStore();
 
   return (
     <>
@@ -72,12 +50,13 @@ const HomeSearchBar = () => {
             value={jobIdentify || "직군·직무"}
             type="button"
             placeholder="직군·직무"
-            onClick={() => setIsOpen(!isOpen)}
+            onFocus={() => setIsOpen(!isOpen)}
+            onBlur={() => setTimeout(() => setIsOpen(!isOpen), 50)}
             readOnly
           />
           {isOpen && (
             <ul css={jobListUl}>
-              {JobList.map((value, index) => (
+              {preferedPositionList.map((value, index) => (
                 <JobDropDown
                   key={index}
                   value={value}
@@ -91,7 +70,7 @@ const HomeSearchBar = () => {
           <Image src={bag} alt="sclocationicon-icon" css={searchIconCss}></Image>
           <input
             type="text"
-            placeholder="기술 스택"
+            placeholder="기술 스택 (최대 3개)"
             onFocus={() => setIsTechStacksVisible(true)}
             onBlur={() => setTimeout(() => setIsTechStacksVisible(false), 200)}
           />
@@ -108,11 +87,18 @@ const HomeSearchBar = () => {
             z-index:1;`,
             ]}
           >
-            {techStacks.map((tech, index) => {
+            {techStackList.map((tech, index) => {
               return (
                 <div
                   key={index}
-                  onClick={() => addTechStack(tech)}
+                  onClick={() => {
+                    // techStackContainer의 길이가 3보다 작을 때만 addTechStack 함수 호출
+                    if (techStackContainer.length < 3) {
+                      addTechStack(tech);
+                    } else {
+                      alert("최대 3개까지만 선택할 수 있습니다.");
+                    }
+                  }}
                   css={[
                     `display: flex;
                   align-items: center;
