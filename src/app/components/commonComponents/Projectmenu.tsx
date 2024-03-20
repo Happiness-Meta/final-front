@@ -19,7 +19,9 @@ const ProjectMenu = () => {
         </Link>
       </div>
       <nav css={homeMenuStyle}>
-        <span>MY커리어</span>
+        <span>
+          <Link href={"/pages/workspacePage"}>MY커리어</Link>
+        </span>
         <span>허브</span>
         <span>채용</span>
       </nav>

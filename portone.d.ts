@@ -251,6 +251,8 @@ export interface RequestPayParams extends RequestPayAdditionalParams {
 }
 
 export interface RequestPayAdditionalResponse {
+  /* ### 신용카드 번호 */
+  card_number?: string;
   /**
    * ### 신용카드 승인번호
    * - 신용카드 결제수단에 한하여 제공
