@@ -105,3 +105,16 @@ export const aniForImportant = keyframes`
     width: 200px;
 }
 `;
+
+export const toHeight0 = keyframes`
+0% {
+  height: 100%;
+  min-height: 0;
+}
+100% {
+  height: 0%;
+  min-height: 0;
+  opacity: 0;
+  display: none;
+}
+`;

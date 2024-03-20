@@ -3,8 +3,7 @@
 
 import { flexCenterX2 } from "@/app/styleComponents/commonStyles/commonStyles";
 import { signInUpButtonStyle } from "@/app/styleComponents/commonStyles/inputAndButtonAndText";
-import { RefObject, useEffect, useRef, useState } from "react";
-import { techStackList } from "@/app/constants/techStacks";
+import { RefObject, useRef, useState } from "react";
 import SignUpInputs from "./componentsForBoth/SignUpInputs";
 import TechStackSpace from "../commonComponents/TechStackSpace";
 import { preferedPositionList } from "@/app/constants/industryOptions";
@@ -28,11 +27,7 @@ const IndividualMembetSection = () => {
   const positionRef: RefObject<HTMLSelectElement> = useRef(null);
   const searchTechStackRef: RefObject<HTMLInputElement> = useRef(null);
 
-  const [pwCheckMessage, setPwCheckMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [isPwVisible, setIsPwVisible] = useState(false);
-  const [isTechStacksVisible, setIsTechStacksVisible] = useState(false);
-  const [searchedList, setSearchedList] = useState<string[]>([]);
 
   const { techStackContainer, activateErrorMessageAni, setIsSignedUp } =
     useSignUpPageStore();
@@ -95,17 +90,13 @@ const IndividualMembetSection = () => {
     },
   });
 
-  useEffect(() => {
-    setSearchedList(techStackList);
-  }, []);
-
   const nicknamePlaceHolder = "nickname";
 
   return (
     <section
       css={[
         flexCenterX2,
-        `flex-direction: column; row-gap: 5px; user-select: none;`,
+        `flex-direction: column; row-gap: 5px; width: 90%; user-select: none;`,
       ]}
     >
       <SignUpInputs
@@ -114,23 +105,12 @@ const IndividualMembetSection = () => {
         nicknameCompanyPlaceHolder={nicknamePlaceHolder}
         pwRef={pwRef}
         pwVerRef={pwVerRef}
-        isPwVisible={isPwVisible}
-        setIsPwVisible={setIsPwVisible}
-        pwCheckMessage={pwCheckMessage}
-        setPwCheckMessage={setPwCheckMessage}
       />
       <PositionSpace
         positionRef={positionRef}
         positionList={preferedPositionList}
       />
-      <TechStackSpace
-        searchTechStackRef={searchTechStackRef}
-        techStackList={techStackList}
-        setSearchedList={setSearchedList}
-        isTechStacksVisible={isTechStacksVisible}
-        setIsTechStacksVisible={setIsTechStacksVisible}
-        searchedList={searchedList}
-      />
+      <TechStackSpace searchTechStackRef={searchTechStackRef} />
       <SignUpErrorMessage errorMessage={errorMessage} />
       <button
         onClick={() => handleIndividualSignUp.mutate()}

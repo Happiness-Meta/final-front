@@ -2,6 +2,7 @@
 /** @jsxImportSource @emotion/react */
 
 import { useProjectTemplateStore } from "@/app/store/projectTemplateStore/useProjectTemplateStore";
+import useSignUpPageStore from "@/app/store/signUpPageStore/useSignUpPageStore";
 import { showUp, showUp2 } from "@/app/styleComponents/commonStyles/keyframes";
 import {
   headerStyle,
@@ -16,6 +17,8 @@ const Header = () => {
   const { guideMessage, guideMessageAni, setGuideMessageAni } =
     useProjectTemplateStore();
 
+  const { resetTechStack } = useSignUpPageStore();
+
   useEffect(() => {
     setGuideMessageAni();
   }, [guideMessage, setGuideMessageAni]);
@@ -28,6 +31,7 @@ const Header = () => {
           css={[
             `font-size: 1.3em; font-weight: bold; transition: .2s; &:hover{transform: scale(1.1);}`,
           ]}
+          onClick={() => resetTechStack()}
         >
           Palette*
         </Link>
@@ -50,7 +54,9 @@ const Header = () => {
         </p>
       </section>
       <section css={[sectionStyle, `justify-content: end;`]}>
-        <button css={[workspaceBtnStyle]}>workspace</button>
+        <button onClick={() => resetTechStack()} css={[workspaceBtnStyle]}>
+          workspace
+        </button>
       </section>
     </header>
   );

@@ -1,17 +1,22 @@
 "use client";
+import { useProjectLinkStore } from "@/app/store/projectTemplateStore/useProjectLinkStore";
 /** @jsxImportSource @emotion/react */
 
 import { useProjectTemplateStore } from "@/app/store/projectTemplateStore/useProjectTemplateStore";
 import {
   addButtonStyle,
+  deleteButtonStyles,
   inputContainerStyles,
   inputStyles,
   labelStyles,
 } from "@/app/styleComponents/projectTemplateStyles/templateStyle";
 import { AboutProjectLink } from "@/app/types/aboutProjectTemplate";
+import Image from "next/image";
+import Delete from "@/app/assets/svg/delete.svg";
 
 const ProjectLink: React.FC<AboutProjectLink> = ({ linkNameRef, linkRef }) => {
   const { setGuideMessage } = useProjectTemplateStore();
+  const { links, addLink, deleteLink, setLink } = useProjectLinkStore();
 
   return (
     <>
@@ -19,22 +24,40 @@ const ProjectLink: React.FC<AboutProjectLink> = ({ linkNameRef, linkRef }) => {
         링크
       </label>
       <hr />
-      <div css={inputContainerStyles.style2}>
-        <input
-          ref={linkNameRef}
-          onFocus={() => setGuideMessage("어떤 링크인지 적어주세요.")}
-          type="text"
-          css={inputStyles.style6}
-        />
-        <input
-          ref={linkRef}
-          onFocus={() => setGuideMessage("링크를 넣어주세요.")}
-          id="link"
-          type="text"
-          css={inputStyles.style7}
-        />
-      </div>
-      <button css={[addButtonStyle]}>+</button>
+      {links.map((_, index) => {
+        return (
+          <div key={index} css={inputContainerStyles.style2}>
+            <input
+              ref={linkNameRef}
+              onFocus={() => setGuideMessage("어떤 링크인지 적어주세요.")}
+              onChange={(e) => setLink("description", e.target.value, index)}
+              value={_.description}
+              type="text"
+              css={inputStyles.style6}
+            />
+            <input
+              ref={linkRef}
+              onFocus={() => setGuideMessage("링크를 넣어주세요.")}
+              onChange={(e) => setLink("link", e.target.value, index)}
+              value={_.link}
+              id="link"
+              type="text"
+              css={inputStyles.style7}
+            />
+            {links.length > 1 ? (
+              <button
+                onClick={() => deleteLink(index)}
+                css={[deleteButtonStyles.deleteButtonStyle1]}
+              >
+                <Image src={Delete} alt="delete" width={20} height={20} />
+              </button>
+            ) : undefined}
+          </div>
+        );
+      })}
+      <button onClick={() => addLink()} css={[addButtonStyle]}>
+        +
+      </button>
     </>
   );
 };

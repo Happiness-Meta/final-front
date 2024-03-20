@@ -23,12 +23,15 @@ import ProjectFunction from "@/app/components/ptpComponents/sections/ProjectFunc
 import ProjectProblem from "@/app/components/ptpComponents/sections/ProjectProblem";
 import ProjectLink from "@/app/components/ptpComponents/sections/ProjectLink";
 import ProjectTakeaway from "@/app/components/ptpComponents/sections/ProjectTakeaway";
+import ProjectTechStack from "@/app/components/ptpComponents/sections/ProjectTechStack";
+import useSignUpPageStore from "@/app/store/signUpPageStore/useSignUpPageStore";
 
 const ProjectTemplate = () => {
   const nameRef: RefObject<HTMLInputElement> = useRef(null);
   const startDateRef: RefObject<HTMLInputElement> = useRef(null);
   const endDateRef: RefObject<HTMLInputElement> = useRef(null);
   const personnelRef: RefObject<HTMLInputElement> = useRef(null);
+  const searchTechStackRef: RefObject<HTMLInputElement> = useRef(null);
   const descriptionRef: RefObject<HTMLTextAreaElement> = useRef(null);
   const projectFuntionRef: RefObject<HTMLInputElement> = useRef(null);
   const projFuncContRef: RefObject<HTMLInputElement> = useRef(null);
@@ -37,6 +40,8 @@ const ProjectTemplate = () => {
   const pSolutionRef: RefObject<HTMLTextAreaElement> = useRef(null);
   const linkNameRef: RefObject<HTMLInputElement> = useRef(null);
   const linkRef: RefObject<HTMLInputElement> = useRef(null);
+
+  const { techStackContainer } = useSignUpPageStore();
 
   useEffect(() => {
     if (nameRef.current?.value === "") {
@@ -50,6 +55,9 @@ const ProjectTemplate = () => {
     }
     if (personnelRef.current?.value === "") {
       return personnelRef.current.focus();
+    }
+    if (techStackContainer.length === 0) {
+      return searchTechStackRef.current?.focus();
     }
     if (descriptionRef.current?.value === "") {
       return descriptionRef.current.focus();
@@ -68,6 +76,7 @@ const ProjectTemplate = () => {
         <ProjectName nameRef={nameRef} />
         <ProjectPeriod startDateRef={startDateRef} endDateRef={endDateRef} />
         <ProjectPersonnel personnelRef={personnelRef} />
+        <ProjectTechStack searchTechStackRef={searchTechStackRef} />
         <ProjectDescription descriptionRef={descriptionRef} />
         <ProjectFunction
           projectFuntionRef={projectFuntionRef}

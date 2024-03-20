@@ -29,7 +29,6 @@ export const paintStyle = css`
   border: 1px solid gray;
   border-radius: 20px;
   transition: transform 0.4s, box-shadow 0.4s;
-  cursor: pointer;
   &:hover,
   &:focus {
     box-shadow: 0px 5px 5px #b4b4b4;

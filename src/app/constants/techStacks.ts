@@ -1,5 +1,6 @@
 export const techStackList = [
-  "HTML/CSS",
+  "HTML",
+  "CSS",
   "JavaScript",
   "TypeScript",
   "React",

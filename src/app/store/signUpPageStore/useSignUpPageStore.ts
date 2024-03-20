@@ -6,6 +6,7 @@ interface AboutSignUpPageStore {
   techStackContainer: string[];
   addTechStack: (T: string) => void;
   removeTechStack: (T: string) => void;
+  resetTechStack: () => void;
   errorMessageAniStatus: boolean;
   activateErrorMessageAni: () => void;
   isSignedUp: boolean;
@@ -34,6 +35,7 @@ const useSignUpPageStore = create<AboutSignUpPageStore>((set) => ({
         (name) => name !== stack
       ),
     })),
+  resetTechStack: () => set({ techStackContainer: [] }),
   errorMessageAniStatus: false,
   activateErrorMessageAni: () =>
     set((state) => ({ errorMessageAniStatus: !state.errorMessageAniStatus })),

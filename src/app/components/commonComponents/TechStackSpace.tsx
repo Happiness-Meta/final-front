@@ -5,6 +5,7 @@ import { handleSearchTechStacks } from "@/app/hooks/signUpPageHooks/useHandleSea
 import { flexCenterX2 } from "@/app/styleComponents/commonStyles/commonStyles";
 import Image from "next/image";
 import search from "@/app/assets/svg/search.svg";
+import { techStackList } from "@/app/constants/techStacks";
 import {
   signInUpInputStyleHover,
   signInUpinputStyle,
@@ -15,17 +16,30 @@ import {
   stackInContainerStyle,
 } from "@/app/styleComponents/signUpPageStyles/techStackStyles";
 import { AboutTechStackSpace } from "@/app/types/aboutCommonComponents";
+import { useEffect, useState } from "react";
+import {
+  searchImageStyle,
+  techStackContainerStyle,
+  techStackExampleStyle,
+} from "@/app/styleComponents/commonStyles/techStackSpaceStyles";
+import { css } from "@emotion/react";
+import { useProjectTemplateStore } from "@/app/store/projectTemplateStore/useProjectTemplateStore";
+import { toHeight0 } from "@/app/styleComponents/commonStyles/keyframes";
 
 const TechStackSpace: React.FC<AboutTechStackSpace> = ({
   searchTechStackRef,
-  techStackList,
-  setSearchedList,
-  isTechStacksVisible,
-  setIsTechStacksVisible,
-  searchedList,
 }) => {
   const { techStackContainer, addTechStack, removeTechStack } =
     useSignUpPageStore();
+  const { setGuideMessage } = useProjectTemplateStore();
+
+  const [isTechStacksVisible, setIsTechStacksVisible] = useState(false);
+  const [searchedList, setSearchedList] = useState<string[]>([]);
+
+  useEffect(() => {
+    setSearchedList(techStackList);
+  }, []);
+
   return (
     <>
       <div css={[flexCenterX2, `position: relative; width:100%;`]}>
@@ -34,22 +48,23 @@ const TechStackSpace: React.FC<AboutTechStackSpace> = ({
           alt="search"
           width={15}
           height={15}
-          css={[
-            `position: absolute; top:50%; left: 30px; transform: translateY(-50%);`,
-          ]}
+          css={[searchImageStyle]}
         />
         <input
           ref={searchTechStackRef}
-          placeholder="기술 스택(선택) : 최대 15개"
-          onChange={() =>
+          placeholder="기술 스택 : 최대 15개"
+          onChange={(e) =>
             handleSearchTechStacks({
               searchTechStackRef,
               techStackList,
               setSearchedList,
             })
           }
-          onFocus={() => setIsTechStacksVisible(true)}
-          onBlur={() => setTimeout(() => setIsTechStacksVisible(false), 200)}
+          onFocus={() => {
+            setIsTechStacksVisible(true);
+            setGuideMessage("프로젝트에 사용한 기술스택을 선택해주세요.");
+          }}
+          onBlur={() => setTimeout(() => setIsTechStacksVisible(false), 100)}
           css={[
             signInUpinputStyle,
             `${signInUpInputStyleHover}; height: 40px; padding-left: 30px`,
@@ -57,22 +72,17 @@ const TechStackSpace: React.FC<AboutTechStackSpace> = ({
         />
         <div
           css={[
-            `position: absolute; top: 102%;
-              display: ${isTechStacksVisible ? `flex` : `none`};
-              flex-direction: column;
-              width: 92%; 
-              min-height:30px; height: fit-content; max-height: 200px; 
-              border: 1px solid gray; border-radius: 7px; 
-              background-color: white;
-              overflow-y: scroll;
-              z-index:1;`,
+            techStackExampleStyle,
+            css`
+              animation: ${isTechStacksVisible ? null : toHeight0} 0.3s forwards;
+            `,
           ]}
         >
           {searchedList.map((tech: string, index: number) => {
             return (
               <div
                 key={index}
-                onClick={() => {
+                onMouseDown={() => {
                   addTechStack(tech);
                   searchTechStackRef.current!.value = "";
                 }}
@@ -84,14 +94,7 @@ const TechStackSpace: React.FC<AboutTechStackSpace> = ({
           })}
         </div>
       </div>
-      <div
-        css={[
-          signInUpinputStyle,
-          `${signInUpInputStyleHover}; 
-            display:flex; align-items: center; gap: 3px;
-            height: 35px; padding-left: 3px; overflow-x: scroll;`,
-        ]}
-      >
+      <div css={[signInUpinputStyle, techStackContainerStyle]}>
         {techStackContainer.map((tech, index) => {
           return (
             <div

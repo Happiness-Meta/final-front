@@ -4,6 +4,7 @@ export const mainStyle = css`
   display: flex;
   flex-direction: column;
   justify-content: start;
+  align-items: center;
   width: 400px;
-  height: 650px;
+  height: 700px;
 `;

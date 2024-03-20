@@ -8,7 +8,6 @@ export const nextButtonStyle = `
   background-color: ${commonColor.representative};
   color: white;
   transition: 0.2s;
-  cursor: pointer;
   &:hover, &:focus {
     width: 170px;
     border-radius: 25px;
@@ -24,7 +23,6 @@ export const previousButtonStyle = `
   background-color: transparent;
   color: ${commonColor.representative};
   transition: 0.2s;
-  cursor: pointer;
   &:hover, &:focus {
     border-radius: 25px;
     font-size: 15px;
