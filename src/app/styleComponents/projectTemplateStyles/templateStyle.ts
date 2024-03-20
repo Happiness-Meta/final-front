@@ -137,7 +137,6 @@ export const inputStyles = {
     width: 79%;
     ${commonInputStyle}
     text-align: center;
-    font-weight: bold;
     &:focus {
       border-color: ${commonColor.representative};
       border-radius: 20px;

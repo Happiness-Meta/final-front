@@ -24,7 +24,7 @@ export const signInUpInputStyleHover = `
 `;
 
 export const signInUpButtonStyle = css`
-  width: 90%;
+  width: 100%;
   height: 50px;
   border: none;
   border-radius: 5px;
@@ -33,7 +33,7 @@ export const signInUpButtonStyle = css`
   font-size: 16px;
   transition: 0.2s;
   &:hover {
-    width: 92%;
+    width: 102%;
     font-weight: bold;
   }
 `;

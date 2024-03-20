@@ -2,7 +2,10 @@
 /** @jsxImportSource @emotion/react */
 
 import { handleSearchTechStacks } from "@/app/hooks/signUpPageHooks/useHandleSearchTechStacks";
-import { flexCenterX2 } from "@/app/styleComponents/commonStyles/commonStyles";
+import {
+  flexCenterX2,
+  widthHeightFull,
+} from "@/app/styleComponents/commonStyles/commonStyles";
 import Image from "next/image";
 import search from "@/app/assets/svg/search.svg";
 import { techStackList } from "@/app/constants/techStacks";
@@ -92,6 +95,20 @@ const TechStackSpace: React.FC<AboutTechStackSpace> = ({
               </div>
             );
           })}
+          {searchedList.length < 1 ? (
+            <p
+              css={[
+                css`
+                  display: flex;
+                  align-items: center;
+                  height: 30px;
+                  padding-left: 5px;
+                `,
+              ]}
+            >
+              해당 기술스택이 없습니다.
+            </p>
+          ) : null}
         </div>
       </div>
       <div css={[signInUpinputStyle, techStackContainerStyle]}>

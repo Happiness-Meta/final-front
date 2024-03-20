@@ -13,38 +13,43 @@ import { AboutSignUpInputs } from "@/app/types/aboutSignInUp";
 import { useState } from "react";
 
 const SignUpInputs: React.FC<AboutSignUpInputs> = ({
-  emailRef,
-  nicknameCompanyRef,
+  handlePutInfo,
   nicknameCompanyPlaceHolder,
   pwRef,
   pwVerRef,
 }) => {
   const [pwCheckMessage, setPwCheckMessage] = useState("");
   const [isPwVisible, setIsPwVisible] = useState(false);
+
   return (
     <>
       <input
         autoFocus
-        ref={emailRef}
-        type="text"
+        autoComplete="off"
+        onChange={(e) => handlePutInfo("email", e.target.value)}
+        type="email"
         placeholder="email"
-        css={[signInUpinputStyle, `${signInUpInputStyleHover}`]}
+        css={[signInUpinputStyle, signInUpInputStyleHover]}
       />
       <input
-        ref={nicknameCompanyRef}
+        autoComplete="off"
+        onChange={(e) => handlePutInfo("name", e.target.value)}
         type="text"
         placeholder={nicknameCompanyPlaceHolder}
-        css={[signInUpinputStyle, `${signInUpInputStyleHover}`]}
+        css={[signInUpinputStyle, signInUpInputStyleHover]}
       />
       <div css={[flexCenterX2, `position: relative; width: 100%`]}>
         <input
+          autoComplete="off"
           ref={pwRef}
-          onChange={() =>
-            handlePwVerCheck({ pwRef, pwVerRef, setPwCheckMessage })
-          }
+          name="pw"
+          onChange={(e) => {
+            handlePwVerCheck({ pwRef, pwVerRef, setPwCheckMessage });
+            handlePutInfo("password", e.target.value);
+          }}
           type={isPwVisible ? "text" : "password"}
           placeholder="password : 9자 이상"
-          css={[signInUpinputStyle, `${signInUpInputStyleHover}`]}
+          css={[signInUpinputStyle, signInUpInputStyleHover]}
         />
         <VisibilityEyes
           isPwVisible={isPwVisible}
@@ -52,13 +57,14 @@ const SignUpInputs: React.FC<AboutSignUpInputs> = ({
         />
       </div>
       <input
+        autoComplete="off"
         ref={pwVerRef}
         onChange={() =>
           handlePwVerCheck({ pwRef, pwVerRef, setPwCheckMessage })
         }
         type={isPwVisible ? "text" : "password"}
         placeholder="verify password"
-        css={[signInUpinputStyle, `${signInUpInputStyleHover}`]}
+        css={[signInUpinputStyle, signInUpInputStyleHover]}
       />
       <p
         css={[

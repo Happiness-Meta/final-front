@@ -1,10 +1,5 @@
+import { AboutProblem } from "@/app/types/portfolioDto";
 import { create } from "zustand";
-
-interface AboutProblem {
-  definition: string;
-  reason: string;
-  solution: string;
-}
 
 interface AboutProjectProblemStore {
   projProblems: AboutProblem[];

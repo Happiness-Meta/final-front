@@ -1,9 +1,5 @@
+import { AboutLink } from "@/app/types/portfolioDto";
 import { create } from "zustand";
-
-interface AboutLink {
-  description: string;
-  link: string;
-}
 
 interface AboutProjectLinkStore {
   links: AboutLink[];

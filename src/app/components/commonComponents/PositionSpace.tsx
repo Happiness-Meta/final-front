@@ -5,13 +5,15 @@ import { signInUpinputStyle } from "@/app/styleComponents/commonStyles/inputAndB
 import { AboutPositionSpace } from "@/app/types/aboutSignInUp";
 
 const PositionSpace: React.FC<AboutPositionSpace> = ({
-  positionRef,
+  handlePutInfo,
   positionList,
 }) => {
   return (
     <select
-      ref={positionRef}
-      name="희망 포지션"
+      onChange={(e) => {
+        handlePutInfo("position", e.target.value);
+      }}
+      name="position"
       css={[signInUpinputStyle, `height: 40px;`]}
     >
       {positionList.map((position, index) => (

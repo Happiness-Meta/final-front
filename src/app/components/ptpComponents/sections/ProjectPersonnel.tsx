@@ -13,7 +13,7 @@ import { css } from "@emotion/react";
 const ProjectPersonnel: React.FC<AboutProjectPersonnel> = ({
   personnelRef,
 }) => {
-  const { dynamicQuestionsContainer, addDynamicQuestions } = useProjectStore();
+  const { dynamicQuestionsContainer, setDynamicQuestions } = useProjectStore();
   const { setGuideMessage } = useProjectTemplateStore();
 
   return (
@@ -35,11 +35,13 @@ const ProjectPersonnel: React.FC<AboutProjectPersonnel> = ({
         <input
           ref={personnelRef}
           onFocus={() => setGuideMessage("프로젝트의 인원은 몇명이었나요?")}
-          onChange={(e) => addDynamicQuestions(e.target.value, 4)}
+          onChange={(e) =>
+            setDynamicQuestions("personnel", parseInt(e.target.value))
+          }
           id="personnel"
           type="number"
           min={1}
-          defaultValue={dynamicQuestionsContainer[4]}
+          value={dynamicQuestionsContainer.personnel}
           css={inputStyles.style3}
         />
         <p

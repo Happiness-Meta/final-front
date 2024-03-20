@@ -1,8 +1,7 @@
 import { RefObject } from "react";
 
 export interface AboutSignUpInputs {
-  emailRef: RefObject<HTMLInputElement>;
-  nicknameCompanyRef: RefObject<HTMLInputElement>;
+  handlePutInfo: (sort: string, value: string) => void;
   nicknameCompanyPlaceHolder: string;
   pwRef: RefObject<HTMLInputElement>;
   pwVerRef: RefObject<HTMLInputElement>;
@@ -31,6 +30,22 @@ export interface AboutHomePage {
 }
 
 export interface AboutPositionSpace {
-  positionRef: RefObject<HTMLSelectElement>;
+  handlePutInfo: (sort: string, value: string) => void;
   positionList: string[];
+}
+
+export interface AboutInfoForIndiSignUp {
+  email: string;
+  nickname: string;
+  password: string;
+  position: string;
+}
+
+export interface AboutInfoForCorpSignUp {
+  email: string;
+  name: string;
+  password: string;
+  address: string;
+  phoneNumber: string;
+  industry: string;
 }

@@ -11,7 +11,7 @@ import { personnelInputStyle } from "@/app/styleComponents/projectCreatingStyles
 const FourthQuestion = () => {
   const inputRef: RefObject<HTMLInputElement> = useRef(null);
 
-  const { dynamicQuestionsContainer, addDynamicQuestions, setOrder } =
+  const { dynamicQuestionsContainer, setDynamicQuestions, setOrder } =
     useProjectStore();
 
   return (
@@ -30,8 +30,10 @@ const FourthQuestion = () => {
         type="number"
         min={1}
         max={99}
-        defaultValue={dynamicQuestionsContainer[4]}
-        onChange={() => addDynamicQuestions(inputRef.current!.value, 4)}
+        value={dynamicQuestionsContainer.personnel}
+        onChange={() =>
+          setDynamicQuestions("personnel", inputRef.current!.value)
+        }
         css={[personnelInputStyle]}
       />
 

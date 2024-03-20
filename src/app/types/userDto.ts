@@ -10,6 +10,8 @@ export interface CorporateUserSignUpDTO {
   email: string;
   name: string;
   password: string;
+  address: string;
+  phoneNumber: string;
   industry: string;
 }
 

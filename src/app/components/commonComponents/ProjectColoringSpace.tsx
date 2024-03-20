@@ -8,7 +8,7 @@ import { AboutProjectColoringSpace } from "@/app/types/aboutCommonComponents";
 import { css } from "@emotion/react";
 
 const ProjectColoringSpace = () => {
-  const { addDynamicQuestions, clickedColor, setClickedColor } =
+  const { setDynamicQuestions, clickedColor, setClickedColor } =
     useProjectStore();
 
   return (
@@ -25,7 +25,7 @@ const ProjectColoringSpace = () => {
           <button
             key={index}
             onClick={() => {
-              addDynamicQuestions(color, 1);
+              setDynamicQuestions("color", color);
               setClickedColor(color);
             }}
             css={[

@@ -25,6 +25,14 @@ import ProjectLink from "@/app/components/ptpComponents/sections/ProjectLink";
 import ProjectTakeaway from "@/app/components/ptpComponents/sections/ProjectTakeaway";
 import ProjectTechStack from "@/app/components/ptpComponents/sections/ProjectTechStack";
 import useSignUpPageStore from "@/app/store/signUpPageStore/useSignUpPageStore";
+import useProjectStore from "@/app/store/commonStore/useProjectStore";
+import { useMutation } from "@tanstack/react-query";
+import { CreatePortfolioDTO } from "@/app/types/portfolioDto";
+import { useProjectFunctionStore } from "@/app/store/projectTemplateStore/useProjectFunctionStore";
+import { useProjectProblemStore } from "@/app/store/projectTemplateStore/useProjectProblemStore";
+import { useProjectLinkStore } from "@/app/store/projectTemplateStore/useProjectLinkStore";
+import { useCookies } from "react-cookie";
+import axios from "axios";
 
 const ProjectTemplate = () => {
   const nameRef: RefObject<HTMLInputElement> = useRef(null);
@@ -42,10 +50,16 @@ const ProjectTemplate = () => {
   const linkRef: RefObject<HTMLInputElement> = useRef(null);
 
   const { techStackContainer } = useSignUpPageStore();
+  const { dynamicQuestionsContainer } = useProjectStore();
+  const { projFuncs } = useProjectFunctionStore();
+  const { projProblems } = useProjectProblemStore();
+  const { links } = useProjectLinkStore();
+
+  const [cookies] = useCookies(["token"]);
 
   useEffect(() => {
-    if (nameRef.current?.value === "") {
-      return nameRef.current.focus();
+    if (dynamicQuestionsContainer.name === "") {
+      return nameRef.current?.focus();
     }
     if (startDateRef.current?.value === "") {
       return startDateRef.current.focus();
@@ -66,6 +80,34 @@ const ProjectTemplate = () => {
       return projectFuntionRef.current.focus();
     }
   }, []);
+
+  const handleCreateProject = useMutation({
+    mutationFn: async () => {
+      const body: CreatePortfolioDTO = {
+        visibility: false,
+        projectName: dynamicQuestionsContainer.name,
+        themeColor: dynamicQuestionsContainer.color,
+        projectStartDate: dynamicQuestionsContainer.startDate,
+        projectEndDate: dynamicQuestionsContainer.endDate,
+        description: dynamicQuestionsContainer.description,
+        personnel: dynamicQuestionsContainer.personnel,
+        techStack: techStackContainer,
+        projectFunction: projFuncs,
+        problemAndSolution: projProblems,
+        link: links,
+        takeaway: dynamicQuestionsContainer.takeaway,
+        token: cookies.token,
+      };
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/portfolio`,
+        body
+      );
+      console.log(response.data.data.code);
+    },
+    onError: (e) => {
+      console.error(e);
+    },
+  });
 
   return (
     <div css={[widthHeightFull, pageStyle]}>
@@ -91,7 +133,12 @@ const ProjectTemplate = () => {
         <ProjectTakeaway />
 
         <div css={[flexCenterX2, templateBottomStyle]}>
-          <button css={[createButtonStyle]}>생성</button>
+          <button
+            onClick={() => handleCreateProject.mutate()}
+            css={[createButtonStyle]}
+          >
+            생성
+          </button>
         </div>
       </section>
     </div>

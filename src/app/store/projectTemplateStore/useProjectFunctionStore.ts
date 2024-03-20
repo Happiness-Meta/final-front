@@ -1,9 +1,5 @@
+import { AboutFunction } from "@/app/types/portfolioDto";
 import { create } from "zustand";
-
-interface AboutFunction {
-  function: string;
-  contribution: number;
-}
 
 interface AboutProjectFunctionStore {
   projFuncs: AboutFunction[];
