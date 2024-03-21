@@ -19,7 +19,7 @@ const PaintBackground = () => {
         height: 100%;
         background: linear-gradient(
           45deg,
-          ${dynamicQuestionsContainer[1]},
+          ${dynamicQuestionsContainer.color},
           ${commonColor.representative}
         );
         animation: ${paintAni} 1s forwards;

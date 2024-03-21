@@ -1,9 +1,5 @@
+import { AboutFunction } from "@/app/types/portfolioDto";
 import { create } from "zustand";
-
-interface AboutFunction {
-  function: string;
-  contribution: number;
-}
 
 interface AboutProjectFunctionStore {
   projFuncs: AboutFunction[];
@@ -18,10 +14,10 @@ interface AboutProjectFunctionStore {
 
 export const useProjectFunctionStore = create<AboutProjectFunctionStore>(
   (set) => ({
-    projFuncs: [{ function: "", contribution: 100 }],
+    projFuncs: [{ description: "", contribution: 100 }],
     addFunc: () =>
       set((state) => ({
-        projFuncs: [...state.projFuncs, { function: "", contribution: 100 }],
+        projFuncs: [...state.projFuncs, { description: "", contribution: 100 }],
       })),
     deleteFunc: (index) =>
       set((state) => ({

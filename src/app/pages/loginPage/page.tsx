@@ -11,12 +11,12 @@ import SignUpBtnSection from "@/app/components/loginPageComponents/SignUpBtnSect
 import { signInUpMainStyle } from "@/app/styleComponents/commonStyles/inputAndButtonAndText";
 import HelloMessage from "@/app/components/loginPageComponents/HelloMessage";
 import useLoginPageStore from "@/app/store/loginPageStore/useLoginPageStore";
-// import { useCookies } from "react-cookie";
+import { useCookies } from "react-cookie";
 
 const LoginPage = () => {
   const { isLogined } = useLoginPageStore();
-  // const [cookies] = useCookies(["token"]);
-  // console.log(cookies);
+  const [cookies] = useCookies(["token"]);
+  console.log(cookies);
   return (
     <div css={[widthHeighVhFull, flexCenterX2]}>
       <main

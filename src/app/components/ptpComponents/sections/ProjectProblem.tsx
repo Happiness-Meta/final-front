@@ -87,6 +87,7 @@ const ProjectProblem: React.FC<AboutProjectProblem> = ({
               문제 상황
             </label>
             <input
+              autoComplete="off"
               autoFocus={projProblems.length > 1 ? true : false}
               ref={pDefinitionRef}
               onFocus={() => {

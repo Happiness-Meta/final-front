@@ -8,9 +8,7 @@ import { RefObject, useRef } from "react";
 import useProjectStore from "@/app/store/commonStore/useProjectStore";
 
 const FirstQuestion = () => {
-  const inputRef: RefObject<HTMLInputElement> = useRef(null);
-
-  const { dynamicQuestionsContainer, addDynamicQuestions, setOrder } =
+  const { dynamicQuestionsContainer, setDynamicQuestions, setOrder } =
     useProjectStore();
 
   return (
@@ -18,14 +16,13 @@ const FirstQuestion = () => {
       <h1 css={[questionStyle]}>프로젝트의 이름이 무엇입니까?</h1>
       <input
         autoFocus
-        onChange={() => addDynamicQuestions(inputRef.current!.value, 0)}
-        ref={inputRef}
+        onChange={(e) => setDynamicQuestions("name", e.target.value)}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             setOrder(1);
           }
         }}
-        defaultValue={dynamicQuestionsContainer[0]}
+        value={dynamicQuestionsContainer.name}
         css={[projectNnDInputStyle]}
       />
       <NextButton />

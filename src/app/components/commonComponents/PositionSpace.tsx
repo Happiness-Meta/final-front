@@ -1,17 +1,24 @@
 "use client";
+import { useProjectTemplateStore } from "@/app/store/projectTemplateStore/useProjectTemplateStore";
 /** @jsxImportSource @emotion/react */
 
 import { signInUpinputStyle } from "@/app/styleComponents/commonStyles/inputAndButtonAndText";
 import { AboutPositionSpace } from "@/app/types/aboutSignInUp";
 
 const PositionSpace: React.FC<AboutPositionSpace> = ({
-  positionRef,
+  handlePutInfo,
   positionList,
+  textForGuide,
 }) => {
+  const { setGuideMessage } = useProjectTemplateStore();
+
   return (
     <select
-      ref={positionRef}
-      name="희망 포지션"
+      onFocus={() => setGuideMessage(`${textForGuide} 선택해 주세요.`)}
+      onChange={(e) => {
+        handlePutInfo("position", e.target.value);
+      }}
+      name="position"
       css={[signInUpinputStyle, `height: 40px;`]}
     >
       {positionList.map((position, index) => (

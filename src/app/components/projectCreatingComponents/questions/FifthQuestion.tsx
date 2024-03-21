@@ -14,7 +14,7 @@ const FifthQuestion = () => {
 
   const inputRef: RefObject<HTMLInputElement> = useRef(null);
 
-  const { dynamicQuestionsContainer, addDynamicQuestions, setOrder } =
+  const { dynamicQuestionsContainer, setDynamicQuestions, setOrder } =
     useProjectStore();
 
   const handleBtnOnClick = () => {
@@ -39,8 +39,10 @@ const FifthQuestion = () => {
           }
         }}
         type="text"
-        defaultValue={dynamicQuestionsContainer[5]}
-        onChange={() => addDynamicQuestions(inputRef.current!.value, 5)}
+        value={dynamicQuestionsContainer.description}
+        onChange={() =>
+          setDynamicQuestions("description", inputRef.current!.value)
+        }
         css={[projectNnDInputStyle]}
       />
       <section css={[`display: flex; gap: 20px;`]}>

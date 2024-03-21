@@ -13,6 +13,8 @@ import CorporateMemberSection from "../../components/signUpPageComponents/Corpor
 import LinkToLogin from "../../components/signUpPageComponents/LinkToLogin";
 import WelcomeMessage from "@/app/components/signUpPageComponents/WelcomeMessage";
 import { mainStyle } from "@/app/styleComponents/signUpPageStyles/signUpPageStyles";
+import HeaderNo1 from "@/app/components/commonComponents/HeaderNo1";
+import { css } from "@emotion/react";
 
 const SignUpPage = () => {
   const { isIndividual, isSignedUp } = useSignUpPageStore();
@@ -21,7 +23,16 @@ const SignUpPage = () => {
     <div css={[flexCenterX2, widthHeighVhFull]}>
       <main css={mainStyle}>
         {isSignedUp ? <WelcomeMessage /> : undefined}
-        <ProjectTitle />
+        <div
+          css={css`
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+          `}
+        >
+          <HeaderNo1 />
+        </div>
         <SignUpPathBtnSection />
         {isIndividual ? (
           <IndividualMemberSection />

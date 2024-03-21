@@ -1,9 +1,5 @@
+import { AboutLink } from "@/app/types/portfolioDto";
 import { create } from "zustand";
-
-interface AboutLink {
-  description: string;
-  link: string;
-}
 
 interface AboutProjectLinkStore {
   links: AboutLink[];
@@ -13,10 +9,10 @@ interface AboutProjectLinkStore {
 }
 
 export const useProjectLinkStore = create<AboutProjectLinkStore>((set) => ({
-  links: [{ description: "", link: "" }],
+  links: [{ description: "", address: "" }],
   addLink: () =>
     set((state) => ({
-      links: [...state.links, { description: "", link: "" }],
+      links: [...state.links, { description: "", address: "" }],
     })),
   deleteLink: (order: number) =>
     set((state) => ({

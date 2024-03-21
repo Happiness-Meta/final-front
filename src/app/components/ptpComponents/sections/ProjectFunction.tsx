@@ -36,12 +36,12 @@ const ProjectFunction: React.FC<AboutProjectFunction> = ({
               autoFocus={projFuncs.length > 1 ? true : false}
               onFocus={() => setGuideMessage("구현 기능을 적어주세요.")}
               onChange={(e) => {
-                setFunc("function", e.target.value, index);
+                setFunc("description", e.target.value, index);
               }}
               id="myFunctions"
               type="text"
               css={inputStyles.style4}
-              value={_.function}
+              value={_.description}
             />
             <input
               ref={projFuncContRef}

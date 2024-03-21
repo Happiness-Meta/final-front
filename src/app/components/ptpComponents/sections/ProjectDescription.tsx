@@ -12,7 +12,7 @@ import { AboutProjectDescription } from "@/app/types/aboutProjectTemplate";
 const ProjectDescription: React.FC<AboutProjectDescription> = ({
   descriptionRef,
 }) => {
-  const { dynamicQuestionsContainer, addDynamicQuestions } = useProjectStore();
+  const { dynamicQuestionsContainer, setDynamicQuestions } = useProjectStore();
   const { setGuideMessage } = useProjectTemplateStore();
 
   return (
@@ -24,8 +24,11 @@ const ProjectDescription: React.FC<AboutProjectDescription> = ({
       <textarea
         ref={descriptionRef}
         onFocus={() => setGuideMessage("프로젝트에 대해 간단히 설명해 주세요.")}
-        onChange={(e) => addDynamicQuestions(e.target.value, 5)}
-        defaultValue={dynamicQuestionsContainer[5]}
+        onChange={(e) => {
+          setDynamicQuestions("description", e.target.value);
+          console.log(e.target.value);
+        }}
+        value={dynamicQuestionsContainer.description}
         id="description"
         rows={3}
         css={textareaStyle1}

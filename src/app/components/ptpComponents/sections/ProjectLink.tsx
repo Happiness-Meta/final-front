@@ -28,6 +28,7 @@ const ProjectLink: React.FC<AboutProjectLink> = ({ linkNameRef, linkRef }) => {
         return (
           <div key={index} css={inputContainerStyles.style2}>
             <input
+              autoComplete="off"
               ref={linkNameRef}
               onFocus={() => setGuideMessage("어떤 링크인지 적어주세요.")}
               onChange={(e) => setLink("description", e.target.value, index)}
@@ -36,10 +37,11 @@ const ProjectLink: React.FC<AboutProjectLink> = ({ linkNameRef, linkRef }) => {
               css={inputStyles.style6}
             />
             <input
+              autoComplete="off"
               ref={linkRef}
               onFocus={() => setGuideMessage("링크를 넣어주세요.")}
-              onChange={(e) => setLink("link", e.target.value, index)}
-              value={_.link}
+              onChange={(e) => setLink("address", e.target.value, index)}
+              value={_.address}
               id="link"
               type="text"
               css={inputStyles.style7}

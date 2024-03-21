@@ -12,7 +12,7 @@ const ThirdQuestion = () => {
   const startDateRef: RefObject<HTMLInputElement> = useRef(null);
   const endDateRef: RefObject<HTMLInputElement> = useRef(null);
 
-  const { dynamicQuestionsContainer, addDynamicQuestions, setOrder } =
+  const { dynamicQuestionsContainer, setDynamicQuestions, setOrder } =
     useProjectStore();
 
   return (
@@ -27,8 +27,10 @@ const ThirdQuestion = () => {
             ref={startDateRef}
             type="date"
             css={[periodInputStyle]}
-            defaultValue={dynamicQuestionsContainer[2]}
-            onChange={() => addDynamicQuestions(startDateRef.current!.value, 2)}
+            value={dynamicQuestionsContainer.startDate}
+            onChange={() =>
+              setDynamicQuestions("startDate", startDateRef.current!.value)
+            }
           />
         </div>
         <p css={[`text-align: center; font-size: 1.3em;`]}>~</p>
@@ -42,8 +44,10 @@ const ThirdQuestion = () => {
             }}
             type="date"
             css={[periodInputStyle]}
-            defaultValue={dynamicQuestionsContainer[3]}
-            onChange={() => addDynamicQuestions(endDateRef.current!.value, 3)}
+            value={dynamicQuestionsContainer.endDate}
+            onChange={() =>
+              setDynamicQuestions("endDate", endDateRef.current!.value)
+            }
           />
         </div>
       </section>

@@ -18,7 +18,7 @@ const SignUpErrorMessage: React.FC<AboutSignUpErrorMessage> = ({
   const { errorMessageAniStatus } = useSignUpPageStore();
 
   const errorMessageStyle = css`
-    width: 90%;
+    width: 100%;
     height: 17px;
     margin: 5px 0;
     color: red;

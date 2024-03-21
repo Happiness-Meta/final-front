@@ -49,9 +49,10 @@ const LoginSection = () => {
       };
 
       const response = await axios.post(
-        "http://processlogic.link/api/v1/auth/login",
+        `${process.env.NEXT_PUBLIC_BASE_URL}/auth/login`,
         body
       );
+      console.log(response.data.data.token);
       setCookie("email", response.data.data.email);
       setCookie("nickname", response.data.data.name);
       setCookie("token", response.data.data.token);
@@ -69,7 +70,7 @@ const LoginSection = () => {
         flexCenterX2,
         `
         flex-direction: column; 
-        width: 100%;
+        width: 90%;
         `,
       ]}
     >

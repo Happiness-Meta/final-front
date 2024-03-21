@@ -7,4 +7,5 @@ export const mainStyle = css`
   align-items: center;
   width: 400px;
   height: 700px;
+  margin-top: 20vh;
 `;

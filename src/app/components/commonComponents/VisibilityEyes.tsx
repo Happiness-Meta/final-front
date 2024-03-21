@@ -21,7 +21,7 @@ const VisibilityEyes: React.FC<AboutVisibilityEyes> = ({
         css`
           position: absolute;
           top: 50%;
-          right: 30px;
+          right: 10px;
           transform: translateY(-50%);
           padding: 5px;
           border-radius: 50%;

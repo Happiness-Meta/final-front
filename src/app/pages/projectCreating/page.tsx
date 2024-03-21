@@ -27,12 +27,12 @@ const ProjectCreating = () => {
         `transition: box-shadow .3s; 
         ${
           order !== 5
-            ? `box-shadow: inset 0px 0px 20px 50px ${dynamicQuestionsContainer[1]}`
+            ? `box-shadow: inset 0px 0px 20px 50px ${dynamicQuestionsContainer.color}`
             : undefined
         }`,
       ]}
     >
-      {dynamicQuestionsContainer[0] === "" ? <WelcomeMessage /> : undefined}
+      {dynamicQuestionsContainer.name === "" ? <WelcomeMessage /> : undefined}
       <main
         css={[
           flexCenterX2,

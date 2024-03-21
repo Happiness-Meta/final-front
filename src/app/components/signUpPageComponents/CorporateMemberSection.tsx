@@ -3,37 +3,59 @@
 
 import { flexCenterX2 } from "@/app/styleComponents/commonStyles/commonStyles";
 import { signInUpButtonStyle } from "@/app/styleComponents/commonStyles/inputAndButtonAndText";
-import { RefObject, useRef, useState } from "react";
-import SignUpInputs from "./componentsForBoth/SignUpInputs";
+import { RefObject, useEffect, useRef, useState } from "react";
+import SignUpInputs from "./componentsForIndiCorp/SignUpInputs";
 import { industryList } from "@/app/constants/industryOptions";
 import SignUpErrorMessage from "../commonComponents/SignInUpErrorMessage";
 import useSignUpPageStore from "@/app/store/signUpPageStore/useSignUpPageStore";
 import PositionSpace from "../commonComponents/PositionSpace";
 import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
+import { CorporateUserSignUpDTO } from "@/app/types/userDto";
+import AddressAndPhonNum from "./componentsForIndiCorp/AddressAndPhoneNum";
+import { AboutInfoForCorpSignUp } from "@/app/types/aboutSignInUp";
 
 const CorporateMemberSection = () => {
-  const emailRef: RefObject<HTMLInputElement> = useRef(null);
-  const companyNameRef: RefObject<HTMLInputElement> = useRef(null);
   const pwRef: RefObject<HTMLInputElement> = useRef(null);
   const pwVerRef: RefObject<HTMLInputElement> = useRef(null);
-  const industryRef: RefObject<HTMLSelectElement> = useRef(null);
 
   const [errorMessage, setErrorMessage] = useState("");
+  const [infoForSignUp, setInfoForSignUp] = useState<AboutInfoForCorpSignUp>({
+    email: "",
+    name: "",
+    password: "",
+    address: "",
+    phoneNumber: "",
+    position: "산업 분야",
+  });
+
+  const { email, name, password, address, phoneNumber, position } =
+    infoForSignUp;
+
+  const handlePutInfo = (sort: string, value: string) => {
+    setInfoForSignUp((prev) => ({
+      ...prev,
+      [sort]: value,
+    }));
+  };
 
   const { activateErrorMessageAni } = useSignUpPageStore();
 
   const handleCorporateSignUp = useMutation({
     mutationFn: async () => {
-      if (emailRef.current?.value === "") {
+      if (email === "") {
         activateErrorMessageAni();
         return setErrorMessage("아이디를 입력해 주세요.");
       }
-      if (companyNameRef.current?.value === "") {
+      if (!email.includes("@") || !email.includes(".")) {
+        activateErrorMessageAni();
+        return setErrorMessage("이메일 형식으로 입력해 주세요.");
+      }
+      if (name === "") {
         activateErrorMessageAni();
         return setErrorMessage("회사명을 입력해 주세요.");
       }
-      if (pwRef.current?.value === "") {
+      if (password === "") {
         activateErrorMessageAni();
         return setErrorMessage("비밀번호를 입력해주세요");
       }
@@ -41,18 +63,20 @@ const CorporateMemberSection = () => {
         activateErrorMessageAni();
         return setErrorMessage("위에서 비밀번호를 일치시켜주세요");
       }
-      if (industryRef.current?.value === "산업 분야") {
+      if (position === "산업 분야") {
         activateErrorMessageAni();
         return setErrorMessage("산업분야을 선택해주세요");
       }
-      const body = {
-        email: emailRef.current?.value,
-        companyName: companyNameRef.current?.value,
-        password: pwRef.current?.value,
-        industryList: industryRef.current?.value,
+      const body: CorporateUserSignUpDTO = {
+        email: email,
+        name: name,
+        password: password,
+        address: address,
+        phoneNumber: phoneNumber,
+        industry: position,
       };
       const response = await axios.post(
-        "http://processlogic.link/api/v1/auth/basic/register",
+        `${process.env.NEXT_PUBLIC_BASE_URL}/auth/company/register`,
         body
       );
       console.log(response);
@@ -63,17 +87,26 @@ const CorporateMemberSection = () => {
   });
 
   const companyPlaceHolder = "company name";
+  const guideForCompany = "회사명";
+  const guideForIndustry = "산업 분야를";
 
   return (
-    <section css={[flexCenterX2, `flex-direction: column; row-gap: 5px `]}>
+    <section
+      css={[flexCenterX2, `flex-direction: column; row-gap: 5px; width: 90%`]}
+    >
       <SignUpInputs
-        emailRef={emailRef}
-        nicknameCompanyRef={companyNameRef}
+        handlePutInfo={handlePutInfo}
         nicknameCompanyPlaceHolder={companyPlaceHolder}
+        textForGuide={guideForCompany}
         pwRef={pwRef}
         pwVerRef={pwVerRef}
       />
-      <PositionSpace positionRef={industryRef} positionList={industryList} />
+      <AddressAndPhonNum handlePutInfo={handlePutInfo} />
+      <PositionSpace
+        handlePutInfo={handlePutInfo}
+        positionList={industryList}
+        textForGuide={guideForIndustry}
+      />
       <SignUpErrorMessage errorMessage={errorMessage} />
       <button
         css={signInUpButtonStyle}
