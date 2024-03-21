@@ -12,11 +12,13 @@ import {
 import { css } from "@emotion/react";
 import Link from "next/link";
 import { useEffect } from "react";
+import { useCookies } from "react-cookie";
 
 const HeaderNo1 = () => {
+  const [cookies] = useCookies(["token"]);
+
   const { guideMessage, guideMessageAni, setGuideMessageAni } =
     useProjectTemplateStore();
-
   const { resetTechStack } = useSignUpPageStore();
 
   useEffect(() => {
@@ -54,9 +56,11 @@ const HeaderNo1 = () => {
         </p>
       </section>
       <section css={[sectionStyle, `justify-content: end;`]}>
-        <button onClick={() => resetTechStack()} css={[workspaceBtnStyle]}>
-          workspace
-        </button>
+        {cookies.token ? (
+          <button onClick={() => resetTechStack()} css={[workspaceBtnStyle]}>
+            workspace
+          </button>
+        ) : null}
       </section>
     </header>
   );
