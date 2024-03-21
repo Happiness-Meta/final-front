@@ -65,7 +65,7 @@ const TechStackSpace: React.FC<AboutTechStackSpace> = ({
           }
           onFocus={() => {
             setIsTechStacksVisible(true);
-            setGuideMessage("프로젝트에 사용한 기술스택을 선택해주세요.");
+            setGuideMessage("기술스택을 선택해주세요.");
           }}
           onBlur={() => setTimeout(() => setIsTechStacksVisible(false), 100)}
           css={[

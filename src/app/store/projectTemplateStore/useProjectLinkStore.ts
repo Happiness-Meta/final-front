@@ -9,10 +9,10 @@ interface AboutProjectLinkStore {
 }
 
 export const useProjectLinkStore = create<AboutProjectLinkStore>((set) => ({
-  links: [{ description: "", link: "" }],
+  links: [{ description: "", address: "" }],
   addLink: () =>
     set((state) => ({
-      links: [...state.links, { description: "", link: "" }],
+      links: [...state.links, { description: "", address: "" }],
     })),
   deleteLink: (order: number) =>
     set((state) => ({

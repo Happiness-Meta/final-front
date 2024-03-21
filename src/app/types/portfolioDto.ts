@@ -1,5 +1,5 @@
 export interface AboutFunction {
-  function: string;
+  description: string;
   contribution: number;
 }
 
@@ -11,11 +11,11 @@ export interface AboutProblem {
 
 export interface AboutLink {
   description: string;
-  link: string;
+  address: string;
 }
 
 export interface CreatePortfolioDTO {
-  visibility: boolean; // 공개 여부 -> private
+  isContained: boolean; // 공개 여부 -> private
   themeColor: string; // 메인 컬러 -> #FFFFFF
   projectName: string; // 프로젝트 명 -> not null
   description: string; // 프로젝트 설명 -> not null
@@ -27,7 +27,7 @@ export interface CreatePortfolioDTO {
   problemAndSolution: AboutProblem[]; //nullable
   link: AboutLink[]; //nullable
   takeaway: string; // 프로젝트에서 배운 점 -> nullable
-  token: string;
+  // token: string;
 }
 
 export interface ReadPortfolioDTO {

@@ -3,7 +3,7 @@
 
 import { flexCenterX2 } from "@/app/styleComponents/commonStyles/commonStyles";
 import { signInUpButtonStyle } from "@/app/styleComponents/commonStyles/inputAndButtonAndText";
-import { ChangeEvent, RefObject, useEffect, useRef, useState } from "react";
+import { RefObject, useRef, useState } from "react";
 import SignUpInputs from "./componentsForIndiCorp/SignUpInputs";
 import TechStackSpace from "../commonComponents/TechStackSpace";
 import { preferedPositionList } from "@/app/constants/industryOptions";
@@ -29,7 +29,7 @@ const IndividualMembetSection = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [infoForSignUp, setInfoForSignUp] = useState<AboutInfoForIndiSignUp>({
     email: "",
-    nickname: "",
+    name: "",
     password: "",
     position: "희망포지션",
   });
@@ -37,7 +37,7 @@ const IndividualMembetSection = () => {
   const { techStackContainer, activateErrorMessageAni, setIsSignedUp } =
     useSignUpPageStore();
 
-  const { email, nickname, password, position } = infoForSignUp;
+  const { email, name, password, position } = infoForSignUp;
 
   const handlePutInfo = (sort: string, value: string) => {
     setInfoForSignUp((prev) => ({
@@ -52,11 +52,11 @@ const IndividualMembetSection = () => {
         activateErrorMessageAni();
         return setErrorMessage("이메일을 입력해 주세요.");
       }
-      if (!email.includes("@")) {
+      if (!email.includes("@") || !email.includes(".")) {
         activateErrorMessageAni();
         return setErrorMessage("이메일 형식으로 입력해 주세요.");
       }
-      if (nickname === "") {
+      if (name === "") {
         activateErrorMessageAni();
         return setErrorMessage("닉네임을 입력해 주세요.");
       }
@@ -78,7 +78,7 @@ const IndividualMembetSection = () => {
       }
       const body: IndividualUserSignUpDTO = {
         email: email, // =>email, 이라고 쓰면 email = email이라고 인식함
-        nickname: nickname,
+        nickname: name,
         password: password,
         preferedPosition: position,
         techStack: techStackContainer,
@@ -105,6 +105,8 @@ const IndividualMembetSection = () => {
   });
 
   const nicknamePlaceHolder = "nickname";
+  const guideForNickname = "사용하실 닉네임";
+  const guideForPosition = "희망하시는 포지션을";
 
   return (
     <section
@@ -116,12 +118,14 @@ const IndividualMembetSection = () => {
       <SignUpInputs
         handlePutInfo={handlePutInfo}
         nicknameCompanyPlaceHolder={nicknamePlaceHolder}
+        textForGuide={guideForNickname}
         pwRef={pwRef}
         pwVerRef={pwVerRef}
       />
       <PositionSpace
         handlePutInfo={handlePutInfo}
         positionList={preferedPositionList}
+        textForGuide={guideForPosition}
       />
       <TechStackSpace searchTechStackRef={searchTechStackRef} />
       <SignUpErrorMessage errorMessage={errorMessage} />

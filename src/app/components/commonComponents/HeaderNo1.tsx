@@ -13,7 +13,7 @@ import { css } from "@emotion/react";
 import Link from "next/link";
 import { useEffect } from "react";
 
-const Header = () => {
+const HeaderNo1 = () => {
   const { guideMessage, guideMessageAni, setGuideMessageAni } =
     useProjectTemplateStore();
 
@@ -62,4 +62,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default HeaderNo1;

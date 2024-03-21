@@ -52,6 +52,7 @@ const LoginSection = () => {
         `${process.env.NEXT_PUBLIC_BASE_URL}/auth/login`,
         body
       );
+      console.log(response.data.data.token);
       setCookie("email", response.data.data.email);
       setCookie("nickname", response.data.data.name);
       setCookie("token", response.data.data.token);

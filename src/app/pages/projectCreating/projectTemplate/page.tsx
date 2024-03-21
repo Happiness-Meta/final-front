@@ -12,7 +12,6 @@ import {
   templateBottomStyle,
 } from "@/app/styleComponents/projectTemplateStyles/templateStyle";
 import PaintBackground from "@/app/components/ptpComponents/PaintBackground";
-import Header from "@/app/components/ptpComponents/Header";
 import ProjectColoringSpace from "@/app/components/commonComponents/ProjectColoringSpace";
 import { RefObject, useEffect, useRef } from "react";
 import ProjectName from "@/app/components/ptpComponents/sections/ProjectName";
@@ -31,8 +30,9 @@ import { CreatePortfolioDTO } from "@/app/types/portfolioDto";
 import { useProjectFunctionStore } from "@/app/store/projectTemplateStore/useProjectFunctionStore";
 import { useProjectProblemStore } from "@/app/store/projectTemplateStore/useProjectProblemStore";
 import { useProjectLinkStore } from "@/app/store/projectTemplateStore/useProjectLinkStore";
-import { useCookies } from "react-cookie";
 import axios from "axios";
+import userAxiosWithAuth from "@/app/utils/useAxiosWithAuth";
+import HeaderNo1 from "@/app/components/commonComponents/HeaderNo1";
 
 const ProjectTemplate = () => {
   const nameRef: RefObject<HTMLInputElement> = useRef(null);
@@ -54,8 +54,6 @@ const ProjectTemplate = () => {
   const { projFuncs } = useProjectFunctionStore();
   const { projProblems } = useProjectProblemStore();
   const { links } = useProjectLinkStore();
-
-  const [cookies] = useCookies(["token"]);
 
   useEffect(() => {
     if (dynamicQuestionsContainer.name === "") {
@@ -79,14 +77,29 @@ const ProjectTemplate = () => {
     if (projectFuntionRef.current?.value === "") {
       return projectFuntionRef.current.focus();
     }
+    if (pDefinitionRef.current?.value === "") {
+      return pDefinitionRef.current.focus();
+    }
+    if (pReasonRef.current?.value === "") {
+      return pReasonRef.current.focus();
+    }
+    if (pSolutionRef.current?.value === "") {
+      return pSolutionRef.current.focus();
+    }
+    if (linkNameRef.current?.value === "") {
+      return linkNameRef.current.focus();
+    }
+    if (linkRef.current?.value === "") {
+      return linkRef.current.focus();
+    }
   }, []);
 
   const handleCreateProject = useMutation({
     mutationFn: async () => {
       const body: CreatePortfolioDTO = {
-        visibility: false,
-        projectName: dynamicQuestionsContainer.name,
+        isContained: false,
         themeColor: dynamicQuestionsContainer.color,
+        projectName: dynamicQuestionsContainer.name,
         projectStartDate: dynamicQuestionsContainer.startDate,
         projectEndDate: dynamicQuestionsContainer.endDate,
         description: dynamicQuestionsContainer.description,
@@ -96,12 +109,12 @@ const ProjectTemplate = () => {
         problemAndSolution: projProblems,
         link: links,
         takeaway: dynamicQuestionsContainer.takeaway,
-        token: cookies.token,
       };
-      const response = await axios.post(
+      const response = await userAxiosWithAuth.post(
         `${process.env.NEXT_PUBLIC_BASE_URL}/portfolio`,
         body
       );
+
       console.log(response.data.data.code);
     },
     onError: (e) => {
@@ -111,7 +124,7 @@ const ProjectTemplate = () => {
 
   return (
     <div css={[widthHeightFull, pageStyle]}>
-      <Header />
+      <HeaderNo1 />
       <PaintBackground />
       <section css={sectionStyle}>
         <ProjectColoringSpace />

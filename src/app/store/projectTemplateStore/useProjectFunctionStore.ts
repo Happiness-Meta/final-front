@@ -14,10 +14,10 @@ interface AboutProjectFunctionStore {
 
 export const useProjectFunctionStore = create<AboutProjectFunctionStore>(
   (set) => ({
-    projFuncs: [{ function: "", contribution: 100 }],
+    projFuncs: [{ description: "", contribution: 100 }],
     addFunc: () =>
       set((state) => ({
-        projFuncs: [...state.projFuncs, { function: "", contribution: 100 }],
+        projFuncs: [...state.projFuncs, { description: "", contribution: 100 }],
       })),
     deleteFunc: (index) =>
       set((state) => ({

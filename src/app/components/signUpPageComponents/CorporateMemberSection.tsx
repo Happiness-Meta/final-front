@@ -26,10 +26,10 @@ const CorporateMemberSection = () => {
     password: "",
     address: "",
     phoneNumber: "",
-    industry: "산업 분야",
+    position: "산업 분야",
   });
 
-  const { email, name, password, address, phoneNumber, industry } =
+  const { email, name, password, address, phoneNumber, position } =
     infoForSignUp;
 
   const handlePutInfo = (sort: string, value: string) => {
@@ -47,6 +47,10 @@ const CorporateMemberSection = () => {
         activateErrorMessageAni();
         return setErrorMessage("아이디를 입력해 주세요.");
       }
+      if (!email.includes("@") || !email.includes(".")) {
+        activateErrorMessageAni();
+        return setErrorMessage("이메일 형식으로 입력해 주세요.");
+      }
       if (name === "") {
         activateErrorMessageAni();
         return setErrorMessage("회사명을 입력해 주세요.");
@@ -59,7 +63,7 @@ const CorporateMemberSection = () => {
         activateErrorMessageAni();
         return setErrorMessage("위에서 비밀번호를 일치시켜주세요");
       }
-      if (industry === "산업 분야") {
+      if (position === "산업 분야") {
         activateErrorMessageAni();
         return setErrorMessage("산업분야을 선택해주세요");
       }
@@ -69,7 +73,7 @@ const CorporateMemberSection = () => {
         password: password,
         address: address,
         phoneNumber: phoneNumber,
-        industry: industry,
+        industry: position,
       };
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BASE_URL}/auth/company/register`,
@@ -83,6 +87,8 @@ const CorporateMemberSection = () => {
   });
 
   const companyPlaceHolder = "company name";
+  const guideForCompany = "회사명";
+  const guideForIndustry = "산업 분야를";
 
   return (
     <section
@@ -91,6 +97,7 @@ const CorporateMemberSection = () => {
       <SignUpInputs
         handlePutInfo={handlePutInfo}
         nicknameCompanyPlaceHolder={companyPlaceHolder}
+        textForGuide={guideForCompany}
         pwRef={pwRef}
         pwVerRef={pwVerRef}
       />
@@ -98,6 +105,7 @@ const CorporateMemberSection = () => {
       <PositionSpace
         handlePutInfo={handlePutInfo}
         positionList={industryList}
+        textForGuide={guideForIndustry}
       />
       <SignUpErrorMessage errorMessage={errorMessage} />
       <button

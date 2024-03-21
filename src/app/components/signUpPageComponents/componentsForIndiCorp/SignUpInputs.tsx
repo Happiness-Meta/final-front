@@ -11,21 +11,26 @@ import VisibilityEyes from "../../commonComponents/VisibilityEyes";
 import { handlePwVerCheck } from "@/app/hooks/signUpPageHooks/useHandlePwVerCheck";
 import { AboutSignUpInputs } from "@/app/types/aboutSignInUp";
 import { useState } from "react";
+import { useProjectTemplateStore } from "@/app/store/projectTemplateStore/useProjectTemplateStore";
 
 const SignUpInputs: React.FC<AboutSignUpInputs> = ({
   handlePutInfo,
   nicknameCompanyPlaceHolder,
+  textForGuide,
   pwRef,
   pwVerRef,
 }) => {
   const [pwCheckMessage, setPwCheckMessage] = useState("");
   const [isPwVisible, setIsPwVisible] = useState(false);
 
+  const { setGuideMessage } = useProjectTemplateStore();
+
   return (
     <>
       <input
         autoFocus
         autoComplete="off"
+        onFocus={() => setGuideMessage("사용하실 이메일을 입력해 주세요.")}
         onChange={(e) => handlePutInfo("email", e.target.value)}
         type="email"
         placeholder="email"
@@ -33,6 +38,7 @@ const SignUpInputs: React.FC<AboutSignUpInputs> = ({
       />
       <input
         autoComplete="off"
+        onFocus={() => setGuideMessage(`${textForGuide}을 입력해 주세요.`)}
         onChange={(e) => handlePutInfo("name", e.target.value)}
         type="text"
         placeholder={nicknameCompanyPlaceHolder}
@@ -43,12 +49,13 @@ const SignUpInputs: React.FC<AboutSignUpInputs> = ({
           autoComplete="off"
           ref={pwRef}
           name="pw"
+          onFocus={() => setGuideMessage("사용하실 비밀번호를 입력해 주세요.")}
           onChange={(e) => {
             handlePwVerCheck({ pwRef, pwVerRef, setPwCheckMessage });
             handlePutInfo("password", e.target.value);
           }}
           type={isPwVisible ? "text" : "password"}
-          placeholder="password : 9자 이상"
+          placeholder="password : 9자리 이상"
           css={[signInUpinputStyle, signInUpInputStyleHover]}
         />
         <VisibilityEyes
@@ -59,6 +66,7 @@ const SignUpInputs: React.FC<AboutSignUpInputs> = ({
       <input
         autoComplete="off"
         ref={pwVerRef}
+        onFocus={() => setGuideMessage("비밀번호을 한번 더 입력해 주세요.")}
         onChange={() =>
           handlePwVerCheck({ pwRef, pwVerRef, setPwCheckMessage })
         }

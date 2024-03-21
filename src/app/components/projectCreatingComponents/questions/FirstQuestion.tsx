@@ -22,6 +22,7 @@ const FirstQuestion = () => {
             setOrder(1);
           }
         }}
+        value={dynamicQuestionsContainer.name}
         css={[projectNnDInputStyle]}
       />
       <NextButton />

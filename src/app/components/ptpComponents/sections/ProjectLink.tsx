@@ -40,8 +40,8 @@ const ProjectLink: React.FC<AboutProjectLink> = ({ linkNameRef, linkRef }) => {
               autoComplete="off"
               ref={linkRef}
               onFocus={() => setGuideMessage("링크를 넣어주세요.")}
-              onChange={(e) => setLink("link", e.target.value, index)}
-              value={_.link}
+              onChange={(e) => setLink("address", e.target.value, index)}
+              value={_.address}
               id="link"
               type="text"
               css={inputStyles.style7}
