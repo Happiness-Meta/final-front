@@ -1,7 +1,7 @@
 import { RefObject } from "react";
 
 export interface AboutSignUpInputs {
-  handlePutInfo: (sort: string, value: string) => void;
+  handlePutInfo: (sort: keyof AboutInfoForCorpSignUp, value: string) => void;
   nicknameCompanyPlaceHolder: string;
   textForGuide: string;
   pwRef: RefObject<HTMLInputElement>;
@@ -31,7 +31,7 @@ export interface AboutHomePage {
 }
 
 export interface AboutPositionSpace {
-  handlePutInfo: (sort: string, value: string) => void;
+  handlePutInfo: (sort: keyof AboutInfoForCorpSignUp, value: string) => void;
   positionList: string[];
   textForGuide: string;
 }
@@ -48,6 +48,6 @@ export interface AboutInfoForCorpSignUp {
   name: string;
   password: string;
   address: string;
-  phoneNumber: string;
+  telephone: string;
   position: string;
 }

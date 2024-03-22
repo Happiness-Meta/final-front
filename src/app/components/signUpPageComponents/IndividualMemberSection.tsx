@@ -99,8 +99,9 @@ const IndividualMembetSection = () => {
         router.push("/");
       }, 2500);
     },
-    onError: (e) => {
-      console.log(e);
+    onError: (error: any) => {
+      setErrorMessage(error.response?.data.message);
+      activateErrorMessageAni();
     },
   });
 

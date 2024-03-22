@@ -26,20 +26,19 @@ const ProjectCreating = () => {
         widthHeightFull,
         `transition: box-shadow .3s; 
         ${
-          order !== 5
-            ? `box-shadow: inset 0px 0px 20px 50px ${dynamicQuestionsContainer.color}`
-            : undefined
+          order !== 5 &&
+          `box-shadow: inset 0px 0px 20px 50px ${dynamicQuestionsContainer.color}`
         }`,
       ]}
     >
-      {dynamicQuestionsContainer.name === "" ? <WelcomeMessage /> : undefined}
+      {dynamicQuestionsContainer.name === "" && <WelcomeMessage />}
       <main
         css={[
           flexCenterX2,
           `flex-direction: column; width: 100%; height: 100vh; row-gap: 20px;`,
         ]}
       >
-        {order !== 5 ? <StepViewer /> : undefined}
+        {order !== 5 && <StepViewer />}
         {order === 0 ? (
           <FirstQuestion />
         ) : order === 1 ? (
@@ -54,14 +53,14 @@ const ProjectCreating = () => {
           <ContinueMessage />
         )}
 
-        {order !== 4 && 5 ? (
+        {order !== 4 && 5 && (
           <Link
             href={"./projectCreating/projectTemplate"}
             css={[templateLinkStyle]}
           >
             프로젝트 템플릿으로 바로 넘어가기
           </Link>
-        ) : null}
+        )}
       </main>
       <Footer />
     </div>

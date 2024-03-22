@@ -3,7 +3,7 @@
 
 import { flexCenterX2 } from "@/app/styleComponents/commonStyles/commonStyles";
 import { signInUpButtonStyle } from "@/app/styleComponents/commonStyles/inputAndButtonAndText";
-import { RefObject, useEffect, useRef, useState } from "react";
+import { RefObject, useRef, useState } from "react";
 import SignUpInputs from "./componentsForIndiCorp/SignUpInputs";
 import { industryList } from "@/app/constants/industryOptions";
 import SignUpErrorMessage from "../commonComponents/SignInUpErrorMessage";
@@ -14,8 +14,12 @@ import { useMutation } from "@tanstack/react-query";
 import { CorporateUserSignUpDTO } from "@/app/types/userDto";
 import AddressAndPhonNum from "./componentsForIndiCorp/AddressAndPhoneNum";
 import { AboutInfoForCorpSignUp } from "@/app/types/aboutSignInUp";
+import { useCookies } from "react-cookie";
+import { useRouter } from "next/navigation";
 
 const CorporateMemberSection = () => {
+  const router = useRouter();
+
   const pwRef: RefObject<HTMLInputElement> = useRef(null);
   const pwVerRef: RefObject<HTMLInputElement> = useRef(null);
 
@@ -25,21 +29,22 @@ const CorporateMemberSection = () => {
     name: "",
     password: "",
     address: "",
-    phoneNumber: "",
+    telephone: "",
     position: "산업 분야",
   });
 
-  const { email, name, password, address, phoneNumber, position } =
-    infoForSignUp;
+  const { email, name, password, address, telephone, position } = infoForSignUp;
 
-  const handlePutInfo = (sort: string, value: string) => {
+  const [, setCookie] = useCookies(["email", "nickname", "token"]);
+
+  const handlePutInfo = (sort: keyof AboutInfoForCorpSignUp, value: string) => {
     setInfoForSignUp((prev) => ({
       ...prev,
       [sort]: value,
     }));
   };
 
-  const { activateErrorMessageAni } = useSignUpPageStore();
+  const { activateErrorMessageAni, setIsSignedUp } = useSignUpPageStore();
 
   const handleCorporateSignUp = useMutation({
     mutationFn: async () => {
@@ -72,17 +77,30 @@ const CorporateMemberSection = () => {
         name: name,
         password: password,
         address: address,
-        phoneNumber: phoneNumber,
+        telephone: telephone,
         industry: position,
       };
+      console.log(body);
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BASE_URL}/auth/company/register`,
         body
       );
       console.log(response);
+      const response2 = await axios.post(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/auth/login`,
+        body
+      );
+      setCookie("email", response2.data.data.email);
+      setCookie("nickname", response2.data.data.name);
+      setCookie("token", response2.data.data.token);
+      setIsSignedUp(true);
+      setTimeout(() => {
+        router.push("/");
+      }, 2500);
     },
-    onError: () => {
-      console.log("onError");
+    onError: (error: any) => {
+      setErrorMessage(error.response?.data.message);
+      activateErrorMessageAni();
     },
   });
 

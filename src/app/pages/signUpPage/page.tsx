@@ -22,7 +22,7 @@ const SignUpPage = () => {
   return (
     <div css={[flexCenterX2, widthHeighVhFull]}>
       <main css={mainStyle}>
-        {isSignedUp ? <WelcomeMessage /> : undefined}
+        {isSignedUp && <WelcomeMessage />}
         <div
           css={css`
             position: fixed;

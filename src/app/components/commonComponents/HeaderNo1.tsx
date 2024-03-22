@@ -56,11 +56,11 @@ const HeaderNo1 = () => {
         </p>
       </section>
       <section css={[sectionStyle, `justify-content: end;`]}>
-        {cookies.token ? (
+        {cookies.token && (
           <button onClick={() => resetTechStack()} css={[workspaceBtnStyle]}>
             workspace
           </button>
-        ) : null}
+        )}
       </section>
     </header>
   );

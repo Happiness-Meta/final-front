@@ -58,7 +58,7 @@ const ProjectFunction: React.FC<AboutProjectFunction> = ({
               css={inputStyles.style5}
               value={_.contribution}
             />
-            {projFuncs.length > 1 ? (
+            {projFuncs.length > 1 && (
               <button
                 css={[deleteButtonStyles.deleteButtonStyle1]}
                 onClick={() => {
@@ -67,7 +67,7 @@ const ProjectFunction: React.FC<AboutProjectFunction> = ({
               >
                 <Image src={Delete} alt="delete" width={20} height={20} />
               </button>
-            ) : undefined}
+            )}
           </div>
         );
       })}

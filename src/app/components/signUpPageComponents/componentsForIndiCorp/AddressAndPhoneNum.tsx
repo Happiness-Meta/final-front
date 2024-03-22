@@ -6,9 +6,10 @@ import {
   signInUpInputStyleHover,
   signInUpinputStyle,
 } from "@/app/styleComponents/commonStyles/inputAndButtonAndText";
+import { AboutInfoForCorpSignUp } from "@/app/types/aboutSignInUp";
 
 interface AboutAddressAndPhoneNum {
-  handlePutInfo: (sort: string, value: string) => void;
+  handlePutInfo: (sort: keyof AboutInfoForCorpSignUp, value: string) => void;
 }
 
 const AddressAndPhoneNum: React.FC<AboutAddressAndPhoneNum> = ({
@@ -29,9 +30,9 @@ const AddressAndPhoneNum: React.FC<AboutAddressAndPhoneNum> = ({
       <input
         autoComplete="off"
         onFocus={() => setGuideMessage("대표번호를 입력해 주세요.")}
-        onChange={(e) => handlePutInfo("phoneNumber", e.target.value)}
+        onChange={(e) => handlePutInfo("telephone", e.target.value)}
         type="number"
-        placeholder="phone number"
+        placeholder="TEL : 000-0000-0000"
         css={[signInUpinputStyle, signInUpInputStyleHover]}
       />
     </>
