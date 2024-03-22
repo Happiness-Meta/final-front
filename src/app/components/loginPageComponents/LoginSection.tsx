@@ -4,11 +4,7 @@
 import VisibilityEyes from "@/app/components/commonComponents/VisibilityEyes";
 import useSignUpPageStore from "@/app/store/signUpPageStore/useSignUpPageStore";
 import { flexCenterX2 } from "@/app/styleComponents/commonStyles/commonStyles";
-import {
-  signInUpButtonStyle,
-  signInUpInputStyleHover,
-  signInUpinputStyle,
-} from "@/app/styleComponents/commonStyles/inputAndButtonAndText";
+import { signInUpButtonStyle } from "@/app/styleComponents/commonStyles/inputAndButtonAndText";
 import React, { RefObject, useRef, useState } from "react";
 import SignUpErrorMessage from "../commonComponents/SignInUpErrorMessage";
 import { useMutation } from "@tanstack/react-query";
@@ -16,6 +12,8 @@ import axios from "axios";
 import { useCookies } from "react-cookie";
 import useLoginPageStore from "@/app/store/loginPageStore/useLoginPageStore";
 import { useRouter } from "next/navigation";
+import { inputStyles } from "@/app/styleComponents/loginPageStyles/loginPageStyles";
+import { css } from "@emotion/react";
 
 const LoginSection = () => {
   const router = useRouter();
@@ -52,7 +50,6 @@ const LoginSection = () => {
         `${process.env.NEXT_PUBLIC_BASE_URL}/auth/login`,
         body
       );
-      console.log(response.data.data.token);
       setCookie("email", response.data.data.email);
       setCookie("nickname", response.data.data.name);
       setCookie("token", response.data.data.token);
@@ -61,16 +58,19 @@ const LoginSection = () => {
         router.push("/");
       }, 2500);
     },
-    onError: () => console.log("you have failed to login"),
+    onError: (error: any) => {
+      setErrorMessage(error.response?.data.message);
+      activateErrorMessageAni();
+    },
   });
 
   return (
     <section
       css={[
         flexCenterX2,
-        `
-        flex-direction: column; 
-        width: 90%;
+        css`
+          flex-direction: column;
+          width: 90%;
         `,
       ]}
     >
@@ -79,16 +79,7 @@ const LoginSection = () => {
         ref={emailRef}
         type="text"
         placeholder="email"
-        css={[
-          signInUpinputStyle,
-          `border-bottom-width: 0; 
-          border-bottom-left-radius: 0; 
-          border-bottom-right-radius: 0;
-          &:focus{
-            border-bottom-width: 1px;
-          }
-          ${signInUpInputStyleHover};`,
-        ]}
+        css={[inputStyles.inputStyle1]}
       />
       <div css={[flexCenterX2, `position: relative; width: 100%`]}>
         <input
@@ -100,16 +91,7 @@ const LoginSection = () => {
           }}
           type={isPwVisible ? "text" : "password"}
           placeholder="password"
-          css={[
-            signInUpinputStyle,
-            ` border-top-width: 0; 
-            border-top-left-radius: 0; 
-            border-top-right-radius: 0;
-            &:focus{
-              border-top-width: 1px;
-            }
-            ${signInUpInputStyleHover};`,
-          ]}
+          css={[inputStyles.inputStyle2]}
         />
         <VisibilityEyes
           isPwVisible={isPwVisible}

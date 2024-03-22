@@ -77,7 +77,7 @@ const TechStackSpace: React.FC<AboutTechStackSpace> = ({
           css={[
             techStackExampleStyle,
             css`
-              animation: ${isTechStacksVisible ? null : toHeight0} 0.3s forwards;
+              animation: ${!isTechStacksVisible && toHeight0} 0.3s forwards;
             `,
           ]}
         >
@@ -95,7 +95,7 @@ const TechStackSpace: React.FC<AboutTechStackSpace> = ({
               </div>
             );
           })}
-          {searchedList.length < 1 ? (
+          {searchedList.length < 1 && (
             <p
               css={[
                 css`
@@ -108,7 +108,7 @@ const TechStackSpace: React.FC<AboutTechStackSpace> = ({
             >
               해당 기술스택이 없습니다.
             </p>
-          ) : null}
+          )}
         </div>
       </div>
       <div css={[signInUpinputStyle, techStackContainerStyle]}>

@@ -46,14 +46,14 @@ const ProjectLink: React.FC<AboutProjectLink> = ({ linkNameRef, linkRef }) => {
               type="text"
               css={inputStyles.style7}
             />
-            {links.length > 1 ? (
+            {links.length > 1 && (
               <button
                 onClick={() => deleteLink(index)}
                 css={[deleteButtonStyles.deleteButtonStyle1]}
               >
                 <Image src={Delete} alt="delete" width={20} height={20} />
               </button>
-            ) : undefined}
+            )}
           </div>
         );
       })}

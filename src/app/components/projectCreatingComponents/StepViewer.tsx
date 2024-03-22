@@ -31,7 +31,7 @@ const StepViewer = () => {
                 height: 10px;
                 border-radius: 50%;
                 background-color: ${order === index ? `orange` : `#80808080`};
-                transform: ${order === index ? `translateY(-5px)` : undefined};
+                transform: ${order === index && `translateY(-5px)`};
                 transition: 0.5s;
               `,
             ]}

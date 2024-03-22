@@ -1,22 +1,13 @@
 "use client";
 /** @jsxImportSource @emotion/react */
 
-import { flexCenterX2 } from "@/app/styleComponents/commonStyles/commonStyles";
+import { homeLinkStyle } from "@/app/styleComponents/loginPageStyles/loginPageStyles";
 import Link from "next/link";
-
-const LinkStyle = {
-  ...flexCenterX2,
-  width: "100%",
-  height: "60px",
-  marginBottom: "30px",
-  fontSize: "40px",
-  fontWeight: "bold",
-};
 
 const ProjectTitle = () => {
   return (
-    <div css={LinkStyle}>
-      <Link href={"/"} css={[`transition:.2s; &:hover {font-size: 45px}`]}>
+    <div css={homeLinkStyle}>
+      <Link href={"/"} css={[`transition: 0.2s; &:hover {font-size: 45px}`]}>
         Palette*
       </Link>
     </div>

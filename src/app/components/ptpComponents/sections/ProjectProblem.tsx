@@ -53,8 +53,7 @@ const ProjectProblem: React.FC<AboutProjectProblem> = ({
               font-size: 0.5em;
               color: #ff4b00;
               overflow: hidden;
-              animation: ${important ? aniForImportant : undefined} 1s forwards
-                ease-out;
+              animation: ${important && aniForImportant} 1s forwards ease-out;
             `,
           ]}
         >
@@ -75,14 +74,14 @@ const ProjectProblem: React.FC<AboutProjectProblem> = ({
               `,
             ]}
           >
-            {projProblems.length > 1 ? (
+            {projProblems.length > 1 && (
               <button
                 css={[flexCenterX2, deleteButtonStyles.deleteButtonStyle2]}
                 onClick={() => deleteProblem(index)}
               >
                 <Image src={Delete} alt="delete" width={15} height={15}></Image>
               </button>
-            ) : undefined}
+            )}
             <label htmlFor="problem" css={labelStyles.style2}>
               문제 상황
             </label>

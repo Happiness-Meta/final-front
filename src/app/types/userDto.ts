@@ -3,7 +3,7 @@ export interface IndividualUserSignUpDTO {
   nickname: string;
   password: string;
   preferedPosition: string;
-  techStack?: String[];
+  techStack: String[];
 }
 
 export interface CorporateUserSignUpDTO {
@@ -11,7 +11,7 @@ export interface CorporateUserSignUpDTO {
   name: string;
   password: string;
   address: string;
-  phoneNumber: string;
+  telephone: string;
   industry: string;
 }
 
