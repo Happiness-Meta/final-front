@@ -1,9 +1,7 @@
 export const Container = {
-  width: "100vw",
   display: "flex",
   alignItems: "center",
   height: "100vh",
-  backgroundColor: "#efefef",
 };
 export const tinyContainer = {
   width: "700px",
@@ -22,12 +20,13 @@ export const profile = {
   height: "300px",
   margin: "1rem",
   borderRadius: "50%",
-  border: "1px solid #efefef",
   backgroundColor: "white",
+  border: "2px solid #c1c1c1",
 };
 
 export const userDataContainer = {
   width: "300px",
+  height: "350px",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
@@ -38,6 +37,7 @@ export const userDataContainer = {
 
 export const userNickname = {
   marginTop: "1rem",
+  marginBottom: "1rem",
   fontSize: "2rem",
   fontWeight: "bold",
 };
@@ -53,6 +53,17 @@ export const userField = {
   fontSize: "1.2rem",
   fontWieght: "bold",
   marginBottom: "1rem",
+  color: "#c1c1c1",
+};
+
+export const techStacks = {
+  width: "90px",
+  color: "#FF8A00",
+  fontWigth: "900",
+  marginRight: "0.5rem",
+  marginBottom: "0.5rem",
+  border: "2px solid #FF8A00",
+  borderRadius: "1rem",
 };
 
 export const techStackImg = {
@@ -60,4 +71,40 @@ export const techStackImg = {
   borderRadius: "50%",
   margin: "0.1rem",
   padding: "0.1rem",
+};
+
+export const backgroundImg = {
+  width: "100%",
+  bottom: "-4rem",
+  left: 0,
+};
+
+export const inputContainer = {
+  width: "250px",
+  height: "50px",
+  display: "flex",
+  alignItems: "center",
+  border: "1px solid gray",
+  borderRadius: "0.5rem",
+  marginBottom: "0.5rem",
+};
+
+export const input = {
+  width: "100%",
+  height: "30px",
+  padding: "10px",
+  fontSize: "16px",
+  transition: ".2s",
+};
+
+export const okButton = {
+  width: "60px",
+  color: "#FF8A00",
+  backgroundColor: "white",
+  border: "1px solid #FF8A00",
+  borderRadius: "1rem",
+};
+
+export const dataContainer = {
+  height: "350px",
 };

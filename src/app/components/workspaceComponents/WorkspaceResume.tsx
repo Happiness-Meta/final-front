@@ -48,53 +48,64 @@ const WorkspaceResume = () => {
       <div css={divider}></div>
       <div
         css={[
-          ContentContainer,
           `
-        
-        flex-direction: column;     
-    
-      `,
+          display: flex;
+          flex-wrap: wrap;
+          width: 75vw;
+
+        `,
         ]}
       >
-        <span css={text}>도화지가 비어 있습니다.</span>
-        <span css={text2}>당신의 미래를 그려주세요</span>
         <div
           css={[
-            AddResumeButtonContainer,
+            ContentContainer,
             `
+        
+        flex-direction: column;  
+    
+      `,
+          ]}
+        >
+          <span css={text}>도화지가 비어 있습니다.</span>
+          <span css={text2}>당신의 미래를 그려주세요</span>
+          <div
+            css={[
+              AddResumeButtonContainer,
+              `
           flex-direction: row;
           &:hover {
             width: 150px;
             height: 50px;
           }
         `,
-          ]}
-        >
-          <button
-            css={[
-              AddResumeButton,
-              `
+            ]}
+          >
+            <button
+              css={[
+                AddResumeButton,
+                `
               &:hover {
                 font-size: 1.5rem;
               }
           `,
-            ]}
-          >
-            이력서
-          </button>
-          <Image
-            css={[
-              plus,
-              `
+              ]}
+            >
+              이력서
+            </button>
+            <Image
+              css={[
+                plus,
+                `
             &:focus {
               width: 28px,
-             height: 28px,
+              height: 28px,
             }
           `,
-            ]}
-            src={AddIcon}
-            alt="add"
-          />
+              ]}
+              src={AddIcon}
+              alt="add"
+            />
+          </div>
         </div>
       </div>
     </div>

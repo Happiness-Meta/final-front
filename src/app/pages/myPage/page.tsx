@@ -1,18 +1,25 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 /** @jsxImportSource @emotion/react */
 
 import Image from "next/image";
+import { RefObject, useEffect, useRef, useState } from "react";
 
 // libararies
-import { useEffect, useState } from "react";
+import axios from "axios";
 
 //components
 import ProjectTitle from "@/app/components/myPageComponents/myPageProjectTitle";
+import PositionSpace from "@/app/components/commonComponents/PositionSpace";
+
+// constants
+import { preferedPositionList } from "@/app/constants/industryOptions";
 
 //img
 import Email from "@/app/assets/svg/Message_light.svg";
 import Profile from "@/app/assets/svg/profilePicture.svg";
 import Edit from "@/app/assets/svg/Edit.svg";
+import background from "@/app/assets/svg/myPageBackground.svg";
 
 //css
 import {
@@ -23,27 +30,56 @@ import {
   userDataContainer,
   userNickname,
   rowContainer,
-  techStackImg,
+  techStacks,
   userField,
+  backgroundImg,
+  inputContainer,
+  input,
+  okButton,
+  dataContainer,
 } from "@/app/styleComponents/myPageStyles/myPageStyles";
-import axios from "axios";
 
 //types
 import { myInfo } from "@/app/types/aboutMypage";
+import { AboutInfoForIndiSignUp } from "@/app/types/aboutSignInUp";
+
+// custom hooks
+import useGetData from "@/app/hooks/myPageHooks/useGetData";
+import TechStackSpace from "@/app/components/commonComponents/TechStackSpace";
 
 const MyPage = () => {
-  // 선택 창 컨트롤
+  const searchTechStackRef: RefObject<HTMLInputElement> = useRef(null);
+
+  const [infoForSignUp, setInfoForSignUp] = useState<AboutInfoForIndiSignUp>({
+    email: "",
+    name: "",
+    password: "",
+    position: "희망포지션",
+  });
   // 유저 정보
   const [userData, setUserData] = useState([]);
 
-  const getData = async () => {
-    try {
-      const response = await axios.get("http://localhost:3001/myPage");
+  // edit boolean
+  const [isEdit, setIsEdit] = useState(false);
 
-      setUserData(response.data);
-    } catch (e) {
-      console.log(e);
-    }
+  // get user data
+  const getData = async () => {
+    const data = useGetData(setUserData);
+    data();
+  };
+
+  const guideForPosition = "희망하시는 포지션을";
+
+  // 값 넣기
+  const handlePutInfo = (sort: string, value: string) => {
+    setInfoForSignUp((prev) => ({
+      ...prev,
+      [sort]: value,
+    }));
+  };
+
+  const editData = () => {
+    setIsEdit(!isEdit);
   };
 
   useEffect(() => {
@@ -51,8 +87,10 @@ const MyPage = () => {
   }, []);
 
   useEffect(() => {
-    console.log(userData);
-  }, [userData]);
+    console.log("userData: ", userData);
+    console.log("isEdit: ", isEdit);
+  }, [userData, isEdit]);
+
   return (
     <div>
       <ProjectTitle />
@@ -89,96 +127,147 @@ const MyPage = () => {
             `,
               ]}
             >
-              {userData.length > 0 ? (
-                userData.map((item: myInfo, i: number) => (
-                  <div key={i}>
-                    <div>
-                      <div css={[userNickname]}>{item.userNickname}</div>
-                    </div>
-                    <div
-                      css={[
-                        rowContainer,
-                        `
-                    flex-direction: 'row',
-                  `,
-                      ]}
-                    >
-                      <Image
-                        css={[
-                          `
-                      margin-right: 0.5rem;
-                    `,
-                        ]}
-                        src={Email}
-                        alt="이메일"
-                      />
+              {userData.length > 0
+                ? userData.map((item: myInfo, i: number) => (
+                    <div key={i}>
                       <div
                         css={[
                           `
-                      color: #c1c1c1
+                      width: 100%;
+                      text-align: end;
                     `,
                         ]}
                       >
-                        {item.userEmail}
+                        {isEdit === false ? (
+                          <Image
+                            src={Edit}
+                            alt="편집"
+                            width={30}
+                            height={30}
+                            onClick={editData}
+                          />
+                        ) : (
+                          <button css={okButton} onClick={editData}>
+                            확인
+                          </button>
+                        )}
                       </div>
-                    </div>
-                    <h3 css={[userField]}>{item.Field}</h3>
-                    <div
-                      css={[
-                        `
+                      <div>
+                        <div css={[userNickname]}>{item.userNickname}</div>
+                      </div>
+                      {isEdit === true ? (
+                        <div>
+                          <div
+                            css={[
+                              rowContainer,
+                              `
+                          flex-direction: column;
+                        `,
+                            ]}
+                          >
+                            <div
+                              css={[
+                                inputContainer,
+                                `
+                                flex-direction: row;
+                            `,
+                              ]}
+                            >
+                              <Image
+                                css={[
+                                  `
+                                margin-left: 0.3rem;
+                              `,
+                                ]}
+                                src={Email}
+                                alt="메일"
+                              />
+                              <input
+                                css={[
+                                  input,
+                                  `
+                              border: none;
+                              &:focus {
+                                outline: none;
+                              }
+                            `,
+                                ]}
+                                placeholder={item.userEmail}
+                              />
+                            </div>
+                            <PositionSpace
+                              handlePutInfo={handlePutInfo}
+                              positionList={preferedPositionList}
+                              textForGuide={guideForPosition}
+                            />
+                            <TechStackSpace
+                              searchTechStackRef={searchTechStackRef}
+                            />
+                          </div>
+                        </div>
+                      ) : (
+                        <div>
+                          <div
+                            css={[
+                              rowContainer,
+                              `
+                    flex-direction: 'row',
+                    margin-bottom: 1rem;
+                  `,
+                            ]}
+                          >
+                            <Image
+                              css={[
+                                `
+                      margin-right: 0.5rem;
+                      
+                    `,
+                              ]}
+                              src={Email}
+                              alt="이메일"
+                            />
+                            <div>{item.userEmail}</div>
+                          </div>
+                          <h3 css={[userField]}>{item.Field}</h3>
+                          <div
+                            css={[
+                              `
                         display:flex;
                         flex-direction: row;
+                        flex-wrap: wrap;
                       `,
-                      ]}
-                    >
-                      {item.techStack.map((img: string, i: number) => (
-                        <Image
-                          key={i}
-                          css={techStackImg}
-                          src={require(`@/app/assets/svg/techStack/${img.toLowerCase()}.svg`)}
-                          alt="이미지"
-                          width={30}
-                          height={30}
-                        />
-                      ))}
+                            ]}
+                          >
+                            {item.techStack.map((item, i) => (
+                              <div
+                                css={[
+                                  techStacks,
+                                  `
+                          text-align: center;
+                        `,
+                                ]}
+                                key={i}
+                              >
+                                {item}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
-                  </div>
-                ))
-              ) : (
-                <div>
-                  <div className="userContainer">
-                    <div css={[userNickname]}>닉네임</div>
-                  </div>
-                  <div
-                    css={[
-                      rowContainer,
-                      `
-                    flex-direction: 'row',
-                  `,
-                    ]}
-                  >
-                    <Image
-                      css={[
-                        `
-                      margin-right: 0.5rem;
-                    `,
-                      ]}
-                      src={Email}
-                      alt="이메일"
-                    />
-                    <div
-                      css={[
-                        `
-                      color: #c1c1c1
-                    `,
-                      ]}
-                    >
-                      exmaple@example.com
-                    </div>
-                  </div>
-                </div>
-              )}
+                  ))
+                : null}
             </div>
+            <Image
+              css={[
+                backgroundImg,
+                `
+              position: absolute;
+            `,
+              ]}
+              src={background}
+              alt="배경화면"
+            />
           </div>
         </div>
       </div>

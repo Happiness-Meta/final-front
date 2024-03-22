@@ -2,6 +2,7 @@
 /** @jsxImportSource @emotion/react */
 
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 // css
 import {
@@ -32,18 +33,27 @@ import {
 import arrowRight from "@/app/assets/svg/arrow-right-small.svg";
 
 // libraries
-import { css } from "@emotion/react";
 
 // img
 import AddIcon from "@/app/assets/svg/addIcon.svg";
 import Trash from "@/app/assets/svg/Trash.svg";
 
 //types
-import { portPoliosThumbnailData } from "@/app/types/portfolioDto";
-import { useEffect, useState } from "react";
+import {
+  workspaceRemoveData,
+  portPoliosThumbnailData,
+} from "@/app/types/aboutWorkspace";
 import Link from "next/link";
 
-const WorkspaceProject = ({ projectData, removeData }: any) => {
+interface AboutWorkspaceProject {
+  projectData: portPoliosThumbnailData[];
+  removeData: (T: portPoliosThumbnailData) => void;
+}
+
+const WorkspaceProject: React.FC<AboutWorkspaceProject> = ({
+  projectData,
+  removeData,
+}) => {
   console.log(projectData);
   return (
     <div
@@ -168,6 +178,7 @@ const WorkspaceProject = ({ projectData, removeData }: any) => {
               ContentContainer,
               `
         flex-direction: column;
+        margin-left: -1.8rem;
       `,
             ]}
           >

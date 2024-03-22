@@ -13,7 +13,7 @@ import { Container } from "@/app/styleComponents/workspaceStyles/headerStyles";
 import axios from "axios";
 
 //types
-import { portPoliosThumbnailData } from "@/app/types/portfolioDto";
+import { portPoliosThumbnailData } from "@/app/types/aboutWorkspace";
 
 //constants
 
