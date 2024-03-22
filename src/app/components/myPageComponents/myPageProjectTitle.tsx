@@ -22,8 +22,8 @@ const workspaceButton = {
   alignItems: "center",
   marginBottom: "10px",
   fontSize: "0.9em",
-  marginRight: "4rem",
   marginTop: "1rem",
+  marginRight: "3rem",
   justifyContent: "flex-end",
 };
 
@@ -46,7 +46,7 @@ const ProjectTitle = () => {
         <Link href={"/pages/workspacePage"}>
           <div
             css={css`
-              width: 8vw;
+              width: 120px;
               text-align: center;
               color: #ff8a00;
               border: 2px solid #ff8a00;
