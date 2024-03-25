@@ -19,7 +19,7 @@ import { portPoliosThumbnailData } from "@/app/types/aboutWorkspace";
 
 const WorkspacePage = () => {
   const [project, setProject] = useState<portPoliosThumbnailData[]>();
-  const [resumeData, setResumeData] = useState();
+  const [resumeData, setResumeData] = useState("");
 
   const getData = async () => {
     try {
@@ -51,7 +51,7 @@ const WorkspacePage = () => {
 
   return (
     <div css={Container}>
-      <WorkspaceHeader />
+      <WorkspaceHeader resumeData={resumeData} />
       <WorkspaceUserProfile />
       <WorkspaceResume />
       {project && (
