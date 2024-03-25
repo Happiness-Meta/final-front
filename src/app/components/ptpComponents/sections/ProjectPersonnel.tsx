@@ -41,6 +41,7 @@ const ProjectPersonnel: React.FC<AboutProjectPersonnel> = ({
           id="personnel"
           type="number"
           min={1}
+          max={99}
           value={dynamicQuestionsContainer.personnel}
           css={inputStyles.style3}
         />

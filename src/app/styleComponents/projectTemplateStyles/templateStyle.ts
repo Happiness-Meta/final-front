@@ -98,7 +98,7 @@ export const inputStyles = {
     ${commonInputStyle}
     text-align: center;
     &:focus {
-      width: 8%;
+      width: 60px;
       border-color: ${commonColor.representative};
       border-radius: 20px;
     }

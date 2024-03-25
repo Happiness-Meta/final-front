@@ -3,6 +3,7 @@
 
 import {
   flexCenterX2,
+  widthHeighVhFull,
   widthHeightFull,
 } from "@/app/styleComponents/commonStyles/commonStyles";
 import {
@@ -13,7 +14,7 @@ import {
 } from "@/app/styleComponents/projectTemplateStyles/templateStyle";
 import PaintBackground from "@/app/components/ptpComponents/PaintBackground";
 import ProjectColoringSpace from "@/app/components/commonComponents/ProjectColoringSpace";
-import { RefObject, useEffect, useRef } from "react";
+import { RefObject, useEffect, useRef, useState } from "react";
 import ProjectName from "@/app/components/ptpComponents/sections/ProjectName";
 import ProjectPeriod from "@/app/components/ptpComponents/sections/ProjectPeriod";
 import ProjectPersonnel from "@/app/components/ptpComponents/sections/ProjectPersonnel";
@@ -32,8 +33,12 @@ import { useProjectProblemStore } from "@/app/store/projectTemplateStore/useProj
 import { useProjectLinkStore } from "@/app/store/projectTemplateStore/useProjectLinkStore";
 import userAxiosWithAuth from "@/app/utils/useAxiosWithAuth";
 import HeaderNo1 from "@/app/components/commonComponents/HeaderNo1";
+import CongratsMessage from "@/app/components/ptpComponents/CongratsMessage";
+import { useRouter } from "next/navigation";
 
 const ProjectTemplate = () => {
+  const router = useRouter();
+
   const nameRef: RefObject<HTMLInputElement> = useRef(null);
   const startDateRef: RefObject<HTMLInputElement> = useRef(null);
   const endDateRef: RefObject<HTMLInputElement> = useRef(null);
@@ -47,6 +52,8 @@ const ProjectTemplate = () => {
   const pSolutionRef: RefObject<HTMLTextAreaElement> = useRef(null);
   const linkNameRef: RefObject<HTMLInputElement> = useRef(null);
   const linkRef: RefObject<HTMLInputElement> = useRef(null);
+
+  const [isSucceeded, setIsSucceeded] = useState(false);
 
   const { techStackContainer } = useSignUpPageStore();
   const { dynamicQuestionsContainer } = useProjectStore();
@@ -114,6 +121,10 @@ const ProjectTemplate = () => {
         body
       );
       console.log(response);
+      setIsSucceeded(true);
+      setTimeout(() => {
+        router.push(`/pages/workspacePage`);
+      }, 3500);
     },
     onError: (e) => {
       console.error(e);
@@ -122,6 +133,7 @@ const ProjectTemplate = () => {
 
   return (
     <div css={[widthHeightFull, pageStyle]}>
+      {isSucceeded && <CongratsMessage />}
       <HeaderNo1 />
       <PaintBackground />
       <section css={sectionStyle}>
