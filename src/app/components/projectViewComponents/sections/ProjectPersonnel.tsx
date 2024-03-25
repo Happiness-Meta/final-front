@@ -5,16 +5,16 @@ import { labelStyles } from "@/app/styleComponents/projectTemplateStyles/templat
 import { eachSpaceStyle } from "@/app/styleComponents/projectViewStyles.ts/projectViewStyles";
 import { AboutProjectSections } from "@/app/types/aboutProjectView";
 
-const ProjectName: React.FC<AboutProjectSections> = ({ data }) => {
+const ProjectPersonnel: React.FC<AboutProjectSections> = ({ data }) => {
   return (
     <div css={[eachSpaceStyle]}>
-      <label htmlFor="name" css={[labelStyles.style1]}>
-        프로젝트 이름
+      <label htmlFor="personnel" css={[labelStyles.style1]}>
+        프로젝트 인원
       </label>
       <hr />
-      <p>{data?.projectName}</p>
+      <p>{data?.personnel} 명</p>
     </div>
   );
 };
 
-export default ProjectName;
+export default ProjectPersonnel;

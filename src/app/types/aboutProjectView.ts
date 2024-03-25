@@ -34,3 +34,7 @@ export interface AboutGetData {
   techStack: string[];
   themeColor: string;
 }
+
+export interface AboutProjectSections {
+  data: AboutGetData | undefined;
+}

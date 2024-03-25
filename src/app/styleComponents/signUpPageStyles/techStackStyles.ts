@@ -25,6 +25,9 @@ export const stackInContainerStyle = css`
   font-weight: 500;
   white-space: nowrap;
   transition: 0.3s;
+`;
+
+export const stackInContainerHoverStyle = css`
   &:hover {
     background-color: black;
   }
