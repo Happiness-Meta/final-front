@@ -82,25 +82,27 @@ const WorkspaceProject: React.FC<AboutWorkspaceProject> = ({
           <div css={project}>프로젝트</div>
           <Image css={arrowImg} src={arrowRight} alt="화살표" />
         </div>
-        <div
-          css={[
-            `
+        {projectData.length > 0 && (
+          <div
+            css={[
+              `
           width: 80px;
         `,
-          ]}
-        >
-          <Link
-            css={[
-              projectAdd,
-              `
+            ]}
+          >
+            <Link
+              css={[
+                projectAdd,
+                `
             justify-content: center;
           `,
-            ]}
-            href={"/pages/projectCreating"}
-          >
-            추가
-          </Link>
-        </div>
+              ]}
+              href={"/pages/projectCreating"}
+            >
+              추가
+            </Link>
+          </div>
+        )}
       </div>
       <div css={divider}></div>
       <div

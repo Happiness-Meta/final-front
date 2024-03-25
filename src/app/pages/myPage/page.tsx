@@ -14,12 +14,15 @@ import PositionSpace from "@/app/components/commonComponents/PositionSpace";
 
 // constants
 import { preferedPositionList } from "@/app/constants/industryOptions";
+import { industryList } from "@/app/constants/industryOptions";
 
 //img
-import Email from "@/app/assets/svg/Message_light.svg";
+import Email from "@/app/assets/svg/mail.svg";
 import Profile from "@/app/assets/svg/profilePicture.svg";
 import Edit from "@/app/assets/svg/Edit.svg";
 import background from "@/app/assets/svg/myPageBackground.svg";
+import Address from "@/app/assets/svg/Address.svg";
+import PhoneNumber from "@/app/assets/svg/phone.svg";
 
 //css
 import {
@@ -40,7 +43,7 @@ import {
 } from "@/app/styleComponents/myPageStyles/myPageStyles";
 
 //types
-import { myInfo } from "@/app/types/aboutMypage";
+import { myInfo, companyInfo } from "@/app/types/aboutMypage";
 import { AboutInfoForIndiSignUp } from "@/app/types/aboutSignInUp";
 
 // custom hooks
@@ -59,6 +62,9 @@ const MyPage = () => {
   // 유저 정보
   const [userData, setUserData] = useState([]);
 
+  // 회사 정보
+  const [companyData, setCompanyData] = useState([]);
+
   // edit boolean
   const [isEdit, setIsEdit] = useState(false);
 
@@ -68,7 +74,19 @@ const MyPage = () => {
     data();
   };
 
+  // get company data
+  const getCompanyData = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:3001/myPageCompanyData"
+      );
+      setCompanyData(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   const guideForPosition = "희망하시는 포지션을";
+  const guideForIndustry = "산업 분야를";
 
   // 값 넣기
   const handlePutInfo = (sort: string, value: string) => {
@@ -84,12 +102,13 @@ const MyPage = () => {
 
   useEffect(() => {
     getData();
+    getCompanyData();
   }, []);
 
   useEffect(() => {
     console.log("userData: ", userData);
-    console.log("isEdit: ", isEdit);
-  }, [userData, isEdit]);
+    console.log("companyData: ", companyData);
+  }, [userData, companyData]);
 
   return (
     <div>
@@ -148,7 +167,7 @@ const MyPage = () => {
                           />
                         ) : (
                           <button css={okButton} onClick={editData}>
-                            확인
+                            수정
                           </button>
                         )}
                       </div>
@@ -211,7 +230,7 @@ const MyPage = () => {
                             css={[
                               rowContainer,
                               `
-                    flex-direction: 'row',
+                    flex-direction: row;
                     margin-bottom: 1rem;
                   `,
                             ]}
@@ -256,7 +275,230 @@ const MyPage = () => {
                       )}
                     </div>
                   ))
-                : null}
+                : companyData.map((company: companyInfo, i: number) => (
+                    <div key={i}>
+                      <div
+                        css={[
+                          `
+                        width: 100%;
+                        text-align: end;
+                      `,
+                        ]}
+                      >
+                        {isEdit === false ? (
+                          <Image
+                            src={Edit}
+                            alt="편집"
+                            width={30}
+                            height={30}
+                            onClick={editData}
+                          />
+                        ) : (
+                          <button css={okButton} onClick={editData}>
+                            수정
+                          </button>
+                        )}
+                      </div>
+                      <div>
+                        <div css={userNickname}>{company.companyName}</div>
+                      </div>
+                      {isEdit === true ? (
+                        <div
+                          css={[
+                            `
+                          height: 100%;
+                        `,
+                          ]}
+                        >
+                          <div
+                            css={[
+                              rowContainer,
+                              `
+                          flex-direction: column;
+                          margin-bottom: 0.5rem;
+                        `,
+                            ]}
+                          >
+                            <div
+                              css={[
+                                inputContainer,
+                                `
+                                flex-direction: row;
+                              `,
+                              ]}
+                            >
+                              <Image
+                                css={[
+                                  `
+                                  margin-left: 0.5rem;
+                                margin-right: 0.5rem;
+                              `,
+                                ]}
+                                src={Email}
+                                alt="회사이메일"
+                                width={28}
+                                height={28}
+                              />
+                              <input
+                                css={[
+                                  input,
+                                  `
+                                boredr: none;
+                                &:focus {
+                                  outline: none;
+                                }
+                              `,
+                                ]}
+                                placeholder={company.companyEmail}
+                              />
+                            </div>
+                            <div
+                              css={[
+                                inputContainer,
+                                `
+                                flex-direction: row;
+                           `,
+                              ]}
+                            >
+                              <Image
+                                css={[
+                                  `
+                                  margin-left: 0.5rem;
+                                margin-right: 0.5rem;
+                              `,
+                                ]}
+                                src={Address}
+                                alt="회사 주소"
+                                width={28}
+                                height={28}
+                              />
+                              <input
+                                css={[
+                                  input,
+                                  `
+                                boredr: none;
+                                &:focus {
+                                  outline: none;
+                                }
+                              `,
+                                ]}
+                                placeholder={company.companyAddress}
+                              />
+                            </div>
+                            <div
+                              css={[
+                                inputContainer,
+                                `
+                                flex-direction: row;
+                           `,
+                              ]}
+                            >
+                              <Image
+                                css={[
+                                  `
+                                  margin-left: 0.5rem;
+                                margin-right: 0.5rem;
+                              `,
+                                ]}
+                                src={PhoneNumber}
+                                alt="회사 주소"
+                                width={28}
+                                height={28}
+                              />
+                              <input
+                                css={[
+                                  input,
+                                  `
+                                boredr: none;
+                                &:focus {
+                                  outline: none;
+                                }
+                              `,
+                                ]}
+                                placeholder={company.companyPhoneNumber}
+                              />
+                            </div>
+                          </div>
+                          <PositionSpace
+                            handlePutInfo={handlePutInfo}
+                            positionList={industryList}
+                            textForGuide={guideForIndustry}
+                          />
+                        </div>
+                      ) : (
+                        <div>
+                          <div
+                            css={[
+                              rowContainer,
+                              `
+                          flex-direction: row;
+                          margin-bottom: 0.5rem;
+                        `,
+                            ]}
+                          >
+                            <Image
+                              css={[
+                                `
+                                
+                                margin-right: 0.5rem;
+                              `,
+                              ]}
+                              src={Email}
+                              alt="회사이메일"
+                              width={28}
+                              height={28}
+                            />
+                            <div>{company.companyEmail}</div>
+                          </div>
+                          <div
+                            css={[
+                              `
+                            margin-bottom: 0.5rem;
+                            display: flex;
+                            align-items: center;
+                          `,
+                            ]}
+                          >
+                            <Image
+                              css={[
+                                `
+                                margin-right: 0.5rem;
+                              `,
+                              ]}
+                              src={Address}
+                              alt="회사 주소"
+                              width={28}
+                              height={28}
+                            />
+                            {company.companyAddress}
+                          </div>
+                          <div
+                            css={[
+                              `
+                            margin-bottom: 0.5rem;
+                            display: flex;
+                            align-items: center;
+                          `,
+                            ]}
+                          >
+                            <Image
+                              css={[
+                                `
+                                margin-right: 0.5rem;
+                              `,
+                              ]}
+                              src={PhoneNumber}
+                              alt="회사 번호"
+                              width={28}
+                              height={28}
+                            />
+                            {company.companyPhoneNumber}
+                          </div>
+                          <h3 css={[userField]}>{company.companyIndustry}</h3>
+                        </div>
+                      )}
+                    </div>
+                  ))}
             </div>
             <Image
               css={[

@@ -13,7 +13,7 @@ import {
   AddProjectButton,
 } from "@/app/styleComponents/workspaceStyles/headerStyles";
 
-const ProjectTitle = () => {
+const ProjectTitle = ({ resumeData }: any) => {
   return (
     <div
       css={[
@@ -30,23 +30,27 @@ const ProjectTitle = () => {
           Palette*
         </Link>
       </div>
+
       <div css={workspaceButton}>
-        <button css={AddProjectButton}>
-          <div
-            css={css`
-              width: 8vw;
-              text-align: center;
-              color: white;
-              background-color: #ff8a00;
-              padding: 0.7rem;
-              border-radius: 0.5rem;
-              // hover 추가
-              box-shadow: 0 1px 3px 1px gray;
-            `}
-          >
-            이력서 편집
-          </div>
-        </button>
+        {resumeData.length > 0 && (
+          <button css={AddProjectButton}>
+            <div
+              css={css`
+                width: 8vw;
+                text-align: center;
+                color: white;
+                background-color: #ff8a00;
+                padding: 0.7rem;
+                border-radius: 0.5rem;
+                // hover 추가
+                box-shadow: 0 1px 3px 1px gray;
+              `}
+            >
+              이력서 편집
+            </div>
+          </button>
+        )}
+
         <Link href={"/pages/myPage"} css={AddProjectButton}>
           <div
             css={css`

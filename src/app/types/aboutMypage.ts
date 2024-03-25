@@ -6,6 +6,14 @@ export interface myInfo {
   userNickname: string;
 }
 
+export interface companyInfo {
+  companyName: string;
+  companyEmail: string;
+  companyAddress: string;
+  companyPhoneNumber: string;
+  companyIndustry: string;
+}
+
 export interface getDataTypes {
   setUserData: () => myDataTypes;
 }

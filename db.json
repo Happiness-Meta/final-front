@@ -153,7 +153,7 @@
       "projectOutline": "첫 풀스택 프로젝트"
     }
   ],
-  "myPage": [
+  "myPageUserData": [
     {
       "userNickname": "재근",
       "userEmail": "example@example.com",
@@ -167,6 +167,15 @@
         "TypeScript",
         "Recoil"
       ]
+    }
+  ],
+  "myPageCompanyData": [
+    {
+      "companyName": "회사회사",
+      "companyEmail": "company@example.com",
+      "companyAddress": "서울시 어디구 어디동",
+      "companyPhoneNumber": "1588-03123",
+      "companyIndustry": "IT 정보통신 산업"
     }
   ]
 }
