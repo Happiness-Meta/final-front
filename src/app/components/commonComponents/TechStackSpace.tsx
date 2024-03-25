@@ -2,10 +2,7 @@
 /** @jsxImportSource @emotion/react */
 
 import { handleSearchTechStacks } from "@/app/hooks/signUpPageHooks/useHandleSearchTechStacks";
-import {
-  flexCenterX2,
-  widthHeightFull,
-} from "@/app/styleComponents/commonStyles/commonStyles";
+import { flexCenterX2 } from "@/app/styleComponents/commonStyles/commonStyles";
 import Image from "next/image";
 import search from "@/app/assets/svg/search.svg";
 import { techStackList } from "@/app/constants/techStacks";
@@ -70,7 +67,11 @@ const TechStackSpace: React.FC<AboutTechStackSpace> = ({
           onBlur={() => setTimeout(() => setIsTechStacksVisible(false), 100)}
           css={[
             signInUpinputStyle,
-            `${signInUpInputStyleHover}; height: 40px; padding-left: 30px`,
+            signInUpInputStyleHover,
+            css`
+              height: 40px;
+              padding-left: 30px;
+            `,
           ]}
         />
         <div
@@ -96,22 +97,11 @@ const TechStackSpace: React.FC<AboutTechStackSpace> = ({
             );
           })}
           {searchedList.length < 1 && (
-            <p
-              css={[
-                css`
-                  display: flex;
-                  align-items: center;
-                  height: 30px;
-                  padding-left: 5px;
-                `,
-              ]}
-            >
-              해당 기술스택이 없습니다.
-            </p>
+            <p css={[searchedListStyle]}>해당 기술스택이 없습니다.</p>
           )}
         </div>
       </div>
-      <div css={[signInUpinputStyle, techStackContainerStyle]}>
+      <div css={[techStackContainerStyle]}>
         {techStackContainer.map((tech, index) => {
           return (
             <div

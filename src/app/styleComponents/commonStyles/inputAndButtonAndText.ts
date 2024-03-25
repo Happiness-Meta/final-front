@@ -13,13 +13,14 @@ export const signInUpinputStyle = {
   border: "1px solid gray",
   borderRadius: "5px",
   fontSize: "16px",
-  transition: ".2s",
 };
 
-export const signInUpInputStyleHover = `
+export const signInUpInputStyleHover = css`
+  &:hover {
+    border: 2px solid #ff8a0080 !important;
+  }
   &:focus {
-    width: 102%;
-    border-color: ${commonColor.representative} !important;
+    border: 2px solid ${commonColor.representative} !important;
   }
 `;
 

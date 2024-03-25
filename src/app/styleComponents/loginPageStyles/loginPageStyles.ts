@@ -39,12 +39,14 @@ export const inputStyles = {
   ],
   inputStyle2: [
     signInUpinputStyle,
-    ` border-top-width: 0; 
-    border-top-left-radius: 0; 
-    border-top-right-radius: 0;
-    &:focus{
-      border-top-width: 1px;
-    }
-    ${signInUpInputStyleHover};`,
+    css`
+      border-top-width: 0;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      &:focus {
+        border-top-width: 1px;
+      }
+      ${signInUpInputStyleHover};
+    `,
   ],
 };

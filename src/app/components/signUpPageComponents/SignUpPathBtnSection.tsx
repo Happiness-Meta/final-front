@@ -1,18 +1,16 @@
 "use client";
 /** @jsxImportSource @emotion/react */
+
 import useSignUpPageStore from "@/app/store/signUpPageStore/useSignUpPageStore";
 import { flexCenterX2 } from "@/app/styleComponents/commonStyles/commonStyles";
+import {
+  headerSectionStyle,
+  pathStyles,
+} from "@/app/styleComponents/signUpPageStyles/signUpPageStyles";
 import { css } from "@emotion/react";
 
 const SignUpPathBtnSection = () => {
   const { isIndividual, setIsIndividual } = useSignUpPageStore();
-
-  const headerSectionStyle = {
-    ...flexCenterX2,
-    width: "50%",
-    height: "100%",
-    cursor: "pointer",
-  };
 
   return (
     <section
@@ -28,19 +26,9 @@ const SignUpPathBtnSection = () => {
       <div
         onClick={() => setIsIndividual(true)}
         css={[
+          flexCenterX2,
           headerSectionStyle,
-          `transition: .2s;
-          cursor: pointer; ${
-            isIndividual
-              ? `border: 2px solid;
-                  border-bottom: none;
-                  border-radius:  10px 10px 0 0; 
-                  color: orange; 
-                  font-weight: bold;`
-              : `border-bottom: 2px solid orange; 
-              color: gray; 
-              &:hover{ color: black; font-size: 16px}`
-          }`,
+          isIndividual ? pathStyles.style1 : pathStyles.style2,
         ]}
       >
         개인회원
@@ -48,15 +36,9 @@ const SignUpPathBtnSection = () => {
       <div
         onClick={() => setIsIndividual(false)}
         css={[
+          flexCenterX2,
           headerSectionStyle,
-          `transition: .2s;
-          cursor: pointer; ${
-            isIndividual
-              ? `border-bottom: 2px solid orange; color: gray; &:hover{ color: black; font-size: 16px}`
-              : `border: 2px solid;
-                  border-bottom: none;
-                  border-radius:  10px 10px 0 0; color: orange; font-weight: bold;`
-          }`,
+          isIndividual ? pathStyles.style2 : pathStyles.style1,
         ]}
       >
         법인회원

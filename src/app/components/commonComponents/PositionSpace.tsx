@@ -2,7 +2,10 @@
 /** @jsxImportSource @emotion/react */
 
 import { useProjectTemplateStore } from "@/app/store/projectTemplateStore/useProjectTemplateStore";
-import { signInUpinputStyle } from "@/app/styleComponents/commonStyles/inputAndButtonAndText";
+import {
+  signInUpInputStyleHover,
+  signInUpinputStyle,
+} from "@/app/styleComponents/commonStyles/inputAndButtonAndText";
 import { AboutPositionSpace } from "@/app/types/aboutSignInUp";
 
 const PositionSpace: React.FC<AboutPositionSpace> = ({
@@ -19,7 +22,7 @@ const PositionSpace: React.FC<AboutPositionSpace> = ({
         handlePutInfo("position", e.target.value);
       }}
       name="position"
-      css={[signInUpinputStyle, `height: 40px;`]}
+      css={[signInUpinputStyle, signInUpInputStyleHover]}
     >
       {positionList.map((position, index) => (
         <option key={index} value={position}>

@@ -7,12 +7,12 @@ import { showUp, showUp2 } from "@/app/styleComponents/commonStyles/keyframes";
 import {
   headerStyle,
   sectionStyle,
-  workspaceBtnStyle,
 } from "@/app/styleComponents/projectTemplateStyles/ptHeaderStyles";
 import { css } from "@emotion/react";
 import Link from "next/link";
 import { useEffect } from "react";
 import { useCookies } from "react-cookie";
+import WorkspaceBtn from "./buttons/WorkspaceBtn";
 
 const HeaderNo1 = () => {
   const [cookies] = useCookies(["token"]);
@@ -56,11 +56,7 @@ const HeaderNo1 = () => {
         </p>
       </section>
       <section css={[sectionStyle, `justify-content: end;`]}>
-        {cookies.token && (
-          <button onClick={() => resetTechStack()} css={[workspaceBtnStyle]}>
-            workspace
-          </button>
-        )}
+        {cookies.token && <WorkspaceBtn />}
       </section>
     </header>
   );

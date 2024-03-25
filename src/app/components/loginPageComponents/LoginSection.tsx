@@ -5,7 +5,7 @@ import VisibilityEyes from "@/app/components/commonComponents/VisibilityEyes";
 import useSignUpPageStore from "@/app/store/signUpPageStore/useSignUpPageStore";
 import { flexCenterX2 } from "@/app/styleComponents/commonStyles/commonStyles";
 import { signInUpButtonStyle } from "@/app/styleComponents/commonStyles/inputAndButtonAndText";
-import React, { RefObject, useRef, useState } from "react";
+import React, { RefObject, useEffect, useRef, useState } from "react";
 import SignUpErrorMessage from "../commonComponents/SignInUpErrorMessage";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
@@ -18,7 +18,12 @@ import { css } from "@emotion/react";
 const LoginSection = () => {
   const router = useRouter();
 
-  const [, setCookie] = useCookies(["email", "nickname", "token"]);
+  const [cookies, setCookie] = useCookies([
+    "email",
+    "nickname",
+    "accessToken",
+    "refreshToken",
+  ]);
 
   const emailRef: RefObject<HTMLInputElement> = useRef(null);
   const pwRef: RefObject<HTMLInputElement> = useRef(null);
@@ -40,6 +45,7 @@ const LoginSection = () => {
         activateErrorMessageAni();
         return;
       }
+      const expiration = new Date(Date.now() + 1000 * 60 * 60 * 24);
 
       const body = {
         email: emailRef.current!.value,
@@ -50,9 +56,25 @@ const LoginSection = () => {
         `${process.env.NEXT_PUBLIC_BASE_URL}/auth/login`,
         body
       );
-      setCookie("email", response.data.data.email);
-      setCookie("nickname", response.data.data.name);
-      setCookie("token", response.data.data.token);
+      console.log(response.data.data.accessToken);
+
+      setCookie("email", response.data.data.email, {
+        path: "/",
+        expires: expiration,
+      });
+      setCookie("nickname", response.data.data.name, {
+        path: "/",
+        expires: expiration,
+      });
+      setCookie("accessToken", response.data.data.accessToken, {
+        path: "/",
+        expires: expiration,
+      });
+      setCookie("refreshToken", response.data.data.refreshToken, {
+        path: "/",
+        expires: expiration,
+      });
+
       setIsLogined(true);
       setTimeout(() => {
         router.push("/");
