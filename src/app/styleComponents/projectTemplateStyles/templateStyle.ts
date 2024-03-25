@@ -29,8 +29,7 @@ export const sectionStyle = css`
 
 export const labelStyles = {
   style1: css`
-    padding-left: 5px;
-    font-size: 1.3em;
+    font-size: 1.2em;
     font-weight: bold;
   `,
   style2: css`

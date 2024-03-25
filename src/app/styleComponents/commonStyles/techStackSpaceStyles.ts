@@ -1,10 +1,9 @@
 import { css } from "@emotion/react";
-import { signInUpInputStyleHover } from "./inputAndButtonAndText";
 
 export const searchImageStyle = css`
   position: absolute;
   top: 50%;
-  left: 2%;
+  left: 3%;
   transform: translateY(-50%);
 `;
 
@@ -24,15 +23,17 @@ export const techStackExampleStyle = css`
 `;
 
 export const techStackContainerStyle = css`
-  ${signInUpInputStyleHover};
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 3px;
   row-gap: 3px;
+  width: 100%;
   height: fit-content;
   min-height: 30px;
   padding: 3px;
+  border: 1px solid gray;
+  border-radius: 5px;
   overflow-x: scroll;
   overflow-y: hidden;
   user-select: none;

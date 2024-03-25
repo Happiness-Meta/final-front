@@ -30,7 +30,6 @@ import { CreatePortfolioDTO } from "@/app/types/portfolioDto";
 import { useProjectFunctionStore } from "@/app/store/projectTemplateStore/useProjectFunctionStore";
 import { useProjectProblemStore } from "@/app/store/projectTemplateStore/useProjectProblemStore";
 import { useProjectLinkStore } from "@/app/store/projectTemplateStore/useProjectLinkStore";
-import axios from "axios";
 import userAxiosWithAuth from "@/app/utils/useAxiosWithAuth";
 import HeaderNo1 from "@/app/components/commonComponents/HeaderNo1";
 
@@ -114,8 +113,7 @@ const ProjectTemplate = () => {
         `${process.env.NEXT_PUBLIC_BASE_URL}/portfolio`,
         body
       );
-
-      console.log(response.data.data.code);
+      console.log(response);
     },
     onError: (e) => {
       console.error(e);

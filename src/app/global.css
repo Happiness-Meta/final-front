@@ -18,7 +18,8 @@ body {
 }
 
 input,
-textarea {
+textarea,
+select {
   outline: none !important;
 }
 

@@ -20,7 +20,12 @@ import { AboutInfoForIndiSignUp } from "@/app/types/aboutSignInUp";
 const IndividualMembetSection = () => {
   const router = useRouter();
 
-  const [, setCookie] = useCookies(["email", "nickname", "token"]);
+  const [, setCookie] = useCookies([
+    "email",
+    "nickname",
+    "accessToken",
+    "refreshToken",
+  ]);
 
   const pwRef: RefObject<HTMLInputElement> = useRef(null);
   const pwVerRef: RefObject<HTMLInputElement> = useRef(null);
@@ -93,7 +98,9 @@ const IndividualMembetSection = () => {
       );
       setCookie("email", response2.data.data.email);
       setCookie("nickname", response2.data.data.name);
-      setCookie("token", response2.data.data.token);
+      setCookie("accessToken", response2.data.data.accessToken);
+      setCookie("refreshToken", response2.data.data.refreshToken);
+
       setIsSignedUp(true);
       setTimeout(() => {
         router.push("/");
