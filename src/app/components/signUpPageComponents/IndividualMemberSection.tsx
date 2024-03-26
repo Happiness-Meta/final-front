@@ -36,7 +36,7 @@ const IndividualMembetSection = () => {
     email: "",
     name: "",
     password: "",
-    position: "희망포지션",
+    position: "희망 포지션",
   });
 
   const { techStackContainer, activateErrorMessageAni, setIsSignedUp } =

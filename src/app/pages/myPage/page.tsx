@@ -6,7 +6,7 @@ import Image from "next/image";
 import { RefObject, useEffect, useRef, useState } from "react";
 
 // libararies
-import axios from "axios";
+import useSignUpPageStore from "@/app/store/signUpPageStore/useSignUpPageStore";
 
 //components
 import ProjectTitle from "@/app/components/myPageComponents/myPageProjectTitle";
@@ -45,9 +45,10 @@ import {
 //types
 import { myInfo, companyInfo } from "@/app/types/aboutMypage";
 import { AboutInfoForIndiSignUp } from "@/app/types/aboutSignInUp";
+import { AboutSignUpInputs } from "@/app/types/aboutSignInUp";
 
 // custom hooks
-import useGetData from "@/app/hooks/myPageHooks/useGetData";
+import userAxiosWithAuth from "@/app/utils/useAxiosWithAuth";
 import TechStackSpace from "@/app/components/commonComponents/TechStackSpace";
 
 const MyPage = () => {
@@ -59,8 +60,10 @@ const MyPage = () => {
     password: "",
     position: "희망포지션",
   });
+
+  const { techStackContainer, addTechStack } = useSignUpPageStore();
   // 유저 정보
-  const [userData, setUserData] = useState([]);
+  const [userData, setUserData] = useState<myInfo>();
 
   // 회사 정보
   const [companyData, setCompanyData] = useState([]);
@@ -69,22 +72,35 @@ const MyPage = () => {
   const [isEdit, setIsEdit] = useState(false);
 
   // get user data
-  const getData = async () => {
-    const data = useGetData(setUserData);
-    data();
-  };
+  // const getData = async () => {
+  //   const data = useGetData(setUserData);
+  //   data();
+  // };
 
-  // get company data
-  const getCompanyData = async () => {
+  // get user data 2
+  const getDatas = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:3001/myPageCompanyData"
+      const response = await userAxiosWithAuth.get(
+        process.env.NEXT_PUBLIC_BASE_URL + "/user"
       );
-      setCompanyData(response.data);
+      console.log(response);
+      setUserData(response.data.data);
     } catch (err) {
       console.log(err);
     }
   };
+
+  // get company data
+  // const getCompanyData = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       "http://localhost:3001/myPageCompanyData"
+  //     );
+  //     setCompanyData(response.data);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
   const guideForPosition = "희망하시는 포지션을";
   const guideForIndustry = "산업 분야를";
 
@@ -98,17 +114,21 @@ const MyPage = () => {
 
   const editData = () => {
     setIsEdit(!isEdit);
+    userData?.techStack.map((item) => {
+      addTechStack(item);
+    });
   };
 
   useEffect(() => {
-    getData();
-    getCompanyData();
+    getDatas();
+    // getCompanyData();
   }, []);
 
   useEffect(() => {
     console.log("userData: ", userData);
     console.log("companyData: ", companyData);
-  }, [userData, companyData]);
+    console.log("isEdit: ", isEdit);
+  }, [userData, companyData, isEdit]);
 
   return (
     <div>
@@ -146,359 +166,407 @@ const MyPage = () => {
             `,
               ]}
             >
-              {userData.length > 0
-                ? userData.map((item: myInfo, i: number) => (
-                    <div key={i}>
-                      <div
-                        css={[
-                          `
+              {/* 닉네임 변경 가능으로 수정하기 */}
+              {/* 유저 데이터 */}
+              {userData?.industry ? (
+                <div>
+                  <div
+                    css={[
+                      `
                       width: 100%;
                       text-align: end;
                     `,
-                        ]}
-                      >
-                        {isEdit === false ? (
-                          <Image
-                            src={Edit}
-                            alt="편집"
-                            width={30}
-                            height={30}
-                            onClick={editData}
-                          />
-                        ) : (
-                          <button css={okButton} onClick={editData}>
-                            수정
-                          </button>
-                        )}
-                      </div>
-                      <div>
-                        <div css={[userNickname]}>{item.userNickname}</div>
-                      </div>
-                      {isEdit === true ? (
-                        <div>
-                          <div
-                            css={[
-                              rowContainer,
-                              `
+                    ]}
+                  >
+                    {isEdit === false ? (
+                      <Image
+                        src={Edit}
+                        alt="편집"
+                        width={30}
+                        height={30}
+                        onClick={editData}
+                      />
+                    ) : (
+                      <button css={okButton} onClick={editData}>
+                        수정
+                      </button>
+                    )}
+                  </div>
+                  <div>
+                    <div css={[userNickname]}>{userData?.name}</div>
+                  </div>
+                  {isEdit === true ? (
+                    <div>
+                      <div
+                        css={[
+                          rowContainer,
+                          `
                           flex-direction: column;
                         `,
-                            ]}
-                          >
-                            <div
-                              css={[
-                                inputContainer,
-                                `
+                        ]}
+                      >
+                        <div
+                          css={[
+                            inputContainer,
+                            `
                                 flex-direction: row;
                             `,
-                              ]}
-                            >
-                              <Image
-                                css={[
-                                  `
+                          ]}
+                        >
+                          <Image
+                            css={[
+                              `
                                 margin-left: 0.3rem;
                               `,
-                                ]}
-                                src={Email}
-                                alt="메일"
-                              />
-                              <input
-                                css={[
-                                  input,
-                                  `
+                            ]}
+                            src={Email}
+                            alt="메일"
+                            width={25}
+                            height={25}
+                          />
+                          <input
+                            css={[
+                              input,
+                              `
                               border: none;
                               &:focus {
                                 outline: none;
                               }
                             `,
-                                ]}
-                                placeholder={item.userEmail}
-                              />
-                            </div>
-                            <PositionSpace
-                              handlePutInfo={handlePutInfo}
-                              positionList={preferedPositionList}
-                              textForGuide={guideForPosition}
-                            />
-                            <TechStackSpace
-                              searchTechStackRef={searchTechStackRef}
-                            />
-                          </div>
+                            ]}
+                            placeholder={userData?.email}
+                          />
                         </div>
-                      ) : (
-                        <div>
-                          <div
-                            css={[
-                              rowContainer,
-                              `
+                        <PositionSpace
+                          handlePutInfo={handlePutInfo}
+                          positionList={preferedPositionList}
+                          textForGuide={guideForPosition}
+                        />
+                        <TechStackSpace
+                          searchTechStackRef={searchTechStackRef}
+                        />
+                      </div>
+                    </div>
+                  ) : (
+                    <div>
+                      <div
+                        css={[
+                          rowContainer,
+                          `
                     flex-direction: row;
                     margin-bottom: 1rem;
                   `,
-                            ]}
-                          >
-                            <Image
-                              css={[
-                                `
+                        ]}
+                      >
+                        <Image
+                          css={[
+                            `
                       margin-right: 0.5rem;
                       
                     `,
-                              ]}
-                              src={Email}
-                              alt="이메일"
-                            />
-                            <div>{item.userEmail}</div>
-                          </div>
-                          <h3 css={[userField]}>{item.Field}</h3>
-                          <div
-                            css={[
-                              `
+                          ]}
+                          src={Email}
+                          alt="이메일"
+                          width={25}
+                          height={25}
+                        />
+                        <div>{userData?.email}</div>
+                      </div>
+                      <h3 css={[userField]}>
+                        {userData?.position === null
+                          ? "포지션이 없습니다."
+                          : userData?.position}
+                      </h3>
+                      <div
+                        css={[
+                          `
                         display:flex;
                         flex-direction: row;
                         flex-wrap: wrap;
                       `,
-                            ]}
-                          >
-                            {item.techStack.map((item, i) => (
-                              <div
-                                css={[
-                                  techStacks,
-                                  `
+                        ]}
+                      >
+                        {userData?.techStack.map((item, i: number) => (
+                          <div
+                            css={[
+                              techStacks,
+                              `
                           text-align: center;
                         `,
-                                ]}
-                                key={i}
-                              >
-                                {item}
-                              </div>
-                            ))}
+                            ]}
+                            key={i}
+                          >
+                            {item}
                           </div>
-                        </div>
-                      )}
+                        ))}
+                      </div>
                     </div>
-                  ))
-                : companyData.map((company: companyInfo, i: number) => (
-                    <div key={i}>
+                  )}
+                </div>
+              ) : (
+                <div>
+                  <div
+                    css={[
+                      `
+                      width: 100%;
+                      text-align: end;
+                    `,
+                    ]}
+                  >
+                    {isEdit === false ? (
+                      <Image
+                        src={Edit}
+                        alt="편집"
+                        width={30}
+                        height={30}
+                        onClick={editData}
+                      />
+                    ) : (
+                      <button css={okButton} onClick={editData}>
+                        수정
+                      </button>
+                    )}
+                  </div>
+                  <div>
+                    <div css={[userNickname]}>{userData?.name}</div>
+                  </div>
+                  {isEdit === true ? (
+                    <div>
                       <div
                         css={[
+                          rowContainer,
                           `
-                        width: 100%;
-                        text-align: end;
+                        flex-direction: column;
                       `,
                         ]}
                       >
-                        {isEdit === false ? (
-                          <Image
-                            src={Edit}
-                            alt="편집"
-                            width={30}
-                            height={30}
-                            onClick={editData}
-                          />
-                        ) : (
-                          <button css={okButton} onClick={editData}>
-                            수정
-                          </button>
-                        )}
-                      </div>
-                      <div>
-                        <div css={userNickname}>{company.companyName}</div>
-                      </div>
-                      {isEdit === true ? (
                         <div
                           css={[
+                            inputContainer,
                             `
-                          height: 100%;
+                          flex-direction: row;
+                          border: none;
+                          justify-content: center;
                         `,
                           ]}
                         >
+                          <Image
+                            css={[
+                              `
+                                margin-left: 0.3rem;
+                              `,
+                            ]}
+                            src={Email}
+                            alt="메일"
+                            width={25}
+                            height={25}
+                          />
                           <div
                             css={[
-                              rowContainer,
+                              input,
                               `
-                          flex-direction: column;
-                          margin-bottom: 0.5rem;
-                        `,
+                              border: none;
+                              &:focus {
+                                outline: none;
+                              }
+                            `,
                             ]}
                           >
-                            <div
-                              css={[
-                                inputContainer,
-                                `
-                                flex-direction: row;
-                              `,
-                              ]}
-                            >
-                              <Image
-                                css={[
-                                  `
-                                  margin-left: 0.5rem;
-                                margin-right: 0.5rem;
-                              `,
-                                ]}
-                                src={Email}
-                                alt="회사이메일"
-                                width={28}
-                                height={28}
-                              />
-                              <input
-                                css={[
-                                  input,
-                                  `
-                                boredr: none;
-                                &:focus {
-                                  outline: none;
-                                }
-                              `,
-                                ]}
-                                placeholder={company.companyEmail}
-                              />
-                            </div>
-                            <div
-                              css={[
-                                inputContainer,
-                                `
-                                flex-direction: row;
-                           `,
-                              ]}
-                            >
-                              <Image
-                                css={[
-                                  `
-                                  margin-left: 0.5rem;
-                                margin-right: 0.5rem;
-                              `,
-                                ]}
-                                src={Address}
-                                alt="회사 주소"
-                                width={28}
-                                height={28}
-                              />
-                              <input
-                                css={[
-                                  input,
-                                  `
-                                boredr: none;
-                                &:focus {
-                                  outline: none;
-                                }
-                              `,
-                                ]}
-                                placeholder={company.companyAddress}
-                              />
-                            </div>
-                            <div
-                              css={[
-                                inputContainer,
-                                `
-                                flex-direction: row;
-                           `,
-                              ]}
-                            >
-                              <Image
-                                css={[
-                                  `
-                                  margin-left: 0.5rem;
-                                margin-right: 0.5rem;
-                              `,
-                                ]}
-                                src={PhoneNumber}
-                                alt="회사 주소"
-                                width={28}
-                                height={28}
-                              />
-                              <input
-                                css={[
-                                  input,
-                                  `
-                                boredr: none;
-                                &:focus {
-                                  outline: none;
-                                }
-                              `,
-                                ]}
-                                placeholder={company.companyPhoneNumber}
-                              />
-                            </div>
+                            {userData?.email}
                           </div>
-                          <PositionSpace
-                            handlePutInfo={handlePutInfo}
-                            positionList={industryList}
-                            textForGuide={guideForIndustry}
+                        </div>
+                        <div
+                          css={[
+                            inputContainer,
+                            `
+                          flex-direction: row;
+                        `,
+                          ]}
+                        >
+                          <Image
+                            css={[
+                              `
+                                margin-left: 0.3rem;
+                              `,
+                            ]}
+                            src={PhoneNumber}
+                            alt="메일"
+                            width={25}
+                            height={25}
+                          />
+                          <input
+                            css={[
+                              input,
+                              `
+                              border: none;
+                              &:focus {
+                                outline: none;
+                              }
+                            `,
+                            ]}
+                            placeholder={userData?.telephone}
                           />
                         </div>
-                      ) : (
-                        <div>
-                          <div
-                            css={[
-                              rowContainer,
-                              `
+                        <div
+                          css={[
+                            inputContainer,
+                            `
                           flex-direction: row;
-                          margin-bottom: 0.5rem;
                         `,
-                            ]}
-                          >
-                            <Image
-                              css={[
-                                `
-                                
-                                margin-right: 0.5rem;
-                              `,
-                              ]}
-                              src={Email}
-                              alt="회사이메일"
-                              width={28}
-                              height={28}
-                            />
-                            <div>{company.companyEmail}</div>
-                          </div>
-                          <div
+                          ]}
+                        >
+                          <Image
                             css={[
                               `
-                            margin-bottom: 0.5rem;
-                            display: flex;
-                            align-items: center;
-                          `,
-                            ]}
-                          >
-                            <Image
-                              css={[
-                                `
-                                margin-right: 0.5rem;
+                                margin-left: 0.3rem;
                               `,
-                              ]}
-                              src={Address}
-                              alt="회사 주소"
-                              width={28}
-                              height={28}
-                            />
-                            {company.companyAddress}
-                          </div>
-                          <div
+                            ]}
+                            src={Address}
+                            alt="메일"
+                            width={25}
+                            height={25}
+                          />
+                          <input
                             css={[
+                              input,
                               `
-                            margin-bottom: 0.5rem;
-                            display: flex;
-                            align-items: center;
-                          `,
+                              border: none;
+                              &:focus {
+                                outline: none;
+                              }
+                            `,
                             ]}
-                          >
-                            <Image
-                              css={[
-                                `
-                                margin-right: 0.5rem;
-                              `,
-                              ]}
-                              src={PhoneNumber}
-                              alt="회사 번호"
-                              width={28}
-                              height={28}
-                            />
-                            {company.companyPhoneNumber}
-                          </div>
-                          <h3 css={[userField]}>{company.companyIndustry}</h3>
+                            placeholder={
+                              userData?.address
+                                ? userData?.address
+                                : "주소가 없습니다"
+                            }
+                          />
                         </div>
-                      )}
+                        <PositionSpace
+                          handlePutInfo={handlePutInfo}
+                          positionList={industryList}
+                          textForGuide={guideForIndustry}
+                        />
+                      </div>
                     </div>
-                  ))}
+                  ) : (
+                    <div>
+                      <div
+                        css={[
+                          rowContainer,
+                          `
+                          flex-direction: column;
+                        `,
+                        ]}
+                      >
+                        <div
+                          css={[
+                            inputContainer,
+                            `
+                            border: none;
+                          `,
+                          ]}
+                        >
+                          <Image
+                            css={[
+                              `
+                              margin-left: 0.3rem;
+                              `,
+                            ]}
+                            src={Email}
+                            alt="메일"
+                            width={25}
+                            height={25}
+                          />
+                          <div
+                            css={[
+                              input,
+                              `
+                              border: none;
+                              &:focus {
+                                outline: none;
+                              }
+                            `,
+                            ]}
+                          >
+                            {userData?.email}
+                          </div>
+                        </div>
+                        <div
+                          css={[
+                            inputContainer,
+                            `
+                          border: none;
+                        `,
+                          ]}
+                        >
+                          <Image
+                            css={[
+                              `
+                                margin-left: 0.3rem;
+                              `,
+                            ]}
+                            src={PhoneNumber}
+                            alt="메일"
+                            width={25}
+                            height={25}
+                          />
+                          <div
+                            css={[
+                              input,
+                              `
+                              border: none;
+                              &:focus {
+                                outline: none;
+                              }
+                            `,
+                            ]}
+                          >
+                            {userData?.telephone}
+                          </div>
+                        </div>
+                        <div
+                          css={[
+                            inputContainer,
+                            `
+                          flex-direction: row;
+                          border: none;
+                        `,
+                          ]}
+                        >
+                          <Image
+                            css={[
+                              `
+                                margin-left: 0.3rem;
+                              `,
+                            ]}
+                            src={Address}
+                            alt="메일"
+                            width={25}
+                            height={25}
+                          />
+                          <div
+                            css={[
+                              input,
+                              `
+                              border: none;
+                              &:focus {
+                                outline: none;
+                              }
+                            `,
+                            ]}
+                          >
+                            {userData?.address
+                              ? userData?.address
+                              : "주소가 없습니다"}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
             <Image
               css={[

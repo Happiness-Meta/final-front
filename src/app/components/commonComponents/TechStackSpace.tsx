@@ -29,7 +29,7 @@ import { toHeight0 } from "@/app/styleComponents/commonStyles/keyframes";
 const TechStackSpace: React.FC<AboutTechStackSpace> = ({
   searchTechStackRef,
 }) => {
-  const { techStackContainer, addTechStack, removeTechStack } =
+  const { techStackContainer, addTechStack, removeTechStack, setTechStack } =
     useSignUpPageStore();
   const { setGuideMessage } = useProjectTemplateStore();
 

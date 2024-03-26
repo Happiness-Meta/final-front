@@ -35,7 +35,12 @@ const CorporateMemberSection = () => {
 
   const { email, name, password, address, telephone, position } = infoForSignUp;
 
-  const [, setCookie] = useCookies(["email", "nickname", "token"]);
+  const [, setCookie] = useCookies([
+    "email",
+    "nickname",
+    "accessToken",
+    "refreshToken",
+  ]);
 
   const handlePutInfo = (sort: keyof AboutInfoForCorpSignUp, value: string) => {
     setInfoForSignUp((prev) => ({
@@ -92,7 +97,8 @@ const CorporateMemberSection = () => {
       );
       setCookie("email", response2.data.data.email);
       setCookie("nickname", response2.data.data.name);
-      setCookie("token", response2.data.data.token);
+      setCookie("accessToken", response2.data.data.accessToken);
+      setCookie("refreshToken", response2.data.data.refreshToken);
       setIsSignedUp(true);
       setTimeout(() => {
         router.push("/");

@@ -96,6 +96,7 @@ export const input = {
   fontSize: "16px",
   transition: ".2s",
   border: "none",
+  marginLeft: "0.5rem",
 };
 
 export const okButton = {
