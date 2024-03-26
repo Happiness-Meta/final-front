@@ -251,6 +251,8 @@ export interface RequestPayParams extends RequestPayAdditionalParams {
 }
 
 export interface RequestPayAdditionalResponse {
+  /* cvc번호 */
+  card_code?: string;
   /* ### 신용카드 번호 */
   card_number?: string;
   /**
@@ -339,6 +341,12 @@ export interface RequestPayResponse extends RequestPayAdditionalResponse {
   paid_at?: string;
   /** ### 거래 매출전표 URL */
   receipt_url?: string;
+
+  /** ### 통화 */
+  currency?: string;
+
+  /** ### 카드사 이름 */
+  card_name?: string;
 }
 
 export type RequestPayResponseCallback = (response: RequestPayResponse) => void;

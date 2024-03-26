@@ -60,13 +60,13 @@ const TicketPage = () => {
         itemPrice: orderProducts.BASIC_TICKET.itemPrice,
         itemName: orderProducts.BASIC_TICKET.itemName,
       };
-      const response = await axios.post("/api/v1/order", body);
+      const response = await axios.post("http://processlogic.link/api/v1/order", body);
 
-      setIsSetOrder(response.data);
+      setIsSetOrder(response.data.data);
 
       // 요청이 성공적으로 처리되면 실행될 코드
-      // 예를 들어, 응답을 콘솔에 출력
-      console.log(response.data);
+
+      console.log("res data", response.data);
     } catch (error) {
       // 에러 처리 코드
       console.error("handleBuyTicket error:", error);
@@ -76,10 +76,10 @@ const TicketPage = () => {
     }
   };
 
-  useEffect(() => {
-    console.log("isSetOrder", isSetOrder);
-    console.log("isSetOrder", typeof isSetOrder.orderUid);
-  }, [isSetOrder]);
+  // useEffect(() => {
+  //   console.log("isSetOrder", isSetOrder);
+  //   console.log("isSetOrder", typeof isSetOrder.orderUid);
+  // }, [isSetOrder]);
 
   useEffect(() => {
     // 포트원 스크립트 동적 로드 및 초기화
@@ -116,18 +116,31 @@ const TicketPage = () => {
       //front -> kg : request
       //kg -> front : response
 
+      //아임포트 결제창 켜기
       window.IMP.request_pay(data, async (response) => {
         if (response.success) {
           console.log("window.imp.request_pay: ", data);
           console.log("call back!!: " + JSON.stringify(data));
-
+          console.log("this is res", response);
           if (response.imp_uid) {
             try {
-              const rsp = await axios.post("http://localhost:8080/payment", {
-                paymentUid: response.imp_uid,
+              const body = {
+                impUid: response.imp_uid,
                 orderUid: response.merchant_uid,
                 cardNumber: response.card_number,
-              });
+                payMethod: response.pay_method,
+                amount: response.paid_amount,
+                buyerTel: response.buyer_tel,
+                currency: response.currency,
+                paidAt: response.paid_at,
+                status: response.status,
+                buyerEmail: response.buyer_email,
+                cardName: response.card_name,
+              };
+
+              console.log("pay api rsp myBody", body);
+
+              const rsp = await axios.post("http://processlogic.link/api/v1/payment", body);
               console.log(rsp.data);
             } catch (error) {
               console.error("axios 요청 중 에러 발생:", error);

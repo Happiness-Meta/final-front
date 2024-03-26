@@ -15,6 +15,17 @@ export const signInUpinputStyle = {
   fontSize: "16px",
 };
 
+export const techStackinputStyle = {
+  width: "100%",
+  height: "30px",
+  padding: "10px",
+  border: "1px solid gray",
+  borderRadius: "5px",
+  fontSize: "16px",
+  display: "Flex",
+  alignItems: "center",
+};
+
 export const signInUpInputStyleHover = css`
   &:hover {
     border: 2px solid #ff8a0080 !important;

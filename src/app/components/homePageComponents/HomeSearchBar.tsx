@@ -19,6 +19,7 @@ import { commonColor } from "@/app/styleComponents/commonStyles/commonStyles";
 import {
   signInUpinputStyle,
   signInUpInputStyleHover,
+  techStackinputStyle,
 } from "@/app/styleComponents/commonStyles/inputAndButtonAndText";
 import { useRef, useEffect, useState } from "react";
 import useDetectClose from "@/app/hooks/homePageHooks/useDetectClose";
@@ -48,11 +49,10 @@ const HomeSearchBar = () => {
 
           <input
             value={jobIdentify || "직군·직무"}
-            type="button"
+            type="text"
             placeholder="직군·직무"
             onFocus={() => setIsOpen(!isOpen)}
-            onBlur={() => setTimeout(() => setIsOpen(!isOpen), 50)}
-            readOnly
+            onBlur={() => setTimeout(() => setIsOpen(false), 200)}
           />
           {isOpen && (
             <ul css={jobListUl}>
@@ -76,12 +76,18 @@ const HomeSearchBar = () => {
           />
           <div
             css={[
-              `position: absolute; top: 102%;
+              `position: absolute;
+            top: 102%;
+            left: 32%;
             display: ${isTechStacksVisible ? `flex` : `none`};
             flex-direction: column;
-            width: 90%; 
-            min-height:30px; height: fit-content; max-height: 200px; 
-            border: 1px solid gray; border-radius: 7px; 
+            width: 68%;
+
+            min-height:30px;
+            height: fit-content;
+            max-height: 200px; 
+            border: 1px solid gray; 
+            border-radius: 7px; 
             background-color: white;
             overflow: scroll;
             z-index:1;`,
@@ -117,7 +123,7 @@ const HomeSearchBar = () => {
           </div>
           <div
             css={[
-              signInUpinputStyle,
+              techStackinputStyle,
               `${signInUpInputStyleHover}; 
           display:flex; align-items: center; gap: 3px;
           height: 35px; padding-left: 3px; overflow: hidden;`,
@@ -140,6 +146,10 @@ const HomeSearchBar = () => {
                 font-weight: 500;
                 white-space: nowrap;
                 transition: .3s;
+                display:flex;
+                height: 22px !important;
+                align-items: center;
+                margin-left: 2px;
                 &:hover {
                   background-color: black;
                 }
