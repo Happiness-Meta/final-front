@@ -5,16 +5,18 @@ import { labelStyles } from "@/app/styleComponents/projectTemplateStyles/templat
 import { eachSpaceStyle } from "@/app/styleComponents/projectViewStyles.ts/projectViewStyles";
 import { AboutProjectSections } from "@/app/types/aboutProjectView";
 
-const ProjectName: React.FC<AboutProjectSections> = ({ data }) => {
+const ProjectPeriod: React.FC<AboutProjectSections> = ({ data }) => {
   return (
     <div css={[eachSpaceStyle]}>
-      <label htmlFor="name" css={[labelStyles.style1]}>
-        프로젝트 이름
+      <label htmlFor="period" css={[labelStyles.style1]}>
+        프로젝트 기간
       </label>
       <hr />
-      <p>{data?.projectName}</p>
+      <p>
+        {data?.projectStartDate} ~ {data?.projectEndDate}
+      </p>
     </div>
   );
 };
 
-export default ProjectName;
+export default ProjectPeriod;

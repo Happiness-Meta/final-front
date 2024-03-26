@@ -2,7 +2,15 @@
 /** @jsxImportSource @emotion/react */
 
 import Header from "@/app/components/projectViewComponents/Header";
+import ProjectDescription from "@/app/components/projectViewComponents/sections/ProjectDescription";
+import ProjectFunction from "@/app/components/projectViewComponents/sections/ProjectFunction";
+import ProjectLink from "@/app/components/projectViewComponents/sections/ProjectLink";
 import ProjectName from "@/app/components/projectViewComponents/sections/ProjectName";
+import ProjectPeriod from "@/app/components/projectViewComponents/sections/ProjectPeriod";
+import ProjectPersonnel from "@/app/components/projectViewComponents/sections/ProjectPersonnel";
+import ProjectProblem from "@/app/components/projectViewComponents/sections/ProjectProblem";
+import ProjectTakeAway from "@/app/components/projectViewComponents/sections/ProjectTakeAway";
+import ProjectTechStack from "@/app/components/projectViewComponents/sections/ProjectTechStack";
 import PaintBackground from "@/app/components/ptpComponents/PaintBackground";
 import useProjectStore from "@/app/store/commonStore/useProjectStore";
 import {
@@ -10,16 +18,8 @@ import {
   widthHeighVhFull,
   widthHeightFull,
 } from "@/app/styleComponents/commonStyles/commonStyles";
-import {
-  labelStyles,
-  pageStyle,
-} from "@/app/styleComponents/projectTemplateStyles/templateStyle";
-import {
-  eachSpaceStyle,
-  pvSectionStyle,
-  styleAboutLink,
-} from "@/app/styleComponents/projectViewStyles.ts/projectViewStyles";
-import { stackInContainerStyle } from "@/app/styleComponents/signUpPageStyles/techStackStyles";
+import { pageStyle } from "@/app/styleComponents/projectTemplateStyles/templateStyle";
+import { pvSectionStyle } from "@/app/styleComponents/projectViewStyles.ts/projectViewStyles";
 import { AboutGetData } from "@/app/types/aboutProjectView";
 import userAxiosWithAuth from "@/app/utils/useAxiosWithAuth";
 import { useQuery } from "@tanstack/react-query";
@@ -39,9 +39,7 @@ const ProjectView = () => {
       const response = await userAxiosWithAuth.get(
         `${process.env.NEXT_PUBLIC_BASE_URL}/portfolio/${id}`
       );
-
       setData(response.data.data);
-      console.log(response.data.data);
       setDynamicQuestions("color", response.data.data.themeColor);
       return response;
     },
@@ -49,13 +47,17 @@ const ProjectView = () => {
   if (loadData.isLoading)
     return (
       <pre css={[flexCenterX2, widthHeighVhFull]}>
-        Getting the data for you!
+        불러오고 있습니다. 잠시만 기다려주세요.
       </pre>
     );
   if (loadData.isError)
     return (
-      <pre css={[flexCenterX2, widthHeighVhFull]}>
-        {JSON.stringify(loadData.error)}
+      <pre css={[flexCenterX2, widthHeighVhFull, `flex-direction: column;`]}>
+        <div>{JSON.stringify(loadData.error.message)}</div>
+        <div>
+          서버에러이거나, 이 프로젝트는 회원님의 프로젝트가 아니어서 엑세스 불가
+          합니다.
+        </div>
       </pre>
     );
 
@@ -64,111 +66,15 @@ const ProjectView = () => {
       <Header />
       <PaintBackground />
       <section css={[pvSectionStyle]}>
-        {/* <ProjectName data={data} /> */}
-        <div css={[eachSpaceStyle]}>
-          <label htmlFor="period" css={[labelStyles.style1]}>
-            프로젝트 기간
-          </label>
-          <hr />
-          <p>
-            {data?.projectStartDate} ~ {data?.projectEndDate}
-          </p>
-        </div>
-
-        <div css={[eachSpaceStyle]}>
-          <label htmlFor="personnel" css={[labelStyles.style1]}>
-            프로젝트 인원
-          </label>
-          <hr />
-          <p>{data?.personnel} 명</p>
-        </div>
-
-        <div css={[eachSpaceStyle]}>
-          <label htmlFor="techStacks" css={[labelStyles.style1]}>
-            사용한 기술 스택 : {data?.techStack.length}개
-          </label>
-          <hr />
-          <div>
-            {data?.techStack.map((stack, index) => {
-              return (
-                <div key={index} css={[stackInContainerStyle]}>
-                  {stack}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        <div css={[eachSpaceStyle]}>
-          <label htmlFor="description" css={[labelStyles.style1]}>
-            프로젝트 소개
-          </label>
-          <hr />
-          <p>{data?.description}</p>
-        </div>
-
-        <div css={[eachSpaceStyle]}>
-          <label htmlFor="function" css={[labelStyles.style1]}>
-            구현 기능
-          </label>
-          <hr />
-          <div>
-            {data?.projectFunction.map((func, index) => {
-              return (
-                <div key={index}>
-                  <div>{func.description}</div>
-                  <div>{func.contribution}</div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        <div css={[eachSpaceStyle]}>
-          <label htmlFor="problem" css={[labelStyles.style1]}>
-            문제 해결
-          </label>
-          <hr />
-          <div>
-            {data?.problemAndSolution.map((prob, index) => {
-              return (
-                <div key={index}>
-                  <div>{prob.definition}</div>
-                  <div>{prob.reason}</div>
-                  <div>{prob.solution}</div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        <div css={[eachSpaceStyle]}>
-          <label htmlFor="link" css={[labelStyles.style1]}>
-            링크
-          </label>
-          <hr />
-          {data?.link.map((link, index) => {
-            return (
-              <div key={index} css={[styleAboutLink.linkContainerStyle]}>
-                <p css={[styleAboutLink.linkDescriptionStyle]}>
-                  {link.description}
-                </p>
-
-                <a css={[styleAboutLink.linkStyle]} href={link.address}>
-                  {link.address}
-                </a>
-              </div>
-            );
-          })}
-        </div>
-
-        <div css={[eachSpaceStyle]}>
-          <label htmlFor="takeaway" css={[labelStyles.style1]}>
-            배운 점
-          </label>
-          <hr />
-          <div>{data?.takeaway}</div>
-        </div>
+        <ProjectName data={data} />
+        <ProjectPeriod data={data} />
+        <ProjectPersonnel data={data} />
+        <ProjectTechStack data={data} />
+        <ProjectDescription data={data} />
+        <ProjectFunction data={data} />
+        <ProjectProblem data={data} />
+        <ProjectLink data={data} />
+        <ProjectTakeAway data={data} />
       </section>
     </div>
   );

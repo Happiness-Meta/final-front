@@ -13,6 +13,7 @@ import {
 import useSignUpPageStore from "@/app/store/signUpPageStore/useSignUpPageStore";
 import {
   searchedListStyle,
+  stackInContainerHoverStyle,
   stackInContainerStyle,
 } from "@/app/styleComponents/signUpPageStyles/techStackStyles";
 import { AboutTechStackSpace } from "@/app/types/aboutCommonComponents";
@@ -107,7 +108,7 @@ const TechStackSpace: React.FC<AboutTechStackSpace> = ({
             <div
               key={index}
               onClick={() => removeTechStack(tech)}
-              css={stackInContainerStyle}
+              css={[stackInContainerStyle, stackInContainerHoverStyle]}
             >
               {tech}
             </div>

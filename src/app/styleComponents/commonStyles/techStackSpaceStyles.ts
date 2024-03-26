@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 export const searchImageStyle = css`
   position: absolute;
   top: 50%;
-  left: 3%;
+  left: 10px;
   transform: translateY(-50%);
 `;
 
