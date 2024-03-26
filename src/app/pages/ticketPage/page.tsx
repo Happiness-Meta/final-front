@@ -15,7 +15,6 @@ import ReactModal from "react-modal";
 import useModalstore from "@/app/store/modalStore/ticketPageStore/useModalStore";
 import { useEffect, useState } from "react";
 import { RequestPayParams } from "../../../../portone";
-import axios from "axios";
 import qrCode from "@/app/assets/svg/qrcode.svg";
 import paletteTicketPicture from "@/app/assets/svg/paletteTicketPicture.svg";
 import {
@@ -33,6 +32,8 @@ import {
   paymentStyle,
 } from "@/app/styleComponents/ticketPagestyles/ticketPageStyles";
 import { orderProducts } from "@/app/constants/orderProducts";
+import userAxiosWithAuth from "@/app/utils/useAxiosWithAuth";
+import { useCookies } from "react-cookie";
 
 interface SetOrder {
   orderUid: string;
@@ -44,7 +45,7 @@ interface SetOrder {
 
 const TicketPage = () => {
   const { isModalOpen, togglePayModal } = useModalstore();
-
+  const [cookies] = useCookies(["token", "nickname"]);
   const [isSetOrder, setIsSetOrder] = useState<SetOrder>({
     orderUid: "",
     amount: 0,
@@ -60,7 +61,10 @@ const TicketPage = () => {
         itemPrice: orderProducts.BASIC_TICKET.itemPrice,
         itemName: orderProducts.BASIC_TICKET.itemName,
       };
-      const response = await axios.post("http://processlogic.link/api/v1/order", body);
+      const response = await userAxiosWithAuth.post(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/order`,
+        body
+      );
 
       setIsSetOrder(response.data.data);
 
@@ -107,7 +111,7 @@ const TicketPage = () => {
         amount: isSetOrder.amount,
         name: isSetOrder.itemName,
         buyer_name: isSetOrder.buyerName,
-        buyer_tel: "010-1234-5678", //user에 들어갈 정보 인터페이스
+        buyer_tel: "010-1234-5678",
         buyer_email: "example@example.com",
         buyer_addr: isSetOrder.buyerAddress,
         buyer_postcode: "01181",
@@ -140,7 +144,10 @@ const TicketPage = () => {
 
               console.log("pay api rsp myBody", body);
 
-              const rsp = await axios.post("http://processlogic.link/api/v1/payment", body);
+              const rsp = await userAxiosWithAuth.post(
+                `${process.env.NEXT_PUBLIC_BASE_URL}/payment`,
+                body
+              );
               console.log(rsp.data);
             } catch (error) {
               console.error("axios 요청 중 에러 발생:", error);
@@ -155,19 +162,41 @@ const TicketPage = () => {
       });
     }
   };
+  useEffect(() => {
+    const token = cookies.token;
+
+    if (token) {
+      console.log("사용자가 로그인한 상태입니다.");
+    } else {
+      console.log("사용자가 로그인하지 않은 상태입니다.");
+    }
+  }, [cookies.token]);
+  console.log(cookies.nickname);
+
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   return (
     <>
       <header css={headerContainerStyle}>
         <ProjectMenu />
-        <div css={homeButtonContainer}>
-          <Link href={"loginPage"} css={buttonStyle("white", "black")}>
-            로그인
-          </Link>
-          <Link href={"signUpPage"} css={buttonStyle(commonColor.mainYellow, "white")}>
-            회원가입
-          </Link>
-        </div>
+        {isClient && cookies.nickname ? (
+          <div>
+            <span>안녕하세요, {cookies.nickname} 님!</span>
+          </div>
+        ) : (
+          <div css={homeButtonContainer}>
+            <Link href={"loginPage"} css={buttonStyle("white", "black")}>
+              로그인
+            </Link>
+            <Link href={"signUpPage"} css={buttonStyle(commonColor.mainYellow, "white")}>
+              회원가입
+            </Link>
+          </div>
+        )}
       </header>
       <article>
         <Image

@@ -7,9 +7,6 @@ import {
   headerContainerStyle,
 } from "@/app/styleComponents/homePageStyles/HomePageStyles";
 
-//axios
-import axios from "axios";
-
 // css
 import Image from "next/image";
 import {
@@ -36,9 +33,10 @@ import { commonColor } from "@/app/styleComponents/commonStyles/commonStyles";
 import ReactModal from "react-modal";
 import useModalstore from "@/app/store/modalStore/ticketPageStore/useModalStore";
 import { css } from "@emotion/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { JobDropDown } from "@/app/components/homePageComponents/JobDropDown";
 import { cancelReason } from "@/app/constants/cancelReason";
+import userAxiosWithAuth from "@/app/utils/useAxiosWithAuth";
 
 const reactCancelModal = css`
   background-color: white;
@@ -100,9 +98,9 @@ const cancelListUl = () => css`
 `;
 
 const CancelMembership = () => {
-  const cancelPay = () => {
+  const cancelPay = async () => {
     toggleCancelModal();
-    //   const response = await axios.get("https://api.iamport.kr/payments/cancel")
+    const response = await userAxiosWithAuth.get(`${process.env.NEXT_PUBLIC_BASE_URL}/order`);
     //   if(response.imp_uid){
     //   try {
     //     const body = {
@@ -121,8 +119,14 @@ const CancelMembership = () => {
   const { isCancelModalOpen, toggleCancelModal } = useModalstore();
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const [cookies] = useCookies(["nickname"]);
+  const [cookies] = useCookies(["nickname", "accessToken", "email"]);
   const [reasonCancel, setReasonCancel] = useState<string>("");
+
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   return (
     <>
@@ -140,8 +144,12 @@ const CancelMembership = () => {
       `,
             ]}
           >
-            <div css={userName}>{cookies.nickname ? cookies.nickname : "Guestname"}</div>
-            <div css={email}>guestemail001@gmail.com</div>
+            <div css={userName}>
+              {isClient && cookies.nickname ? cookies.nickname : "GuestName"}
+            </div>
+            <div css={email}>
+              {isClient && cookies.nickname ? cookies.email : "GuestName@guest.com"}
+            </div>
           </div>
         </div>
         <div
@@ -186,7 +194,7 @@ const CancelMembership = () => {
 `,
               ]}
             >
-              {cookies.nickname ? cookies.nickname : "Guestname"}님 안녕하세요,{" "}
+              {isClient && cookies.nickname ? cookies.nickname : "GuestName"}님 안녕하세요,
             </span>
             <span
               css={[
@@ -196,7 +204,8 @@ const CancelMembership = () => {
                 margin-top: 10px`,
               ]}
             >
-              {cookies.nickname ? cookies.nickname : "Guestname"}님은 현재 구독중 입니다.
+              {isClient && cookies.nickname ? cookies.nickname : "GuestName"}님은 현재 구독중
+              입니다.
             </span>
           </div>
           <div css={ticketButtonContainer}>
@@ -228,7 +237,7 @@ const CancelMembership = () => {
       >
         <div css={cancelModalWrapper}>
           <div css={cancelModalContainer}>
-            <span>{cookies.nickname ? cookies.nickname : "GuestName"} 님,</span>
+            <span>{isClient && cookies.nickname ? cookies.nickname : "GuestName"} 님,</span>
             <span>구독을 취소하시겠어요?</span>
           </div>
           <div>

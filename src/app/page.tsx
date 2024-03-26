@@ -2,11 +2,8 @@
 /** @jsxImportSource @emotion/react */
 
 import Link from "next/link";
-import React, { useEffect } from "react";
-import {
-  commonColor,
-  flexCenterX2,
-} from "./styleComponents/commonStyles/commonStyles";
+import React, { useEffect, useState } from "react";
+import { commonColor } from "./styleComponents/commonStyles/commonStyles";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import HomeSearchBar from "./components/homePageComponents/HomeSearchBar";
@@ -46,34 +43,30 @@ function HomePage() {
     window.location.reload();
     console.log(cookies);
   };
+
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   return (
     <>
       <header css={headerContainerStyle}>
         <ProjectMenu />
         <div css={homeButtonContainer}>
-          {cookies.accessToken ? (
+          {isClient && cookies.accessToken ? (
             <>
-              <div
-                css={buttonStyle("white", "black")}
-                onClick={() => {
-                  removeCookies();
-                }}
-              >
+              <div css={buttonStyle("white", "black")} onClick={removeCookies}>
                 로그아웃
               </div>
             </>
           ) : (
             <>
-              <Link
-                href={"pages/loginPage"}
-                css={buttonStyle("white", "black")}
-              >
+              <Link href="pages/loginPage" css={buttonStyle("white", "black")}>
                 로그인
               </Link>
-              <Link
-                href={"pages/signUpPage"}
-                css={buttonStyle(commonColor.mainYellow, "white")}
-              >
+              <Link href="pages/signUpPage" css={buttonStyle(commonColor.mainYellow, "white")}>
                 회원가입
               </Link>
             </>
