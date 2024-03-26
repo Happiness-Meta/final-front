@@ -15,7 +15,7 @@ import { useCookies } from "react-cookie";
 import WorkspaceBtn from "./buttons/WorkspaceBtn";
 
 const HeaderNo1 = () => {
-  const [cookies] = useCookies(["token"]);
+  const [cookies] = useCookies(["accessToken"]);
 
   const { guideMessage, guideMessageAni, setGuideMessageAni } =
     useProjectTemplateStore();
@@ -56,7 +56,7 @@ const HeaderNo1 = () => {
         </p>
       </section>
       <section css={[sectionStyle, `justify-content: end;`]}>
-        {cookies.token && <WorkspaceBtn />}
+        {cookies.accessToken && <WorkspaceBtn />}
       </section>
     </header>
   );

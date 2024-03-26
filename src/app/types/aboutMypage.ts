@@ -1,9 +1,13 @@
 export interface myInfo {
-  Field: string;
+  position: string;
   id: string;
   techStack: string[];
-  userEmail: string;
-  userNickname: string;
+  email: string;
+  name: string;
+  industry: string;
+  address: string;
+  roles: string[];
+  telephone: string;
 }
 
 export interface companyInfo {
